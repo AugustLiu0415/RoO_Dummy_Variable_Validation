@@ -1,5 +1,7 @@
 # Uncertain 与 分类/Other 队列 AI 辅助复核总报告（EXPANSIVE_EXCLUSION_V2）
 
+> 本文件记录 Claude 第二轮复核时的结果与待讨论问题。Codex 第三轮橙色疑点及当前进度见 [Third_Pass_Review_Report.md](Third_Pass_Review_Report.md)。第 5 节提出的“将全部 U 改为 0”只是当时的待讨论问题，尚未获批准；按教授的宽松标准，不能仅因缺乏直接路径就批量改为 0。
+
 > **AI辅助复核建议，非人工确认。** Z 是候选排除建议，不是确认删除；P 不是已核实；R 不是人工完成；本报告不含任何准确率，也不代表整个 PTA 数据已清洗完成。
 
 ## 1. 范围

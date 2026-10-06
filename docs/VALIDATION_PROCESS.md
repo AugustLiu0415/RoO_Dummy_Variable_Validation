@@ -1,6 +1,6 @@
-# Data validation process
+# Three-stage dummy-variable review process
 
-This document records, step by step, how the RoO input→output (IO) dummy variable was validated. It describes what each stage did, what it produced, and what has **not** been done yet.
+This document records how the RoO input→output (IO) dummy variable was screened and cross-checked in three AI-assisted stages: initial Codex screening, Claude re-review, and a Codex cross-check. It describes what each stage did, what it produced, and what has **not** been done yet.
 
 **Guiding rule (Professor Hao Zhang):**
 *If input A could be potentially used to produce output B, then we should keep 1 there. Only when A and B are totally irrelevant should we change 1 to 0.*
@@ -20,7 +20,7 @@ This document records, step by step, how the RoO input→output (IO) dummy varia
 - Pairs sorted by `pair_id`, shuffled with `random.Random(20260930)`, and cut into five equal parts: 23,153 / 23,153 / 23,153 / 23,153 / 23,152.
 - A fixed `split_manifest.csv` is the only grouping used afterwards (no re-sampling). Sample IDs look like `R1-000001`.
 
-## Step 2 – Rule-based loose-exclusion screening of every pair (`Round_k_Review`)
+## Step 2 – Codex initial rule-based loose-exclusion screening of every pair (`Round_k_Review`)
 
 Rule set `EXPANSIVE_EXCLUSION_V2`: only very clear identity contradictions (for example two different named raw fruits, grains, oilseeds, plant oils, wood species) become *candidate* 0; anything with a plausible ingredient, component, feed, recycling or reprocessing route stays 1. Entries whose classification involves an "Other" residual subheading are not excluded automatically.
 
@@ -37,9 +37,9 @@ Result per round (status of the original screening; the workbooks are in `DV_Rou
 
 This stage was an automatic, repeatable rule screen, not a row-by-row review.
 
-## Step 3 – Second-pass AI-assisted review of the 2,649 candidate 0s (`DV_Round_2_ZeroDV_Review/`)
+## Step 3 – Claude re-review of the 2,649 candidate 0s (`DV_Round_2_ZeroDV_Review/`)
 
-Every original candidate 0 was re-checked against both product definitions and against possible ingredient / component / feed / recycling routes. Column names that identify the AI-assisted columns use the prefix `ai_` in this repository.
+Every original candidate 0 was re-checked against both product definitions and against possible ingredient / component / feed / recycling routes. Claude recorded a proposed value and explanation without overwriting the initial dummy. Column names that identify the AI-assisted columns use the prefix `ai_` in the earlier repository copies; the later `2.0` snapshots preserve their original Claude-named columns.
 
 | Result | Pairs |
 |---|---|
@@ -47,7 +47,7 @@ Every original candidate 0 was re-checked against both product definitions and a
 | Suggested back to 1 – potential use (`RESTORE_1_POTENTIAL_USE`) | 34 |
 | Kept 1 – uncertain (`KEEP_1_UNCERTAIN_PENDING_HUMAN`) | 12 |
 
-## Step 4 – AI-assisted review of the two human-review queues (`DV_Round_3_Uncertain_Review/`, `DV_Round_4_Other_Review/`)
+## Step 4 – Claude re-review of the two human-review queues (`DV_Round_3_Uncertain_Review/`, `DV_Round_4_Other_Review/`)
 
 Scope (frozen lists, no overlap, not re-sampled):
 
@@ -85,9 +85,24 @@ Of the Z rows: 23,179 `DIFF_SPECIES`, 6,374 `DIFF_FIBRE`, 2,901 `DIFF_MATERIAL`.
 
 Knowledge basis is the HS2002 working dictionary plus general knowledge (`knowledge_basis = COMMON_KNOWLEDGE`); nothing was verified online (`source_url` is empty).
 
-## Step 5 – Automated consistency checks (218 checks, all passed)
+## Step 5 – Codex cross-check of Claude's proposals (third AI-assisted stage)
 
-Run before the files were delivered:
+Codex re-examined Claude's proposed values and explanations in all three selected queues. It marked questionable rows orange and wrote a specific `second_round_reason` for each orange row in fifteen `2.0` workbooks (five for initial zeros, five for Uncertain and five for Classification / Other). The cross-check did **not** change the initial dummy or Claude's proposed 0/1 value or status. An orange flag is a question for manual adjudication, not a confirmed wrong dummy value.
+
+| Original source queue | Pairs checked | Claude suggests 0 | Claude retains 1 | Orange flags | Orange among 0 | Orange among 1 |
+|---|---:|---:|---:|---:|---:|---:|
+| Initial candidate 0 | 2,649 | 2,603 | 46 | 69 | 69 | 0 |
+| Uncertain | 52,419 | 30,856 | 21,563 | 3,327 | 3,086 | 241 |
+| Classification / Other | 1,621 | 1,598 | 23 | 86 | 86 | 0 |
+| **All selected queues** | **56,689** | **35,057** | **21,632** | **3,482** | **3,241** | **241** |
+
+Thus the two original Uncertain / Other queues account for **3,413** orange rows. Their original `dummy = 1` remains in the source workbooks. Claude proposed 32,454 candidate zeros in those queues, so these decisions could materially change the final dataset if a human confirms them under the professor's rule. The separate [`Third_Pass_Review_Report.md`](../Summary/Third_Pass_Review_Report.md) gives round-level counts and workbook locations.
+
+The directory names `DV_Round_2`, `DV_Round_3` and `DV_Round_4` identify different source queues and processing folders; they do not imply four independent validation stages. `P` in `review_status` means potential use, not the Classification / Other source queue; `C` identifies a remaining code or classification issue.
+
+## Step 6 – Automated consistency checks of the Claude-stage outputs (218 checks, all passed)
+
+Run before the Claude-stage files were delivered; this historical 218-check result does not by itself validate the new `2.0` files:
 
 - Source files (`Round_1–5` Review / Input / Manual, 20 files) unchanged (hash comparison).
 - Target lists recomputed from the source files and compared with the frozen lists; no duplicate `sample_id` / `pair_id`; the two queues do not overlap; no original-0 or `KEEP_1_PLAUSIBLE` row is included.
@@ -96,27 +111,28 @@ Run before the files were delivered:
 - Totals: `T = H + R + N`, `R = Z + P + U + C`, `Q = Z + U + C` hold for every round and for the de-duplicated total.
 - Rows with code 290400 keep their original code and are all classed C.
 
-## Step 6 – Human review (in progress)
+## Step 7 – Human review (in progress)
 
-- The RA (August Liu) carried out a **preliminary manual review** of these workbooks.
+- Repository copies were marked as **preliminarily reviewed for workflow tracking**. This does not document an independent human 0/1 judgement for each row. The later orange flags remain to be adjudicated.
 - In this repository the column `human_review_status` was set to **`REVIEWED`** for every row that was previously `PENDING` or `AWAITING_USER_ACCEPTANCE`. Rows marked `NOT_REQUIRED` (the 59,075 `KEEP_1_PLAUSIBLE` rows) were left as they are.
-- `human_dummy` (the final 0/1 human decision) and `human_notes` were **not** filled by anyone or anything in these files. **No row-level human 0/1 decisions are recorded yet.**
+- `human_dummy` (the final 0/1 human decision) and `human_notes` were **not** filled by anyone or anything in these files. **No row-level human 0/1 decisions are recorded yet.** `human_review_status = REVIEWED` alone must not be used as a ground-truth label or an accuracy denominator.
 - The status change is applied to the copies in this repository only; the RA's local working files were not modified.
 
-## Step 7 – Decisions needed from the professor
+## Step 8 – Decisions needed from the professor
 
-1. **U rows (16,729):** flip all `SIBLING_SPEC` / `REVERSE_STAGE` rows to 0 in bulk? Kept at 1 for now under the literal rule. If yes, only about 4,857 rows (P + C) would remain at 1 in these two queues; if no, 21,586 rows (40%) remain at 1.
-2. **Flour / grits / flakes / root flour → glucose or fructose syrup** (68 rows): accept as a potential use? Currently P; germ, gluten, malt, legume flour and fruit flour are Z.
-3. **Feed route** (about 600 rows): fish, crustaceans and molluscs as feed for farmed carnivorous fish / shrimp / crab – accept as potential use? Currently P.
-4. **Fibre recycling of the same meltable polymer** (polyester, nylon, polypropylene; 199 rows): accept as a recycling route? Currently P.
-5. **Provisionally preserved goods → dried goods** (35 rows): currently U; can be folded into decision 1.
-6. **Code problems** (11 rows, e.g. 290400): someone must confirm the real code.
+1. **Manual review scope:** the professor asked for manual checks of remaining uncertain and excluded pairs and an accuracy rate. Given the 3,482 orange flags and larger unflagged population, determine whether to review all candidate exclusions and unresolved cases or adjudicate every orange flag plus an approved stratified sample of unflagged cases. An orange-only review cannot estimate overall accuracy.
+2. **U rows (16,729):** these remain at 1 under the expansive rule unless a pair is shown to be totally unrelated. Do not flip a whole issue class to 0 solely because no direct route was found.
+3. **Flour / grits / flakes / root flour → glucose or fructose syrup** (68 rows): accept as a potential use? Currently P; germ, gluten, malt, legume flour and fruit flour are Z.
+4. **Feed route** (about 600 rows): fish, crustaceans and molluscs as feed for farmed carnivorous fish / shrimp / crab – accept as potential use? Currently P.
+5. **Fibre recycling of the same meltable polymer** (polyester, nylon, polypropylene; 199 rows): accept as a recycling route? Currently P.
+6. **Provisionally preserved goods → dried goods** (35 rows): currently U; review under the expansive rule.
+7. **Code problems** (11 rows, e.g. 290400): someone must confirm the real code.
 
-## Step 8 – Proposed next steps
+## Step 9 – Proposed next steps
 
-- Draw a stratified random audit sample (about 100 Z, 50 P, 50 U, stratified by round and `issue_class`) and have it labelled by a human, to estimate how often the AI suggestions would be overturned; fix rule weaknesses found per rule tag.
-- Apply the professor's policy decisions in bulk by `issue_class` / rule tag.
-- Fill `human_dummy` (0/1) for the final dataset; only then compute agreement on the human-reviewed subset (this must not be called accuracy of all pairs).
+- Prioritize manual adjudication of the 69 flagged initial-zero pairs and 3,413 flagged Uncertain / Other pairs, especially proposed zeros with a possible indirect production or feed route and Classification / Other boundary cases.
+- Agree with the professor on the remaining manual review coverage. If sampling is used, define the random/stratified population and denominator before reporting an accuracy estimate; do not infer whole-dataset accuracy from targeted orange flags alone.
+- Record final human decisions in `human_dummy`, then compute confirmation or disagreement rates separately for proposed 0 and retained 1 on the human-reviewed population. Do not call the AI proposals final dummy values before adjudication.
 
 ## Not included in this repository
 
