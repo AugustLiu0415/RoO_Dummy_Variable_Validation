@@ -20,9 +20,13 @@ This document records how the RoO input→output (IO) dummy variable was screene
 - Pairs sorted by `pair_id`, shuffled with `random.Random(20260930)`, and cut into five equal parts: 23,153 / 23,153 / 23,153 / 23,153 / 23,152.
 - A fixed `split_manifest.csv` is the only grouping used afterwards (no re-sampling). Sample IDs look like `R1-000001`.
 
-## Step 2 – Codex initial rule-based loose-exclusion screening of every pair (`Round_k_Review`)
+## Step 2 – Codex initial rule-based screening of every pair (`Round_k_Review`)
 
-Rule set `EXPANSIVE_EXCLUSION_V2`: only very clear identity contradictions (for example two different named raw fruits, grains, oilseeds, plant oils, wood species) become *candidate* 0; anything with a plausible ingredient, component, feed, recycling or reprocessing route stays 1. Entries whose classification involves an "Other" residual subheading are not excluded automatically.
+Rule set `EXPANSIVE_EXCLUSION_V2`, implemented as a script (`v2_screen.py`, kept locally). It assigned each pair one status:
+
+1. **Candidate 0 (`EXCLUDE_0_PENDING_HUMAN`):** a narrow list of identity contradictions, for example two different named raw fruits, grains, oilseeds, spices, pure plant oils or log species, or a different-species herbivore meat. Entries whose classification involves an "Other" residual subheading were not excluded automatically.
+2. **`KEEP_1_PLAUSIBLE`:** the pair matched one of the script's fixed templates (the ten that produced rows are listed below).
+3. **`KEEP_1_UNCERTAIN_PENDING_HUMAN` / `KEEP_1_CLASSIFICATION_PENDING_HUMAN`:** every other pair, or a pair with a missing description or a boundary-affecting residual subheading.
 
 Result per round (status of the original screening; the workbooks are in `DV_Round_1_Validation/`):
 
@@ -36,6 +40,26 @@ Result per round (status of the original screening; the workbooks are in `DV_Rou
 | **Total** | **115,764** | **2,649** | **59,075** | **52,419** | **1,621** |
 
 This stage was an automatic, repeatable rule screen, not a row-by-row review.
+
+### How the 59,075 `KEEP_1_PLAUSIBLE` rows were assigned
+
+Two templates are pair-specific. The other eight are **chapter-level templates**: every pair whose input and output chapters fall in the listed block received the same retention sentence, whatever the specific products.
+
+| Template (input → output) | Retention sentence (paraphrased) | Pairs |
+|---|---|---:|
+| Identical six-digit code | Same good; can be further processed, repacked or remade | 1,830 |
+| Live animal (ch. 01) → meat of the same species (ch. 02) | Rearing and slaughter | 128 |
+| Ch. 50–60, 62–63 → ch. 56–60, 62–63 | Textile, cutting, coating, recycling or garment-remaking material | 29,489 |
+| Ch. 72–73 → ch. 72–73 | Can be smelted, rolled, processed or used as a component | 21,208 |
+| Food chapters → ch. 16, 19, 20, 21, 22 (subset) | Seasoning, ingredient or reprocessing input | 4,038 |
+| Ch. 71 → ch. 71 | Precious-metal recovery, processing or assembly | 832 |
+| Ch. 64 → ch. 64 | Footwear part, repair or remaking material | 812 |
+| Ch. 44 → ch. 44, 46, 94 | Wood-processing, furniture or plaiting material | 400 |
+| Ch. 94 → ch. 94 | Dismantling, refurbishing or remaking | 286 |
+| Ch. 91 → ch. 91 | Clock-part remaking or assembly | 52 |
+| **Total** | | **59,075** |
+
+**Limitation (identified 2026-10-08).** The 57,117 rows from the chapter-level templates were not judged pair by pair. For example, 721931 cold-rolled stainless steel → 720260 ferro-nickel and 620333 men's jackets → 620431 women's jackets were both retained at 1. The Round 1 task instructions prohibited "same-chapter automatic 1" and broad chapter or keyword rules. The script did not follow that instruction, and the deviation was not detected at the time. Stages 2 and 3 reviewed only the three selected queues, so these rows have never been reviewed individually. Treat their `dummy = 1` as unreviewed, not as a confirmed plausible use.
 
 ## Step 3 – Claude re-review of the 2,649 candidate 0s (`DV_Round_2_ZeroDV_Review/`)
 
