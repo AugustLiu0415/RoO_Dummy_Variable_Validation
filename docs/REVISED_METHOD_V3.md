@@ -2,10 +2,10 @@
 
 **Status:** adopted on 2026-10-10 after Professor Zhang's confirmation. First applied in V3 Round 1 with the [IO Pair Matching Prompt](../prompts/IO_Pair_Matching_Prompt.md). The Stage 1–3 values in this repository were produced under the earlier rule (`EXPANSIVE_EXCLUSION_V2`) and are not relabelled.
 
-Confirmed decisions:
+Confirmed decisions (2026-10-10):
 
 1. Same-family sibling pairs (`SIBLING`) and reverse-stage pairs (`BACKWARD`) are set to 0.
-2. Same-polymer melt recycling counts as a recycling route (`RECYCLE`, 1).
+2. Five policy routes count as input–output relations (1): same-polymer melt recycling, wool-yarn waste carding, flour → syrup, provisionally preserved → dried goods, and feed routes (Section 3).
 
 Professor Zhang's reminder (2026-10-09): *we still want to have an expansive definition of input-output relations.* V3 narrows the 0 side only for siblings and backward pairs; every other real route still counts as 1.
 
@@ -51,17 +51,15 @@ When A or B is a residual "Other" subheading, establish its scope from the paren
 
 ## 3. Policy flags
 
-Rows that depend on a policy decision carry a `policy_flag`, so they can be recoded if the decision changes.
+All five routes were decided on 2026-10-10 and are coded 1. Rows on these routes carry a `policy_flag`, so they can be counted and traced.
 
-| Flag | Pairs | Current treatment |
+| Flag | Pairs | `relation_type` |
 |---|---|---|
-| `POLYMER_MELT_RECYCLING` | Same-polymer fabric, yarn or fibre → filament, staple or yarn | 1, confirmed 2026-10-10 |
-| `FEED_ROUTE` | Fish, crustaceans or molluscs as feed for farmed carnivorous species | 1, pending confirmation |
-| `FLOUR_TO_SYRUP` | Flour, grits, flakes or root flour → glucose or fructose syrup | 1, pending confirmation |
-| `WOOL_WASTE_CARDING` | Wool or fine-hair yarn waste, opened and carded → 5105 | 1, pending confirmation |
-| `PRESERVED_TO_DRIED` | Provisionally preserved goods → dried goods | 1, pending confirmation |
-
-The pending items keep 1, following the expansive definition, until the professor rules otherwise.
+| `POLYMER_MELT_RECYCLING` | Same-polymer fabric, yarn or fibre → filament, staple or yarn | `RECYCLE` |
+| `WOOL_WASTE_CARDING` | Wool or fine-hair yarn waste, opened and carded → 5105 | `RECYCLE` |
+| `FLOUR_TO_SYRUP` | Starch-based flour, grits, flakes or root flour → glucose or fructose syrup | `FORWARD` |
+| `PRESERVED_TO_DRIED` | Provisionally preserved goods → dried goods | `FORWARD` |
+| `FEED_ROUTE` | Fish, crustaceans, molluscs or other recognized feedstuffs → the farmed animals they feed | `FEED` |
 
 ## 4. Stage ladders and recycling sinks
 
@@ -98,7 +96,8 @@ These extend the other RA's 36 pre-set linkages (HS2002) and are not exhaustive.
 
 - All 115,764 PTA_1 pairs are coded again, so that every row carries a `relation_type`.
 - Particular attention goes to the 57,117 rows that Stage 1 retained by chapter-level templates, and to the 16,729 Stage 2 U rows (12,606 `SIBLING_SPEC`, 4,123 `REVERSE_STAGE`). U rows are checked one by one against classes 3–8, not flipped as a class.
-- Earlier values are kept. V3 results are written to a new workbook, `PTA_1_IO_DV_Uncertain_Validation_Round_1.xlsx`.
+- The run is split into the five fixed groups of the split manifest, one group per session, with shared knowledge tables and rules and a final combining session (see the prompt, Section 6).
+- Earlier values are kept. V3 results are written to a new workbook, `PTA_1_IO_DV_Uncertain_Validation_Round_1.xlsx`, with a report in Chinese and English.
 
 ## 7. Checks
 

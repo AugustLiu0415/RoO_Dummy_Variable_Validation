@@ -8,8 +8,8 @@ This repository documents the AI-assisted validation of the rules-of-origin (RoO
 2. **External benchmark (2026-10-08).** A comparison with another RA's modular coding found two problems:
    - 57,117 initial "plausible" rows had been retained by chapter-level templates and never reviewed pair by pair.
    - The old threshold kept reverse-stage and same-family sibling pairs at 1.
-3. **Revised rule V3 adopted (2026-10-10)** after Professor Zhang's confirmation. Sibling and backward pairs become 0; same-polymer melt recycling counts as a recycling route; the definition of input–output relations stays expansive.
-4. **Next: V3 Round 1.** Codex (GPT-6 Sol Ultra) re-codes all 115,764 pairs with the [IO Pair Matching Prompt](prompts/IO_Pair_Matching_Prompt.md). Its output, `PTA_1_IO_DV_Uncertain_Validation_Round_1.xlsx`, is produced locally first and is not yet in this repository.
+3. **Revised rule V3 adopted (2026-10-10)** after Professor Zhang's confirmation. Sibling and backward pairs become 0. Same-polymer melt recycling, wool-yarn waste carding, flour → syrup, provisionally preserved → dried goods and feed routes all count as 1. The definition of input–output relations stays expansive.
+4. **Next: V3 Round 1.** Codex (GPT-6 Sol Ultra) re-codes all 115,764 pairs with the [IO Pair Matching Prompt](prompts/IO_Pair_Matching_Prompt.md), in five fixed groups (one per session) followed by a combining session. Its output, `PTA_1_IO_DV_Uncertain_Validation_Round_1.xlsx` with a report in Chinese and English, is produced locally first and is not yet in this repository.
 
 ## Decision rule
 
@@ -23,7 +23,7 @@ From V3 Round 1 onward, the rule is applied as a directional question ([full V3 
 
 > Would a producer of B, in normal commercial practice, use A as a material, component, ingredient, processing input, feed, or recycled or recovered feedstock to make B?
 
-- **Keep 1** for any such route, direct or indirect: `SAME_GOOD`, `RECYCLE` (including same-polymer melt recycling), `COMPONENT`, `FORWARD`, `INGREDIENT`, `FEED`, `RECONSTITUTE`.
+- **Keep 1** for any such route, direct or indirect: `SAME_GOOD`, `RECYCLE` (including same-polymer melt recycling and wool-yarn waste carding), `COMPONENT`, `FORWARD` (including flour → syrup and preserved → dried), `INGREDIENT`, `FEED`, `RECONSTITUTE`.
 - **Set 0** only for `SIBLING` (mutually exclusive goods in one family, e.g. men's suits → women's suits), `BACKWARD` (a later stage → an earlier stage, e.g. fabric → yarn) and `DIFFERENT_IDENTITY` (totally unrelated).
 - **Keep 1 and flag** pairs that cannot be decided (`UNRESOLVED`) and code problems (`CODE_ISSUE`).
 - Chapter or heading membership is never a reason by itself, either for 1 or for 0.
@@ -40,7 +40,7 @@ All values here are **AI-assisted suggestions, not human confirmations**. A sugg
 | 2. Re-review of selected queues | Claude Opus 5.5, Ultracode setting | 56,689 | Original threshold | Done |
 | 3. Cross-check of Stage 2 | Codex, GPT-6.1 Sol, ultra reasoning | 56,689 | Original threshold | Done |
 | External benchmark | Comparison with another RA's modular votes | 36,427 | — | Done (2026-10-08) |
-| **V3 Round 1** | **Codex, GPT-6 Sol Ultra** | **115,764** | **V3** | **Next** |
+| **V3 Round 1** (five groups) | **Codex, GPT-6 Sol Ultra** | **115,764** | **V3** | **Next** |
 | V3 checks | Comparison with previous values and the RA's modules; human check of a random sample | — | V3 | After Round 1 |
 
 1. **Stage 1, Codex initial screen.** An automatic, repeatable rule-based screen of all 115,764 pairs in five fixed batches.
@@ -55,7 +55,10 @@ All values here are **AI-assisted suggestions, not human confirmations**. A sugg
    - 3% had a concrete recycling, reconstitution or component route.
 
    The RA's modules also contain likely false 0s, so they serve as a regression test, not a gold standard. Agreement is not accuracy.
-5. **V3 Round 1.** Codex, now using GPT-6 Sol Ultra, re-codes every pair under V3 and gives each row a `relation_type`. It does not see the previous values or the RA's votes until all values are frozen.
+5. **V3 Round 1.** Codex, now using GPT-6 Sol Ultra, re-codes every pair under V3 and gives each row a `relation_type`.
+   - It works through the five fixed data groups (about 23,150 rows each), one group per session, with shared knowledge tables and rules. A rule fixed later is re-applied to earlier groups.
+   - A final session combines the groups, checks consistency across them, and writes the workbook and a report in Chinese and English.
+   - Codex does not see the previous values or the RA's votes until all values are frozen.
 6. **V3 checks.** Proceed to the remaining data only if two conditions hold:
    - every remaining M2/M5 disagreement is a documented exception (`COMPONENT`, `RECYCLE` or `RECONSTITUTE`);
    - a human check of a random sample of the remaining disagreements finds no systematic error.
@@ -98,7 +101,8 @@ The `DV_Round_2`–`DV_Round_4` directory names distinguish **source queues**, n
 
 - Every row has a `relation_type`, a `DV`, an `uncertain_status` and a pair-specific `reason`.
 - Yellow rows are `DV = 0`; light-blue rows have `uncertain_status = 1`.
-- `policy_flag` marks rows that depend on a policy decision, e.g. `POLYMER_MELT_RECYCLING` or the pending `FEED_ROUTE`.
+- `policy_flag` marks rows on the five decided policy routes (`POLYMER_MELT_RECYCLING`, `WOOL_WASTE_CARDING`, `FLOUR_TO_SYRUP`, `PRESERVED_TO_DRIED`, `FEED_ROUTE`), all coded 1.
+- Per-group workbooks are in `groups/Group_1`–`Group_5`; the reports are in Chinese and English.
 
 ## Copies and provenance
 

@@ -226,21 +226,30 @@ Full text: [`REVISED_METHOD_V3.md`](REVISED_METHOD_V3.md). Prompt for applying i
 **Confirmed on 2026-10-10:**
 
 1. **Directional test (Step 9):** `SIBLING` and `BACKWARD` pairs are set to 0, with components, recycling routes and reconstitution kept at 1. This affects the 16,729 U rows (12,606 `SIBLING_SPEC`, 4,123 `REVERSE_STAGE`) and part of the 57,117 template rows. U rows are re-mapped one by one through the exceptions, not flipped to 0 as a class.
-2. **Fibre recycling of the same meltable polymer** (polyester, nylon, polypropylene; 199 rows in the full table, 111 in the benchmark) counts as a recycling route (`RECYCLE`, `policy_flag = POLYMER_MELT_RECYCLING`).
+2. **Policy routes, all coded 1** under the expansive definition. Each carries a `policy_flag` so it can be counted and traced:
 
-**Still open.** Items 3 and 5–7 keep 1 under the expansive definition and carry a `policy_flag` in V3 Round 1, so they can be recoded if the professor rules otherwise.
+   | Route | Earlier count | `relation_type` | `policy_flag` |
+   |---|---|---|---|
+   | Fibre recycling of the same meltable polymer (polyester, nylon, polypropylene) | 199 rows (111 in the benchmark) | `RECYCLE` | `POLYMER_MELT_RECYCLING` |
+   | Carding of wool-yarn waste → carded wool (5105) | 6 benchmark pairs | `RECYCLE` | `WOOL_WASTE_CARDING` |
+   | Starch-based flour, grits, flakes or root flour → glucose or fructose syrup | 68 rows | `FORWARD` | `FLOUR_TO_SYRUP` |
+   | Provisionally preserved goods → dried goods | 35 rows | `FORWARD` | `PRESERVED_TO_DRIED` |
+   | Feed route: fish, crustaceans, molluscs or other recognized feedstuffs → the farmed animals they feed | about 600 rows | `FEED` | `FEED_ROUTE` |
 
-3. **Carding of wool-yarn waste → carded wool (5105)** (6 benchmark pairs): accept as a recycling route? (`WOOL_WASTE_CARDING`)
-4. **Manual review scope:** the professor asked for manual checks of remaining uncertain and excluded pairs and an accuracy rate. Determine whether to review all candidate exclusions and unresolved cases or adjudicate a defined set of flags plus an approved stratified sample of unflagged cases. A flag-only review cannot estimate overall accuracy.
-5. **Flour / grits / flakes / root flour → glucose or fructose syrup** (68 rows): accept as a potential use? Currently P; germ, gluten, malt, legume flour and fruit flour are Z. (`FLOUR_TO_SYRUP`)
-6. **Feed route** (about 600 rows): fish, crustaceans and molluscs as feed for farmed carnivorous fish / shrimp / crab – accept as potential use? Currently P. (`FEED_ROUTE`)
-7. **Provisionally preserved goods → dried goods** (35 rows): currently U. (`PRESERVED_TO_DRIED`)
-8. **Code problems** (11 rows, e.g. 290400): someone must confirm the real code.
+**Still open:**
+
+3. **Manual review scope:** the professor asked for manual checks of remaining uncertain and excluded pairs and an accuracy rate. Determine whether to review all candidate exclusions and unresolved cases or adjudicate a defined set of flags plus an approved stratified sample of unflagged cases. A flag-only review cannot estimate overall accuracy.
+4. **Code problems** (11 rows, e.g. 290400): someone must confirm the real code.
 
 ## Step 11 – Next steps
 
-1. **Done (2026-10-10):** professor's decisions on items 1–2 of Step 10; V3 prompt written ([`IO_Pair_Matching_Prompt.md`](../prompts/IO_Pair_Matching_Prompt.md)).
-2. **V3 Round 1:** Codex, now using **GPT-6 Sol Ultra** (Stages 1 and 3 used GPT-6.1 Sol), re-codes all 115,764 PTA_1 pairs under V3 so that every row carries a `relation_type`. Particular attention goes to the 57,117 template rows and the 16,729 U rows. Codex sees the previous values and the RA's votes only after all V3 values are frozen. Output: `PTA_1_IO_DV_Uncertain_Validation_Round_1.xlsx`, with a CSV mirror and a report, produced locally in `Dummy_Variable/PTA_1/`.
+1. **Done (2026-10-10):** decisions on items 1–2 of Step 10; V3 prompt written ([`IO_Pair_Matching_Prompt.md`](../prompts/IO_Pair_Matching_Prompt.md)).
+2. **V3 Round 1:** Codex, now using **GPT-6 Sol Ultra** (Stages 1 and 3 used GPT-6.1 Sol), re-codes all 115,764 PTA_1 pairs under V3 so that every row carries a `relation_type`. Particular attention goes to the 57,117 template rows and the 16,729 U rows.
+   - **Five groups, one per session.** The work runs in the five fixed groups of the split manifest (23,153 / 23,153 / 23,153 / 23,153 / 23,152 rows), one group per Codex session, followed by a separate combining session. One long session risks losing standards as the context fills and invites shortcuts such as templates. Separate groups give a checkpoint every fifth of the data and let a faulty rule be caught early.
+   - **Shared rules.** The groups share one set of knowledge tables and one rules log. A rule fixed in a later group is re-applied to earlier groups.
+   - **Final checks.** The combining session checks rule consistency and cross-group stability before freezing.
+   - **Independence.** Codex sees the previous values and the RA's votes only after all V3 values are frozen.
+   - **Output**, produced locally in `Dummy_Variable/PTA_1/`: `PTA_1_IO_DV_Uncertain_Validation_Round_1.xlsx`, a CSV mirror, per-group workbooks, and a report in Chinese and English.
 3. Write a new report for the professor and compare the new values with the previous values and with the RA's modules, module by module. Proceed only if both acceptance checks hold:
    - (a) every remaining M2/M5 disagreement falls in a documented exception (`COMPONENT`, `RECYCLE`, `RECONSTITUTE`);
    - (b) a human-checked random sample of 100 remaining disagreements (seed 20261010) shows no systematic error.
