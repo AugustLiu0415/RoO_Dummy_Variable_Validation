@@ -34,6 +34,8 @@ Under Professor Zhang's expansive criterion, a plausible direct or indirect inpu
 
 The 69 initial-zero flags and 3,413 Uncertain/Other flags should be prioritized for human adjudication. The professor's guidance also calls for checking remaining uncertain and excluded pairs. Because the unflagged population is much larger, the scope of full manual review versus an approved stratified audit should be settled before calculating an overall accuracy estimate. Record final human decisions in `human_dummy` and retain the sampling denominator if an audit is used. Currently `human_dummy` is blank, so no human-confirmed accuracy rate is available.
 
+**Update (2026-10-10).** The third pass covered only the 56,689 selected-queue pairs; the 59,075 initial `KEEP_1_PLAUSIBLE` pairs were outside its scope. A later comparison with another RA's modular coding found that most of those pairs were retained by chapter-level templates and never reviewed individually. It also showed that the "totally unrelated" threshold keeps reverse-stage and same-family sibling pairs at 1. A revised rule (V3) was adopted on 2026-10-10, and all pairs will be re-coded under it in V3 Round 1. The orange flags above were raised under the old threshold; after the re-run, the human-review queue should be derived again. See Steps 8–11 of [`VALIDATION_PROCESS.md`](../docs/VALIDATION_PROCESS.md) and [`REVISED_METHOD_V3.md`](../docs/REVISED_METHOD_V3.md).
+
 ## Workbook locations
 
 - `DV_Round_2_ZeroDV_Review/Round_1–5_ZeroDV_Review2.0.xlsx`
