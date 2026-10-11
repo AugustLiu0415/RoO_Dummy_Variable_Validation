@@ -5,7 +5,7 @@
 Confirmed decisions (2026-10-10):
 
 1. Same-family sibling pairs (`SIBLING`) and reverse-stage pairs (`BACKWARD`) are set to 0.
-2. Five policy routes count as input–output relations (1): same-polymer melt recycling, wool-yarn waste carding, flour → syrup, provisionally preserved → dried goods, and feed routes (Section 3).
+2. Five policy routes count as input–output relations (1): same-polymer melt recycling, wool-yarn waste carding, flour → syrup, provisionally preserved → dried goods, and feed routes (Section 3). The feed-route scope was narrowed on 2026-10-11 (provisional until the professor confirms).
 
 Professor Zhang's reminder (2026-10-09): *we still want to have an expansive definition of input-output relations.* V3 narrows the 0 side only for siblings and backward pairs; every other real route still counts as 1.
 
@@ -59,7 +59,7 @@ All five routes were decided on 2026-10-10 and are coded 1. Rows on these routes
 | `WOOL_WASTE_CARDING` | Wool or fine-hair yarn waste, opened and carded → 5105 | `RECYCLE` |
 | `FLOUR_TO_SYRUP` | Starch-based flour, grits, flakes or root flour → glucose or fructose syrup | `FORWARD` |
 | `PRESERVED_TO_DRIED` | Provisionally preserved goods → dried goods | `FORWARD` |
-| `FEED_ROUTE` | Fish, crustaceans, molluscs or other recognized feedstuffs → the farmed animals they feed | `FEED` |
+| `FEED_ROUTE` | Feed-grade aquatic inputs (low-value or residual fish, small pelagic species, fish meal 230120, krill and other small crustaceans, molluscs) → farmed carnivorous fish, shrimp or crab, as the animal itself in any form. Not counted: high-value food fish as input, non-carnivorous or wild-only outputs, non-aquatic feed, and two-step routes such as feed oil → rendered animal fat. | `FEED` |
 
 ## 4. Stage ladders and recycling sinks
 

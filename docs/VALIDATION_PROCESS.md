@@ -234,7 +234,7 @@ Full text: [`REVISED_METHOD_V3.md`](REVISED_METHOD_V3.md). Prompt for applying i
    | Carding of wool-yarn waste → carded wool (5105) | 6 benchmark pairs | `RECYCLE` | `WOOL_WASTE_CARDING` |
    | Starch-based flour, grits, flakes or root flour → glucose or fructose syrup | 68 rows | `FORWARD` | `FLOUR_TO_SYRUP` |
    | Provisionally preserved goods → dried goods | 35 rows | `FORWARD` | `PRESERVED_TO_DRIED` |
-   | Feed route: fish, crustaceans, molluscs or other recognized feedstuffs → the farmed animals they feed | about 600 rows | `FEED` | `FEED_ROUTE` |
+   | Feed route: feed-grade aquatic inputs (low-value fish, fish meal, small crustaceans, molluscs) → farmed carnivorous fish, shrimp and crab; scope narrowed on 2026-10-11, provisional until the professor confirms | about 600 rows | `FEED` | `FEED_ROUTE` |
 
 **Still open:**
 

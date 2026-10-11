@@ -8,7 +8,7 @@ This repository documents the AI-assisted validation of the rules-of-origin (RoO
 2. **External benchmark (2026-10-08).** A comparison with another RA's modular coding found two problems:
    - 57,117 initial "plausible" rows had been retained by chapter-level templates and never reviewed pair by pair.
    - The old threshold kept reverse-stage and same-family sibling pairs at 1.
-3. **Revised rule V3 adopted (2026-10-10)** after Professor Zhang's confirmation. Sibling and backward pairs become 0. Same-polymer melt recycling, wool-yarn waste carding, flour → syrup, provisionally preserved → dried goods and feed routes all count as 1. The definition of input–output relations stays expansive.
+3. **Revised rule V3 adopted (2026-10-10)** after Professor Zhang's confirmation. Sibling and backward pairs become 0. Same-polymer melt recycling, wool-yarn waste carding, flour → syrup, provisionally preserved → dried goods and feed routes all count as 1. Feed routes are limited to feed-grade aquatic inputs (low-value fish, fish meal, small crustaceans, molluscs) → farmed carnivorous fish, shrimp and crab (narrowed on 2026-10-11, provisional until the professor confirms). The definition of input–output relations stays expansive.
 4. **Next: V3 Round 1.** Codex (GPT-6 Sol Ultra) re-codes all 115,764 pairs with the [IO Pair Matching Prompt](prompts/IO_Pair_Matching_Prompt.md), in five fixed groups (one per session) followed by a combining session. Its output, `PTA_1_IO_DV_Uncertain_Validation_Round_1.xlsx` with a report in Chinese and English, is produced locally first and is not yet in this repository.
 
 ## Decision rule

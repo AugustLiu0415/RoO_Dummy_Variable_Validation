@@ -64,14 +64,14 @@ Apply the classes in this order and use the first that fits. Before assigning an
 | 4 | `COMPONENT` | 部件 | A is a part, component, refill, blank, sub-assembly, or an item of a set or assortment of B. Judge from the full heading text. Examples: 640699 parts of footwear → 6403 footwear; 960860 ball-point refills → 960810 ball-point pens; integrated circuits → smart cards. | 1 | 0 |
 | 5 | `FORWARD` | 正向工序 | A precedes B on a production ladder (Section 4) with compatible material or species. Includes processing steps within one heading: greige → bleached → dyed or printed; hot-rolled → cold-rolled → coated; green → roasted; fresh → chilled, frozen, dried, salted or prepared; live animal → meat of the same species. Also the policy routes `FLOUR_TO_SYRUP` and `PRESERVED_TO_DRIED` (Section 3.1). | 1 | 0 |
 | 6 | `INGREDIENT` | 配料或加工投入 | A is a normal ingredient of B, or a processing input consumed in making B, or B is a mixture or preparation containing A. Examples: spices → mixed spices or sauces; sugar → confectionery; tanning extracts → leather; dyes → dyed fabric. | 1 | 0 |
-| 7 | `FEED` | 饲料 | A is a recognized feed for the animal in B, including the policy route `FEED_ROUTE` (Section 3.1). | 1 | 0 |
+| 7 | `FEED` | 饲料 | A is a feed-grade aquatic input and B is a farmed carnivorous fish, shrimp or crab, still in the form of that animal (policy route `FEED_ROUTE`; scope in Section 3.2). Two-step routes do not count. | 1 | 0 |
 | 8 | `RECONSTITUTE` | 复原 | Recognized reconstitution or recombination: 0402 milk powder or 0405 milk fat → 0401 recombined milk or cream; concentrated juice → juice. | 1 | 0 |
 | 9 | `BACKWARD` | 逆向 | A is a later stage than B on the same ladder, and classes 3 and 8 do not apply. Examples: fabric → yarn of a different polymer or of a natural fibre; rolled steel → pig iron or ferro-alloys; chocolate → cocoa paste; confectionery → sugar; cheese → milk; cigarettes → tobacco leaf. | **0** | 0 |
 | 10 | `SIBLING` | 同族互斥 | A and B are mutually exclusive finished goods, or same-stage specifications, in one heading or material family. They differ only in fixed attributes (material, gender, species, use, size, weave, construction), and classes 4–6 do not apply. Examples: men's suits ↔ women's suits; leather-upper ↔ rubber footwear; wooden ↔ metal furniture; ball-point ↔ felt-tipped pens. | **0** | 0 |
 | 11 | `DIFFERENT_IDENTITY` | 完全无关 | Totally unrelated: different species, fibre or material with no conversion route, or no plausible route of any kind after classes 3–8 have been checked. | **0** | 0 |
 | 12 | `UNRESOLVED` | 无法判断 | Cannot be decided with confidence. The reason must name the classes considered and say why none fits. | 1 | 1 |
 
-### 3.1 Policy routes (all decided on 2026-10-10: `DV = 1`)
+### 3.1 Policy routes (`DV = 1`; decided on 2026-10-10, `FEED_ROUTE` scope narrowed on 2026-10-11)
 
 These routes count as input–output relations. Code them with the class shown and set `policy_flag`, so that they can be counted and traced. Use only these values in `policy_flag`; leave it blank otherwise.
 
@@ -81,7 +81,26 @@ These routes count as input–output relations. Code them with the class shown a
 | `WOOL_WASTE_CARDING` | Wool or fine-hair yarn waste, opened and carded → carded or combed wool or hair (5105) | `RECYCLE` |
 | `FLOUR_TO_SYRUP` | Starch-based flour, grits, flakes or root flour → glucose or fructose syrup (starch saccharification) | `FORWARD` |
 | `PRESERVED_TO_DRIED` | Provisionally preserved goods → dried goods of the same product | `FORWARD` |
-| `FEED_ROUTE` | Fish, crustaceans, molluscs, fish meal or other recognized feedstuffs → the farmed animals, or their products, that they feed | `FEED` |
+| `FEED_ROUTE` | Feed-grade aquatic input → farmed carnivorous fish, shrimp or crab (Section 3.2) | `FEED` |
+
+### 3.2 `FEED_ROUTE` scope (chosen on 2026-10-11; provisional until Professor Zhang confirms)
+
+Code a pair as `FEED` only if all three conditions hold:
+
+1. **Input A is a feed-grade aquatic input:**
+   - low-value or residual fish: the residual "Other" fish subheadings, and small pelagic species normally used as feed or bait (e.g. anchovies, sardines, sardinella, sprats, herring, mackerel, horse mackerel, capelin);
+   - fish meal, flours and pellets unfit for human consumption (230120);
+   - krill and other small crustaceans;
+   - molluscs (e.g. squid, mussels, clams).
+2. **Output B is a farmed carnivorous fish, shrimp or crab,** e.g. salmon, trout, grouper, sea bass, sea bream, eel, yellowtail, ranched tuna, shrimps and prawns, crabs.
+3. **One-step route only:** B is the fed animal itself, alive or as its flesh in any form (fresh, chilled, frozen, fillets, dried, salted, smoked, or prepared and preserved in 1604 / 1605).
+
+Not `FEED`. Classify these pairs with the remaining classes; they are usually `DIFFERENT_IDENTITY`:
+
+- **High-value food fish as input,** e.g. salmon, trout, tuna, halibut, sole, cod. Farms do not feed them whole; their processing by-products enter feed as fish meal (230120), which is a separate input.
+- **Outputs that are not farmed carnivorous species,** e.g. abalone (eats seaweed), carp and tilapia (fed mainly plant-based feed), and species that are only wild-caught.
+- **Non-aquatic feed,** e.g. insects or other live animals → poultry, birds or meat.
+- **Two-step routes,** where the fed animal is processed into a different substance (rendered or extracted fats and oils, meals, extracts). Examples: linseed oil → lard; maize oil → other animal fats; fish oil → fats of bovine animals.
 
 ## 4. Production ladders and recycling sinks (HS2002)
 
@@ -99,6 +118,8 @@ These lists cover the main chains but are not exhaustive. For chains not listed 
 - **Food and agriculture:** oilseeds 1201–1207 → oils 1507–1515; wheat 1001 and maize 1005 → flours, groats and meal 1101–1104; meat 0201–0210 → 1601–1602; fish 0301–0307 → 1604–1605; coffee 0901 → 2101.
 
 **Recycling sinks** (class 3): 3915 plastics; 4004 rubber; 411520 leather parings and dust; 440130 sawdust and wood waste; 4707 recovered paper; 5003 silk waste; 5103, 5104 wool waste and garnetted stock; 5202 cotton waste; 5505 man-made fibre waste; 6309 worn clothing; 6310 rags; 7001 cullet; 7112 precious-metal waste; 7204 ferrous scrap; 7404, 7503, 7602, 7802, 7902, 8002 non-ferrous waste and scrap.
+
+**Ferrous scrap grades** (class 3): cast-iron scrap (720410) and tinned scrap (720430) are normal charge materials for non-alloy steel; code them → non-alloy steel and articles of iron or non-alloy steel (7206–7217, chapter 73) as `RECYCLE`. Stainless scrap (720421) and other alloy scrap (720429) → only products of the same alloy family.
 
 ## 5. How to code each row
 
@@ -151,6 +172,20 @@ Session rules:
 
 - The knowledge tables and the rules log are shared and versioned. Record every change with its date and the group in which it was made.
 - If you change or fix a rule in Group k, re-check every row the rule already covered in earlier groups and update those rows. Log the number of changed rows per group in `_work/rule_fixes.csv`, and re-export the affected group files with a revision note.
+- **Manual amendments** in `_work/manual_amendments/` (e.g. `2026-10-11_cast_iron_scrap`) are decisions by the RA. Keep them, never revert them, add their rules to the shared rules log, and apply the same rules in later groups.
+
+**Rule changes after Group 1 (2026-10-11).** Group 1 was coded before these changes:
+
+1. `FEED_ROUTE` is narrowed to the scope in Section 3.2.
+2. Ferrous scrap grades are clarified (Section 4): cast-iron and tinned scrap → non-alloy steel products are `RECYCLE`.
+3. Manual amendment `2026-10-11_cast_iron_scrap` has already changed 8 Group 1 rows to `RECYCLE`.
+
+If `_work/rule_fixes.csv` does not yet record change 1 for Group_1, do the following before starting the next group:
+
+- Re-check every Group 1 row coded `FEED` against Section 3.2, and re-classify the rows that no longer qualify with the remaining classes.
+- Check that the Group 1 ferrous scrap rows follow change 2. The 8 amended rows already do.
+- Update the Group 1 batches, CSV, workbook and report, with revision note "Revision 1.2: FEED_ROUTE narrowed (2026-10-11)". Keep the Revision 1.1 manual amendment.
+- Log the changed rows in `_work/rule_fixes.csv`, with old and new values.
 
 ## 7. Checks
 
@@ -282,7 +317,7 @@ Both the final report and the group reports are written in **Simplified Chinese 
 
 1. 摘要 / Summary: half a page with the key numbers and the acceptance results.
 2. 范围与数据 / Scope and inputs: the files, checksums and five groups.
-3. 判定规则 / Decision rule: the V3 rule, the expansive principle, the class table with Chinese names, and the decisions of 2026-10-10 (`SIBLING` and `BACKWARD` → 0; all five policy routes → 1).
+3. 判定规则 / Decision rule: the V3 rule, the expansive principle, the class table with Chinese names, and the decisions of 2026-10-10 and 2026-10-11 (`SIBLING` and `BACKWARD` → 0; all five policy routes → 1, with `FEED_ROUTE` limited to Section 3.2; the cast-iron scrap amendment).
 4. 结果 / Results: `DV` counts; counts by `relation_type`, by `policy_flag` and by group; the number of uncertain rows.
 5. 与旧结果对比 / Changes against the previous values, and their main drivers.
 6. 与 RA 模块对比 / RA module comparison, and the result of acceptance check (a).
