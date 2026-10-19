@@ -1,0 +1,1077 @@
+{
+ "run": "2026-10-19T17:07:06",
+ "coder1": "PTA_2_5/ai_coders/coder1_claude",
+ "coder2": "PTA_2_5/ai_coders/coder2_codex",
+ "draft": false,
+ "unit_pairs": 56616,
+ "unit_pairs_coded": {
+  "coder1": 56616,
+  "coder2": 56616
+ },
+ "units": {
+  "pairs_both_coders": 56616,
+  "kappa_pairs": 0.394,
+  "agreement_pairs": 0.7092,
+  "kappa_unit_defaults": 0.4613,
+  "units_both_coders": 4725,
+  "DV1": 27629,
+  "DV0": 28987,
+  "uncertain": 16463,
+  "exceptions_ai1": 2422,
+  "exceptions_ai2": 3696,
+  "original_units": {
+   "pairs": 48100,
+   "kappa": 0.377,
+   "agree": 0.7025
+  },
+  "ml_reroute_units": {
+   "pairs": 8516,
+   "kappa": 0.4921,
+   "agree": 0.7474
+  },
+  "kappa_by_input_group": {
+   "01-05 animal": {
+    "pairs": 700,
+    "kappa": 0.5809,
+    "agree": 0.7971
+   },
+   "06-15 plant/fats": {
+    "pairs": 2413,
+    "kappa": 0.8705,
+    "agree": 0.9354
+   },
+   "16-24 food": {
+    "pairs": 1283,
+    "kappa": 0.2698,
+    "agree": 0.636
+   },
+   "25-27 mineral": {
+    "pairs": 3332,
+    "kappa": 0.3601,
+    "agree": 0.7134
+   },
+   "28-38 chemical": {
+    "pairs": 10821,
+    "kappa": 0.1387,
+    "agree": 0.4485
+   },
+   "39-40 plastic/rubber": {
+    "pairs": 1836,
+    "kappa": 0.2198,
+    "agree": 0.6089
+   },
+   "41-43 leather": {
+    "pairs": 7,
+    "kappa": 1.0,
+    "agree": 1.0
+   },
+   "44-49 wood/paper": {
+    "pairs": 10518,
+    "kappa": 0.3728,
+    "agree": 0.7071
+   },
+   "50-67 textile/footwear": {
+    "pairs": 783,
+    "kappa": 0.8629,
+    "agree": 0.9617
+   },
+   "68-71 stone/glass/jewel": {
+    "pairs": 4119,
+    "kappa": 0.3677,
+    "agree": 0.7672
+   },
+   "72-83 metals": {
+    "pairs": 9556,
+    "kappa": 0.4479,
+    "agree": 0.7581
+   },
+   "84-85 machinery": {
+    "pairs": 2671,
+    "kappa": 0.3346,
+    "agree": 0.8615
+   },
+   "86-89 transport": {
+    "pairs": 1202,
+    "kappa": 0.2656,
+    "agree": 0.7862
+   },
+   "90-97 other": {
+    "pairs": 7375,
+    "kappa": 0.4245,
+    "agree": 0.8579
+   }
+  }
+ },
+ "sample": {
+  "items": 788,
+  "both_coders": 788,
+  "kappa": 0.5751,
+  "agreement": 0.7843
+ },
+ "audit_by_stratum": {
+  "ml:keep1": {
+   "n": 100,
+   "both_coders": 100,
+   "coders_agree": 79,
+   "acc_vs_agreed": 0.7342,
+   "acc_vs_combined": 0.79,
+   "auto_DV1": 100,
+   "coders_DV1_agreed": 58
+  },
+  "ml:turn0": {
+   "n": 100,
+   "both_coders": 100,
+   "coders_agree": 93,
+   "acc_vs_agreed": 0.8495,
+   "acc_vs_combined": 0.79,
+   "auto_DV1": 0,
+   "coders_DV1_agreed": 14
+  },
+  "rule:T_BACKWARD": {
+   "rule_now": {
+    "n": 25,
+    "both_coders": 25,
+    "coders_agree": 21,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 0.84,
+    "auto_DV1": 0,
+    "coders_DV1_agreed": 0
+   },
+   "rule_at_sampling": {
+    "n": 25,
+    "both_coders": 25,
+    "coders_agree": 21,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 0.84,
+    "auto_DV1": 0,
+    "coders_DV1_agreed": 0
+   }
+  },
+  "rule:T_BACKWARD_MELT": {
+   "rule_now": {
+    "n": 10,
+    "both_coders": 10,
+    "coders_agree": 4,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 0.4,
+    "auto_DV1": 0,
+    "coders_DV1_agreed": 0
+   },
+   "rule_at_sampling": {
+    "n": 10,
+    "both_coders": 10,
+    "coders_agree": 4,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 0.4,
+    "auto_DV1": 0,
+    "coders_DV1_agreed": 0
+   }
+  },
+  "rule:T_CONSTITUENT": {
+   "rule_now": {
+    "n": 94,
+    "both_coders": 94,
+    "coders_agree": 63,
+    "acc_vs_agreed": 0.746,
+    "acc_vs_combined": 0.8298,
+    "auto_DV1": 94,
+    "coders_DV1_agreed": 47
+   },
+   "rule_at_sampling": {
+    "n": 94,
+    "both_coders": 94,
+    "coders_agree": 63,
+    "acc_vs_agreed": 0.746,
+    "acc_vs_combined": 0.8298,
+    "auto_DV1": 94,
+    "coders_DV1_agreed": 47
+   }
+  },
+  "rule:T_FABRIC_PROCESSED": {
+   "rule_now": {
+    "n": 10,
+    "both_coders": 10,
+    "coders_agree": 7,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 1.0,
+    "auto_DV1": 10,
+    "coders_DV1_agreed": 7
+   },
+   "rule_at_sampling": {
+    "n": 10,
+    "both_coders": 10,
+    "coders_agree": 7,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 1.0,
+    "auto_DV1": 10,
+    "coders_DV1_agreed": 7
+   }
+  },
+  "rule:T_FINISHED_SIBLING": {
+   "rule_now": {
+    "n": 38,
+    "both_coders": 38,
+    "coders_agree": 38,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 1.0,
+    "auto_DV1": 0,
+    "coders_DV1_agreed": 0
+   },
+   "rule_at_sampling": {
+    "n": 38,
+    "both_coders": 38,
+    "coders_agree": 38,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 1.0,
+    "auto_DV1": 0,
+    "coders_DV1_agreed": 0
+   }
+  },
+  "rule:T_FORWARD": {
+   "rule_now": {
+    "n": 71,
+    "both_coders": 71,
+    "coders_agree": 54,
+    "acc_vs_agreed": 0.9444,
+    "acc_vs_combined": 0.9577,
+    "auto_DV1": 71,
+    "coders_DV1_agreed": 51
+   },
+   "rule_at_sampling": {
+    "n": 71,
+    "both_coders": 71,
+    "coders_agree": 54,
+    "acc_vs_agreed": 0.9444,
+    "acc_vs_combined": 0.9577,
+    "auto_DV1": 71,
+    "coders_DV1_agreed": 51
+   }
+  },
+  "rule:T_FORWARD_OTHER_FIBRE": {
+   "rule_now": {
+    "n": 42,
+    "both_coders": 42,
+    "coders_agree": 20,
+    "acc_vs_agreed": 0.35,
+    "acc_vs_combined": 0.6905,
+    "auto_DV1": 42,
+    "coders_DV1_agreed": 7
+   },
+   "rule_at_sampling": {
+    "n": 42,
+    "both_coders": 42,
+    "coders_agree": 20,
+    "acc_vs_agreed": 0.65,
+    "acc_vs_combined": 0.3095,
+    "auto_DV1": 0,
+    "coders_DV1_agreed": 7
+   }
+  },
+  "rule:T_INTERMEDIATE_SIBLING": {
+   "rule_now": {
+    "n": 33,
+    "both_coders": 33,
+    "coders_agree": 15,
+    "acc_vs_agreed": 0.8,
+    "acc_vs_combined": 0.9091,
+    "auto_DV1": 22,
+    "coders_DV1_agreed": 1
+   },
+   "rule_at_sampling": {
+    "n": 33,
+    "both_coders": 33,
+    "coders_agree": 15,
+    "acc_vs_agreed": 0.0667,
+    "acc_vs_combined": 0.5758,
+    "auto_DV1": 33,
+    "coders_DV1_agreed": 1
+   }
+  },
+  "rule:T_PARTS": {
+   "rule_now": {
+    "n": 10,
+    "both_coders": 10,
+    "coders_agree": 10,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 1.0,
+    "auto_DV1": 10,
+    "coders_DV1_agreed": 10
+   },
+   "rule_at_sampling": {
+    "n": 10,
+    "both_coders": 10,
+    "coders_agree": 10,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 1.0,
+    "auto_DV1": 10,
+    "coders_DV1_agreed": 10
+   }
+  },
+  "rule:T_RAGS": {
+   "rule_now": {
+    "n": 10,
+    "both_coders": 10,
+    "coders_agree": 10,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 1.0,
+    "auto_DV1": 10,
+    "coders_DV1_agreed": 10
+   },
+   "rule_at_sampling": {
+    "n": 10,
+    "both_coders": 10,
+    "coders_agree": 10,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 1.0,
+    "auto_DV1": 10,
+    "coders_DV1_agreed": 10
+   }
+  },
+  "rule:T_RETAIL_PACKING": {
+   "rule_now": {
+    "n": 10,
+    "both_coders": 10,
+    "coders_agree": 9,
+    "acc_vs_agreed": 0.5556,
+    "acc_vs_combined": 0.6,
+    "auto_DV1": 6,
+    "coders_DV1_agreed": 1
+   },
+   "rule_at_sampling": {
+    "n": 10,
+    "both_coders": 10,
+    "coders_agree": 9,
+    "acc_vs_agreed": 0.1111,
+    "acc_vs_combined": 0.2,
+    "auto_DV1": 10,
+    "coders_DV1_agreed": 1
+   }
+  },
+  "rule:T_SAME_STAGE_OTHER_FIBRE": {
+   "rule_now": {
+    "n": 33,
+    "both_coders": 33,
+    "coders_agree": 31,
+    "acc_vs_agreed": 0.9677,
+    "acc_vs_combined": 0.9394,
+    "auto_DV1": 2,
+    "coders_DV1_agreed": 0
+   },
+   "rule_at_sampling": {
+    "n": 33,
+    "both_coders": 33,
+    "coders_agree": 31,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 0.9394,
+    "auto_DV1": 0,
+    "coders_DV1_agreed": 0
+   }
+  },
+  "rule:T_THREAD_TO_YARN": {
+   "rule_now": {
+    "n": 10,
+    "both_coders": 10,
+    "coders_agree": 9,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 1.0,
+    "auto_DV1": 6,
+    "coders_DV1_agreed": 5
+   },
+   "rule_at_sampling": {
+    "n": 10,
+    "both_coders": 10,
+    "coders_agree": 9,
+    "acc_vs_agreed": 0.4444,
+    "acc_vs_combined": 0.4,
+    "auto_DV1": 0,
+    "coders_DV1_agreed": 5
+   }
+  },
+  "rule:T_THREAD_TRIM_TO_ARTICLE": {
+   "rule_now": {
+    "n": 15,
+    "both_coders": 15,
+    "coders_agree": 15,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 1.0,
+    "auto_DV1": 15,
+    "coders_DV1_agreed": 15
+   },
+   "rule_at_sampling": {
+    "n": 15,
+    "both_coders": 15,
+    "coders_agree": 15,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 1.0,
+    "auto_DV1": 15,
+    "coders_DV1_agreed": 15
+   }
+  },
+  "rule:T_WASTE_OTHER_FIBRE": {
+   "rule_now": {
+    "n": 10,
+    "both_coders": 10,
+    "coders_agree": 6,
+    "acc_vs_agreed": 0.6667,
+    "acc_vs_combined": 0.8,
+    "auto_DV1": 6,
+    "coders_DV1_agreed": 0
+   },
+   "rule_at_sampling": {
+    "n": 10,
+    "both_coders": 10,
+    "coders_agree": 6,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 0.6,
+    "auto_DV1": 0,
+    "coders_DV1_agreed": 0
+   }
+  },
+  "rule:T_WASTE_REPROCESSED": {
+   "rule_now": {
+    "n": 10,
+    "both_coders": 10,
+    "coders_agree": 8,
+    "acc_vs_agreed": 0.875,
+    "acc_vs_combined": 0.9,
+    "auto_DV1": 10,
+    "coders_DV1_agreed": 7
+   },
+   "rule_at_sampling": {
+    "n": 10,
+    "both_coders": 10,
+    "coders_agree": 8,
+    "acc_vs_agreed": 0.875,
+    "acc_vs_combined": 0.9,
+    "auto_DV1": 10,
+    "coders_DV1_agreed": 7
+   }
+  },
+  "rule:T_WASTE_SAME_FIBRE": {
+   "rule_now": {
+    "n": 10,
+    "both_coders": 10,
+    "coders_agree": 6,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 1.0,
+    "auto_DV1": 10,
+    "coders_DV1_agreed": 6
+   },
+   "rule_at_sampling": {
+    "n": 10,
+    "both_coders": 10,
+    "coders_agree": 6,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 1.0,
+    "auto_DV1": 10,
+    "coders_DV1_agreed": 6
+   }
+  },
+  "conflict:T_BACKWARD": {
+   "rule_now": {
+    "n": 22,
+    "both_coders": 22,
+    "coders_agree": 21,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 0.9545,
+    "auto_DV1": 0,
+    "coders_DV1_agreed": 0
+   },
+   "rule_at_sampling": {
+    "n": 22,
+    "both_coders": 22,
+    "coders_agree": 21,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 0.9545,
+    "auto_DV1": 0,
+    "coders_DV1_agreed": 0
+   },
+   "ml": {
+    "n": 22,
+    "both_coders": 22,
+    "coders_agree": 21,
+    "acc_vs_agreed": 0.0,
+    "acc_vs_combined": 0.0455,
+    "auto_DV1": 22,
+    "coders_DV1_agreed": 0
+   }
+  },
+  "conflict:T_FORWARD": {
+   "rule_now": {
+    "n": 56,
+    "both_coders": 56,
+    "coders_agree": 40,
+    "acc_vs_agreed": 0.825,
+    "acc_vs_combined": 0.875,
+    "auto_DV1": 56,
+    "coders_DV1_agreed": 33
+   },
+   "rule_at_sampling": {
+    "n": 56,
+    "both_coders": 56,
+    "coders_agree": 40,
+    "acc_vs_agreed": 0.825,
+    "acc_vs_combined": 0.875,
+    "auto_DV1": 56,
+    "coders_DV1_agreed": 33
+   },
+   "ml": {
+    "n": 56,
+    "both_coders": 56,
+    "coders_agree": 40,
+    "acc_vs_agreed": 0.175,
+    "acc_vs_combined": 0.125,
+    "auto_DV1": 0,
+    "coders_DV1_agreed": 33
+   }
+  },
+  "conflict:T_FORWARD_OTHER_FIBRE": {
+   "rule_now": {
+    "n": 18,
+    "both_coders": 18,
+    "coders_agree": 10,
+    "acc_vs_agreed": 0.4,
+    "acc_vs_combined": 0.6667,
+    "auto_DV1": 18,
+    "coders_DV1_agreed": 4
+   },
+   "rule_at_sampling": {
+    "n": 18,
+    "both_coders": 18,
+    "coders_agree": 10,
+    "acc_vs_agreed": 0.6,
+    "acc_vs_combined": 0.3333,
+    "auto_DV1": 0,
+    "coders_DV1_agreed": 4
+   },
+   "ml": {
+    "n": 18,
+    "both_coders": 18,
+    "coders_agree": 10,
+    "acc_vs_agreed": 0.4,
+    "acc_vs_combined": 0.6667,
+    "auto_DV1": 18,
+    "coders_DV1_agreed": 4
+   }
+  },
+  "conflict:T_INTERMEDIATE_SIBLING": {
+   "rule_now": {
+    "n": 23,
+    "both_coders": 23,
+    "coders_agree": 23,
+    "acc_vs_agreed": 0.3478,
+    "acc_vs_combined": 0.3478,
+    "auto_DV1": 15,
+    "coders_DV1_agreed": 0
+   },
+   "rule_at_sampling": {
+    "n": 23,
+    "both_coders": 23,
+    "coders_agree": 23,
+    "acc_vs_agreed": 0.0,
+    "acc_vs_combined": 0.0,
+    "auto_DV1": 23,
+    "coders_DV1_agreed": 0
+   },
+   "ml": {
+    "n": 23,
+    "both_coders": 23,
+    "coders_agree": 23,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 1.0,
+    "auto_DV1": 0,
+    "coders_DV1_agreed": 0
+   }
+  },
+  "conflict:T_RETAIL_PACKING": {
+   "rule_now": {
+    "n": 1,
+    "both_coders": 1,
+    "coders_agree": 1,
+    "acc_vs_agreed": 0.0,
+    "acc_vs_combined": 0.0,
+    "auto_DV1": 1,
+    "coders_DV1_agreed": 0
+   },
+   "rule_at_sampling": {
+    "n": 1,
+    "both_coders": 1,
+    "coders_agree": 1,
+    "acc_vs_agreed": 0.0,
+    "acc_vs_combined": 0.0,
+    "auto_DV1": 1,
+    "coders_DV1_agreed": 0
+   },
+   "ml": {
+    "n": 1,
+    "both_coders": 1,
+    "coders_agree": 1,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 1.0,
+    "auto_DV1": 0,
+    "coders_DV1_agreed": 0
+   }
+  },
+  "conflict:T_SAME_STAGE_OTHER_FIBRE": {
+   "rule_now": {
+    "n": 20,
+    "both_coders": 20,
+    "coders_agree": 20,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 1.0,
+    "auto_DV1": 0,
+    "coders_DV1_agreed": 0
+   },
+   "rule_at_sampling": {
+    "n": 20,
+    "both_coders": 20,
+    "coders_agree": 20,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 1.0,
+    "auto_DV1": 0,
+    "coders_DV1_agreed": 0
+   },
+   "ml": {
+    "n": 20,
+    "both_coders": 20,
+    "coders_agree": 20,
+    "acc_vs_agreed": 0.0,
+    "acc_vs_combined": 0.0,
+    "auto_DV1": 20,
+    "coders_DV1_agreed": 0
+   }
+  },
+  "conflict:T_THREAD_TO_YARN": {
+   "rule_now": {
+    "n": 3,
+    "both_coders": 3,
+    "coders_agree": 1,
+    "acc_vs_agreed": 0.0,
+    "acc_vs_combined": 0.6667,
+    "auto_DV1": 3,
+    "coders_DV1_agreed": 0
+   },
+   "rule_at_sampling": {
+    "n": 3,
+    "both_coders": 3,
+    "coders_agree": 1,
+    "acc_vs_agreed": 1.0,
+    "acc_vs_combined": 0.3333,
+    "auto_DV1": 0,
+    "coders_DV1_agreed": 0
+   },
+   "ml": {
+    "n": 3,
+    "both_coders": 3,
+    "coders_agree": 1,
+    "acc_vs_agreed": 0.0,
+    "acc_vs_combined": 0.6667,
+    "auto_DV1": 3,
+    "coders_DV1_agreed": 0
+   }
+  },
+  "conflict:T_WASTE_OTHER_FIBRE": {
+   "rule_now": {
+    "n": 4,
+    "both_coders": 4,
+    "coders_agree": 4,
+    "acc_vs_agreed": 0.5,
+    "acc_vs_combined": 0.5,
+    "auto_DV1": 4,
+    "coders_DV1_agreed": 2
+   },
+   "rule_at_sampling": {
+    "n": 4,
+    "both_coders": 4,
+    "coders_agree": 4,
+    "acc_vs_agreed": 0.5,
+    "acc_vs_combined": 0.5,
+    "auto_DV1": 0,
+    "coders_DV1_agreed": 2
+   },
+   "ml": {
+    "n": 4,
+    "both_coders": 4,
+    "coders_agree": 4,
+    "acc_vs_agreed": 0.5,
+    "acc_vs_combined": 0.5,
+    "auto_DV1": 4,
+    "coders_DV1_agreed": 2
+   }
+  }
+ },
+ "audit_by_rule_now": {
+  "T_BACKWARD": {
+   "n": 45,
+   "both_coders": 45,
+   "coders_agree": 41,
+   "acc_vs_agreed": 1.0,
+   "acc_vs_combined": 0.9111,
+   "auto_DV1": 0,
+   "coders_DV1_agreed": 0
+  },
+  "T_BACKWARD_MELT": {
+   "n": 12,
+   "both_coders": 12,
+   "coders_agree": 5,
+   "acc_vs_agreed": 1.0,
+   "acc_vs_combined": 0.4167,
+   "auto_DV1": 0,
+   "coders_DV1_agreed": 0
+  },
+  "T_CONSTITUENT": {
+   "n": 31,
+   "both_coders": 31,
+   "coders_agree": 30,
+   "acc_vs_agreed": 0.8333,
+   "acc_vs_combined": 0.8387,
+   "auto_DV1": 31,
+   "coders_DV1_agreed": 25
+  },
+  "T_CONSTITUENT_COMMON": {
+   "n": 59,
+   "both_coders": 59,
+   "coders_agree": 30,
+   "acc_vs_agreed": 0.6333,
+   "acc_vs_combined": 0.8136,
+   "auto_DV1": 59,
+   "coders_DV1_agreed": 19
+  },
+  "T_FABRIC_PROCESSED": {
+   "n": 10,
+   "both_coders": 10,
+   "coders_agree": 7,
+   "acc_vs_agreed": 1.0,
+   "acc_vs_combined": 1.0,
+   "auto_DV1": 10,
+   "coders_DV1_agreed": 7
+  },
+  "T_FINISHED_SIBLING": {
+   "n": 38,
+   "both_coders": 38,
+   "coders_agree": 38,
+   "acc_vs_agreed": 1.0,
+   "acc_vs_combined": 1.0,
+   "auto_DV1": 0,
+   "coders_DV1_agreed": 0
+  },
+  "T_FORWARD": {
+   "n": 145,
+   "both_coders": 145,
+   "coders_agree": 103,
+   "acc_vs_agreed": 0.9029,
+   "acc_vs_combined": 0.931,
+   "auto_DV1": 145,
+   "coders_DV1_agreed": 93
+  },
+  "T_FORWARD_COMMON_FIBRE": {
+   "n": 42,
+   "both_coders": 42,
+   "coders_agree": 23,
+   "acc_vs_agreed": 0.2174,
+   "acc_vs_combined": 0.5714,
+   "auto_DV1": 42,
+   "coders_DV1_agreed": 5
+  },
+  "T_FORWARD_OTHER_FIBRE": {
+   "n": 4,
+   "both_coders": 4,
+   "coders_agree": 1,
+   "acc_vs_agreed": 0.0,
+   "acc_vs_combined": 0.75,
+   "auto_DV1": 4,
+   "coders_DV1_agreed": 0
+  },
+  "T_INTERMEDIATE_SIBLING": {
+   "n": 46,
+   "both_coders": 46,
+   "coders_agree": 26,
+   "acc_vs_agreed": 0.0769,
+   "acc_vs_combined": 0.4783,
+   "auto_DV1": 46,
+   "coders_DV1_agreed": 2
+  },
+  "T_PARTS": {
+   "n": 10,
+   "both_coders": 10,
+   "coders_agree": 10,
+   "acc_vs_agreed": 1.0,
+   "acc_vs_combined": 1.0,
+   "auto_DV1": 10,
+   "coders_DV1_agreed": 10
+  },
+  "T_RAGS": {
+   "n": 10,
+   "both_coders": 10,
+   "coders_agree": 10,
+   "acc_vs_agreed": 1.0,
+   "acc_vs_combined": 1.0,
+   "auto_DV1": 10,
+   "coders_DV1_agreed": 10
+  },
+  "T_SAME_STAGE_OTHER_FIBRE": {
+   "n": 78,
+   "both_coders": 78,
+   "coders_agree": 77,
+   "acc_vs_agreed": 1.0,
+   "acc_vs_combined": 0.9872,
+   "auto_DV1": 0,
+   "coders_DV1_agreed": 0
+  },
+  "T_THREAD_TO_YARN": {
+   "n": 9,
+   "both_coders": 9,
+   "coders_agree": 6,
+   "acc_vs_agreed": 0.8333,
+   "acc_vs_combined": 0.8889,
+   "auto_DV1": 9,
+   "coders_DV1_agreed": 5
+  },
+  "T_THREAD_TRIM_TO_ARTICLE": {
+   "n": 15,
+   "both_coders": 15,
+   "coders_agree": 15,
+   "acc_vs_agreed": 1.0,
+   "acc_vs_combined": 1.0,
+   "auto_DV1": 15,
+   "coders_DV1_agreed": 15
+  },
+  "T_WASTE_COMMON_FIBRE": {
+   "n": 9,
+   "both_coders": 9,
+   "coders_agree": 5,
+   "acc_vs_agreed": 0.0,
+   "acc_vs_combined": 0.4444,
+   "auto_DV1": 9,
+   "coders_DV1_agreed": 0
+  },
+  "T_WASTE_OTHER_FIBRE": {
+   "n": 4,
+   "both_coders": 4,
+   "coders_agree": 4,
+   "acc_vs_agreed": 1.0,
+   "acc_vs_combined": 1.0,
+   "auto_DV1": 0,
+   "coders_DV1_agreed": 0
+  },
+  "T_WASTE_REPROCESSED": {
+   "n": 11,
+   "both_coders": 11,
+   "coders_agree": 9,
+   "acc_vs_agreed": 1.0,
+   "acc_vs_combined": 1.0,
+   "auto_DV1": 11,
+   "coders_DV1_agreed": 9
+  },
+  "T_WASTE_SAME_FIBRE": {
+   "n": 10,
+   "both_coders": 10,
+   "coders_agree": 6,
+   "acc_vs_agreed": 1.0,
+   "acc_vs_combined": 1.0,
+   "auto_DV1": 10,
+   "coders_DV1_agreed": 6
+  }
+ },
+ "audit_weighted": {
+  "textile_rules_all": 0.8346,
+  "textile_rules_all_at_sampling": 0.829,
+  "textile_rules_excl_constituent": 0.835,
+  "textile_rules_excl_constituent_at_sampling": 0.8861,
+  "ml_keep1": 0.7342,
+  "ml_turn0": 0.8495
+ },
+ "audit_flags": [
+  "ml_keep1: accuracy 0.7342 < 0.9; narrow the band",
+  "ml_turn0: accuracy 0.8495 < 0.9; narrow the band"
+ ],
+ "conflicts": {
+  "T_BACKWARD|keep1": {
+   "pairs": 93,
+   "winner": "rule",
+   "acc_rule": 1.0,
+   "acc_ml": 0.0,
+   "n_agreed": 21,
+   "level": "rule_id x band"
+  },
+  "T_FORWARD|turn0": {
+   "pairs": 666,
+   "winner": "none",
+   "acc_rule": 0.7857,
+   "acc_ml": 0.2143,
+   "n_agreed": 42,
+   "level": "rule_id x band"
+  },
+  "T_FORWARD_COMMON_FIBRE|turn0": {
+   "pairs": 713,
+   "winner": "none",
+   "acc_rule": 0.25,
+   "acc_ml": 0.75,
+   "n_agreed": 8,
+   "level": "rule_id x band"
+  },
+  "T_FORWARD_OTHER_FIBRE|turn0": {
+   "pairs": 61,
+   "winner": "none",
+   "acc_rule": null,
+   "acc_ml": null,
+   "n_agreed": 0,
+   "level": "rule_id"
+  },
+  "T_INTERMEDIATE_SIBLING|turn0": {
+   "pairs": 93,
+   "winner": "ml",
+   "acc_rule": 0.0,
+   "acc_ml": 1.0,
+   "n_agreed": 16,
+   "level": "rule_id x band"
+  },
+  "T_SAME_STAGE_OTHER_FIBRE|keep1": {
+   "pairs": 592,
+   "winner": "rule",
+   "acc_rule": 1.0,
+   "acc_ml": 0.0,
+   "n_agreed": 25,
+   "level": "rule_id x band"
+  },
+  "T_THREAD_TO_YARN|turn0": {
+   "pairs": 4,
+   "winner": "none",
+   "acc_rule": null,
+   "acc_ml": null,
+   "n_agreed": 0,
+   "level": "rule_id"
+  },
+  "T_WASTE_COMMON_FIBRE|turn0": {
+   "pairs": 3,
+   "winner": "none",
+   "acc_rule": null,
+   "acc_ml": null,
+   "n_agreed": 0,
+   "level": "rule_id"
+  },
+  "T_WASTE_OTHER_FIBRE_MINOR|turn0": {
+   "pairs": 7,
+   "winner": "none",
+   "acc_rule": null,
+   "acc_ml": null,
+   "n_agreed": 0,
+   "level": "rule_id"
+  }
+ },
+ "dv0_without_step": 0,
+ "ml_reroute_audit": {
+  "pairs": 8516,
+  "coders_agree": 6365,
+  "ml_acc_vs_agreed": 0.8405,
+  "by_band": {
+   "keep1": {
+    "pairs": 3486,
+    "acc_vs_agreed": 0.8963,
+    "acc_vs_combined": 0.9306
+   },
+   "turn0": {
+    "pairs": 5030,
+    "acc_vs_agreed": 0.8082,
+    "acc_vs_combined": 0.6477
+   }
+  }
+ },
+ "master": {
+  "pairs": 358048,
+  "source": {
+   "rule_textile": 187479,
+   "exact_copy": 98336,
+   "ai_units": 48100,
+   "ml": 9340,
+   "ai_units_ml_reroute": 8516,
+   "rule": 3388,
+   "conflict_unresolved": 1387,
+   "ai_sample": 788,
+   "conflict_rule": 637,
+   "conflict_ml": 77
+  },
+  "DV1": 237196,
+  "DV_strict1": 197147,
+  "DV_max1": 239460,
+  "uncertain": 40049,
+  "concord_flag": 2
+ },
+ "pta": {
+  "BRN_JPN": {
+   "records": 83491,
+   "DV1": 38356,
+   "DV1_share": 0.4594,
+   "DV_strict1_share": 0.4225,
+   "uncertain_share": 0.0369,
+   "source": {
+    "exact_copy": 64595,
+    "rule_textile": 7854,
+    "ai_units": 3272,
+    "ai_units_ml_reroute": 2920,
+    "ml": 2221,
+    "rule": 2101,
+    "conflict_rule": 387,
+    "ai_sample": 93,
+    "conflict_unresolved": 48
+   }
+  },
+  "AUS_USA": {
+   "records": 333324,
+   "DV1": 223694,
+   "DV1_share": 0.6711,
+   "DV_strict1_share": 0.5724,
+   "uncertain_share": 0.0987,
+   "source": {
+    "rule_textile": 185894,
+    "exact_copy": 91602,
+    "ai_units": 34613,
+    "ml": 9272,
+    "ai_units_ml_reroute": 5803,
+    "rule": 3311,
+    "conflict_unresolved": 1387,
+    "ai_sample": 756,
+    "conflict_rule": 609,
+    "conflict_ml": 77
+   }
+  },
+  "CAFTA": {
+   "records": 321967,
+   "DV1": 216029,
+   "DV1_share": 0.671,
+   "DV_strict1_share": 0.5703,
+   "uncertain_share": 0.1007,
+   "source": {
+    "rule_textile": 179583,
+    "exact_copy": 88678,
+    "ai_units": 35188,
+    "ml": 9128,
+    "ai_units_ml_reroute": 3456,
+    "rule": 3206,
+    "conflict_unresolved": 1322,
+    "ai_sample": 720,
+    "conflict_rule": 609,
+    "conflict_ml": 77
+   }
+  },
+  "BHR_USA": {
+   "records": 244786,
+   "DV1": 184180,
+   "DV1_share": 0.7524,
+   "DV_strict1_share": 0.6659,
+   "uncertain_share": 0.0865,
+   "source": {
+    "rule_textile": 180589,
+    "exact_copy": 50871,
+    "ml": 9272,
+    "conflict_unresolved": 1387,
+    "ai_units": 983,
+    "ai_sample": 690,
+    "conflict_rule": 609,
+    "ai_units_ml_reroute": 180,
+    "rule": 128,
+    "conflict_ml": 77
+   }
+  }
+ }
+}

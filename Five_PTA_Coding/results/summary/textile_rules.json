@@ -1,0 +1,44 @@
+{
+ "textile_pairs_coded_by_rule": 187920,
+ "by_rule": {
+  "T_CONSTITUENT_COMMON": 61058,
+  "T_FORWARD": 48975,
+  "T_CONSTITUENT": 17309,
+  "T_FORWARD_COMMON_FIBRE": 14163,
+  "T_FINISHED_SIBLING": 13231,
+  "T_SAME_STAGE_OTHER_FIBRE": 11318,
+  "T_INTERMEDIATE_SIBLING": 8798,
+  "T_BACKWARD": 5653,
+  "T_THREAD_TRIM_TO_ARTICLE": 2191,
+  "T_FORWARD_OTHER_FIBRE": 2023,
+  "T_RAGS": 872,
+  "T_FABRIC_PROCESSED": 772,
+  "T_WASTE_COMMON_FIBRE": 524,
+  "T_BACKWARD_MELT": 290,
+  "T_WASTE_REPROCESSED": 267,
+  "T_WASTE_OTHER_FIBRE": 157,
+  "T_ACCESSORY_TO_GARMENT": 119,
+  "T_PARTS": 115,
+  "T_THREAD_TO_YARN": 54,
+  "T_WASTE_SAME_FIBRE": 30,
+  "T_RETAIL_PACKING": 1
+ },
+ "DV1_main": 157271,
+ "DV1_strict": 137939,
+ "uncertain_constituent": 19332,
+ "rule_vs_copied_PTA1_DV_agreement": 0.9232,
+ "copied_textile_pairs": 50249,
+ "ml_textile_pairs_rule_conflict": 2232,
+ "source": {
+  "rule_textile": 187920,
+  "exact_copy": 98336,
+  "pending": 50332,
+  "ml": 18072,
+  "rule": 3388
+ },
+ "queue": {
+  "unseen_other": 40490,
+  "ml_middle": 7610,
+  "ml_rule_conflict": 2232
+ }
+}

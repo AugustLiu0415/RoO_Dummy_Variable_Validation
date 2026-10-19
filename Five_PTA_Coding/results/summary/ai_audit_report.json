@@ -1,0 +1,98 @@
+{
+ "auditors": [
+  "claude",
+  "codex"
+ ],
+ "items": 295,
+ "claude": {
+  "agree_with_final_weighted": 0.9734,
+  "agree_with_final_unweighted": 0.9085,
+  "auditor1_final0": 8,
+  "auditor0_final1": 19,
+  "by_family": {
+   "ai_units": {
+    "n": 115,
+    "agree": 0.8723
+   },
+   "conflict": {
+    "n": 20,
+    "agree": 0.8175
+   },
+   "exact_copy": {
+    "n": 30,
+    "agree": 1.0
+   },
+   "ml": {
+    "n": 50,
+    "agree": 0.9401
+   },
+   "rule_textile": {
+    "n": 80,
+    "agree": 0.99
+   }
+  }
+ },
+ "codex": {
+  "agree_with_final_weighted": 0.9064,
+  "agree_with_final_unweighted": 0.8373,
+  "auditor1_final0": 47,
+  "auditor0_final1": 1,
+  "by_family": {
+   "ai_units": {
+    "n": 115,
+    "agree": 0.7616
+   },
+   "conflict": {
+    "n": 20,
+    "agree": 0.604
+   },
+   "exact_copy": {
+    "n": 30,
+    "agree": 0.9
+   },
+   "ml": {
+    "n": 50,
+    "agree": 0.8997
+   },
+   "rule_textile": {
+    "n": 80,
+    "agree": 0.9502
+   }
+  }
+ },
+ "between_auditors": {
+  "agree": 0.7797,
+  "kappa": 0.5312
+ },
+ "final_vs_auditor_consensus": {
+  "items_where_auditors_agree": 230,
+  "final_agrees_weighted": 0.9922,
+  "by_family": {
+   "ai_units": {
+    "n": 81,
+    "agree": 0.9506
+   },
+   "conflict": {
+    "n": 9,
+    "agree": 1.0
+   },
+   "exact_copy": {
+    "n": 27,
+    "agree": 1.0
+   },
+   "ml": {
+    "n": 44,
+    "agree": 0.9773
+   },
+   "rule_textile": {
+    "n": 69,
+    "agree": 1.0
+   }
+  }
+ },
+ "review_counts": {
+  "1 auditors agree, final differs": 5,
+  "2 auditors disagree": 65,
+  "3 all agree": 225
+ }
+}

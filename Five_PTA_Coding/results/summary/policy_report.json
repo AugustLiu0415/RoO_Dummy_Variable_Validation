@@ -1,0 +1,273 @@
+{
+ "decisions_file": "PTA_2_5_coding_questions_2026_10_18_Hao.docx",
+ "policies": {},
+ "pta1": {
+  "rows": 115764,
+  "DV1_before": 55538,
+  "DV1_after": 53949,
+  "policies": {
+   "P_Q4": {
+    "rows_matched": 423,
+    "DV_changed": 423
+   },
+   "P_Q1_2": {
+    "rows_matched": 738,
+    "DV_changed": 738
+   },
+   "P_AUD_C": {
+    "rows_matched": 166,
+    "DV_changed": 166
+   },
+   "P_AUD_D": {
+    "rows_matched": 0,
+    "DV_changed": 0
+   },
+   "P_AUD_A": {
+    "rows_matched": 118,
+    "DV_changed": 118
+   },
+   "P_OPT2": {
+    "rows_matched": 126,
+    "DV_changed": 126
+   },
+   "P_FISH_feed": {
+    "rows_matched": 0,
+    "DV_changed": 0
+   },
+   "P_FISH_maybe": {
+    "rows_matched": 4,
+    "DV_changed": 0
+   },
+   "P_FISH_0": {
+    "rows_matched": 3160,
+    "DV_changed": 3160
+   }
+  },
+  "labels_sha256": "2a03a0a98677f58e7804fe10949e883c70d8da491d4660c9ba966e5cc782176d"
+ },
+ "pta2_5_unique_pairs": {
+  "pairs": 358048,
+  "DV1_v2": 218100,
+  "DV1_after_textile_rule_change": 237196,
+  "DV1_final": 237073,
+  "DV_strict1_final": 206958,
+  "uncertain_v2": 102721,
+  "uncertain_final": 30115,
+  "textile_rule_change_Q1_2": {
+   "DV_changed": 19096
+  },
+  "policies": {
+   "recopy_from_new_PTA1_labels": {
+    "rows_matched": 98336,
+    "DV_changed": 4353
+   },
+   "P_Q4": {
+    "rows_matched": 636,
+    "DV_changed": 636
+   },
+   "P_Q1_2": {
+    "rows_matched": 29,
+    "DV_changed": 29
+   },
+   "P_Q1_1": {
+    "rows_matched": 4024,
+    "DV_changed": 0
+   },
+   "P_CONF": {
+    "rows_matched": 1464,
+    "DV_changed": 77
+   },
+   "P_AUD_C": {
+    "rows_matched": 1,
+    "DV_changed": 1
+   },
+   "P_AUD_D": {
+    "rows_matched": 0,
+    "DV_changed": 0
+   },
+   "P_AUD_A": {
+    "rows_matched": 1,
+    "DV_changed": 1
+   },
+   "P_OPT2": {
+    "rows_matched": 41,
+    "DV_changed": 41
+   },
+   "uncertain_rule_category": {
+    "rows_matched": 83,
+    "DV_changed": 0
+   },
+   "P_AUD_B": {
+    "rows_matched": 78,
+    "DV_changed": 78
+   },
+   "P_Q2_1": {
+    "rows_matched": 7308,
+    "DV_changed": 723
+   },
+   "P_Q2_2": {
+    "rows_matched": 335,
+    "DV_changed": 0
+   },
+   "P_FISH_feed": {
+    "rows_matched": 0,
+    "DV_changed": 0
+   },
+   "P_FISH_maybe": {
+    "rows_matched": 0,
+    "DV_changed": 0
+   },
+   "P_FISH_0": {
+    "rows_matched": 0,
+    "DV_changed": 0
+   }
+  },
+  "uncertain_by_reason": {
+   "minor constituent of a garment or made-up: other fibre or construction": 17279,
+   "AI coders, or the model and the textile rules, disagree": 6722,
+   "open case in the ASEAN-Japan labels": 2732,
+   "minor constituent of a yarn or fabric: other fibre": 2278,
+   "AI coders disagree: sibling or backward": 1100,
+   "possible feed (rock lobster)": 4
+  }
+ },
+ "pta": {
+  "BRN_JPN": {
+   "records": 83491,
+   "DV1": 36117,
+   "DV1_share": 0.4326,
+   "DV_strict1": 32929,
+   "uncertain": 3188,
+   "uncertain_by_reason": {
+    "open case in the ASEAN-Japan labels": 1714,
+    "AI coders, or the model and the textile rules, disagree": 980,
+    "minor constituent of a garment or made-up: other fibre or construction": 273,
+    "minor constituent of a yarn or fabric: other fibre": 190,
+    "AI coders disagree: sibling or backward": 27,
+    "possible feed (rock lobster)": 4
+   },
+   "source": {
+    "exact_copy": 64595,
+    "rule_textile": 7854,
+    "ai_units": 3272,
+    "ai_units_ml_reroute": 2920,
+    "ml": 2221,
+    "rule": 2101,
+    "conflict_rule": 387,
+    "ai_sample": 93,
+    "conflict_unresolved": 48
+   },
+   "DV1_v2": 38152,
+   "uncertain_v2": 6182
+  },
+  "AUS_USA": {
+   "records": 333324,
+   "DV1": 222942,
+   "DV1_share": 0.6688,
+   "DV_strict1": 195187,
+   "uncertain": 27755,
+   "uncertain_by_reason": {
+    "minor constituent of a garment or made-up: other fibre or construction": 16863,
+    "AI coders, or the model and the textile rules, disagree": 4983,
+    "open case in the ASEAN-Japan labels": 2583,
+    "minor constituent of a yarn or fabric: other fibre": 2243,
+    "AI coders disagree: sibling or backward": 1079,
+    "possible feed (rock lobster)": 4
+   },
+   "source": {
+    "rule_textile": 185894,
+    "exact_copy": 91602,
+    "ai_units": 34613,
+    "ml": 9272,
+    "ai_units_ml_reroute": 5803,
+    "rule": 3311,
+    "conflict_unresolved": 1387,
+    "ai_sample": 756,
+    "conflict_rule": 609,
+    "conflict_ml": 77
+   },
+   "DV1_v2": 204601,
+   "uncertain_v2": 95030
+  },
+  "CAFTA": {
+   "records": 321967,
+   "DV1": 215947,
+   "DV1_share": 0.6707,
+   "DV_strict1": 193088,
+   "uncertain": 22859,
+   "uncertain_by_reason": {
+    "minor constituent of a garment or made-up: other fibre or construction": 14512,
+    "AI coders, or the model and the textile rules, disagree": 4086,
+    "open case in the ASEAN-Japan labels": 2449,
+    "minor constituent of a yarn or fabric: other fibre": 1250,
+    "AI coders disagree: sibling or backward": 558,
+    "possible feed (rock lobster)": 4
+   },
+   "source": {
+    "rule_textile": 179583,
+    "exact_copy": 88678,
+    "ai_units": 35188,
+    "ml": 9128,
+    "ai_units_ml_reroute": 3456,
+    "rule": 3206,
+    "conflict_unresolved": 1322,
+    "ai_sample": 720,
+    "conflict_rule": 609,
+    "conflict_ml": 77
+   },
+   "DV1_v2": 198721,
+   "uncertain_v2": 95626
+  },
+  "BHR_USA": {
+   "records": 244786,
+   "DV1": 185904,
+   "DV1_share": 0.7595,
+   "DV_strict1": 165928,
+   "uncertain": 19976,
+   "uncertain_by_reason": {
+    "minor constituent of a garment or made-up: other fibre or construction": 16083,
+    "minor constituent of a yarn or fabric: other fibre": 2243,
+    "open case in the ASEAN-Japan labels": 1423,
+    "AI coders, or the model and the textile rules, disagree": 135,
+    "AI coders disagree: sibling or backward": 92
+   },
+   "source": {
+    "rule_textile": 180589,
+    "exact_copy": 50871,
+    "ml": 9272,
+    "conflict_unresolved": 1387,
+    "ai_units": 983,
+    "ai_sample": 690,
+    "conflict_rule": 609,
+    "ai_units_ml_reroute": 180,
+    "rule": 128,
+    "conflict_ml": 77
+   },
+   "DV1_v2": 165095,
+   "uncertain_v2": 80358
+  },
+  "ASEAN_JPN": {
+   "records": 115764,
+   "DV1": 53949,
+   "DV1_share": 0.466,
+   "DV_strict1": 49811,
+   "uncertain": 4138,
+   "uncertain_by_reason": {
+    "open case in the ASEAN-Japan labels": 4016,
+    "minor constituent of a yarn or fabric: other fibre": 118,
+    "possible feed (rock lobster)": 4
+   },
+   "source": {
+    "pta1_label": 115764
+   },
+   "DV1_v2": 55538,
+   "uncertain_v2": 4016
+  }
+ },
+ "consistency": {
+  "pairs_in_ASEAN_JPN_and_PTA2_5": 98336,
+  "DV_differs": 0,
+  "uncertain_differs": 0,
+  "route_differs": 0
+ }
+}

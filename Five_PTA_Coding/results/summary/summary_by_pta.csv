@@ -1,0 +1,6 @@
+pta,agreement,rows,DV1,DV1_share,DV_strict1,DV_excl_remelt1,uncertain,uncertain_share_of_DV1,uncertain: open case in the ASEAN-Japan labels,uncertain: minor constituent of a yarn or fabric: other fibre,uncertain: possible feed (rock lobster),source: pta1_label,"uncertain: AI coders, or the model and the textile rules, disagree",uncertain: minor constituent of a garment or made-up: other fibre or construction,uncertain: AI coders disagree: sibling or backward,source: exact_copy,source: rule_textile,source: ai_units,source: ai_units_ml_reroute,source: ml,source: rule,source: conflict_rule,source: ai_sample,source: conflict_unresolved,source: conflict_ml
+ASEAN_JPN,ASEAN-Japan,115764,53949,0.466,49811,53526,4138,0.0767,4016,118,4,115764,0,0,0,0,0,0,0,0,0,0,0,0,0
+BRN_JPN,Brunei-Japan,83491,36117,0.4326,32929,35939,3188,0.0883,1714,190,4,0,980,273,27,64595,7854,3272,2920,2221,2101,387,93,48,0
+AUS_USA,Australia-US,333324,222942,0.6688,195187,222121,27755,0.1245,2583,2243,4,0,4983,16863,1079,91602,185894,34613,5803,9272,3311,609,756,1387,77
+CAFTA,CAFTA,321967,215947,0.6707,193088,215133,22859,0.1059,2449,1250,4,0,4086,14512,558,88678,179583,35188,3456,9128,3206,609,720,1322,77
+BHR_USA,Bahrain-US,244786,185904,0.7595,165928,185448,19976,0.1075,1423,2243,0,0,135,16083,92,50871,180589,983,180,9272,128,609,690,1387,77

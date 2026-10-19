@@ -118,3 +118,10 @@ The `2.0` files preserve the local Codex cross-check snapshots. In particular, t
 ## Not included
 
 CSV mirrors of the workbooks, the full audit trail (frozen target lists, source snapshots, per-batch result files, about 200 MB) and the scripts are kept locally and can be added on request. The other RA's modular votes and the row-level comparison workbook are kept locally and are not published here. V3 Round 1 outputs are produced locally first.
+
+## Five-PTA coding (2026-10-18 to 10-19)
+
+The ASEAN–Japan conventions were turned into one general coding workflow. Under it, four more agreements were coded
+(Brunei–Japan, Australia–US, CAFTA, Bahrain–US), and ASEAN–Japan was recoded under the same rules. The workflow
+document, codebook, prompts, scripts, result report, variable description and aggregate figures are in
+[`Five_PTA_Coding/`](Five_PTA_Coding/README.md). The row-level coded files are kept locally.

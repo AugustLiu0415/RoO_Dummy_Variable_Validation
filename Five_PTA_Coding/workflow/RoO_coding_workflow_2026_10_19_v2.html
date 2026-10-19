@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Coding Workflow for RoO Restricted-Input Pairs</title>
+<style>
+@page { size: letter; margin: 0.9in 0.85in 0.85in 0.85in;
+  @bottom-left { content: "RoO input–output coding workflow · 19 October 2026"; font: 8pt "Helvetica Neue", Helvetica, Arial, sans-serif; color: #666; }
+  @bottom-right { content: counter(page); font: 8pt "Helvetica Neue", Helvetica, Arial, sans-serif; color: #666; } }
+body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 10pt; line-height: 1.42; color: #111; }
+h1 { font-size: 19pt; margin: 0 0 4pt 0; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt 0; page-break-after: avoid; }
+h3 { font-size: 11pt; margin: 11pt 0 4pt 0; page-break-after: avoid; }
+p { margin: 3pt 0 6pt 0; }
+.lead { color: #444; }
+ul { margin: 2pt 0 6pt 0; padding-left: 15pt; }
+li { margin: 1pt 0; }
+table { border-collapse: collapse; width: 100%; margin: 4pt 0 8pt 0; font-size: 8.8pt; page-break-inside: auto; }
+tr { page-break-inside: avoid; }
+th { background: #eef0f3; text-align: left; font-weight: bold; padding: 3.5pt 5pt; border-bottom: 1px solid #c8ccd2; }
+td { padding: 3.5pt 5pt; border-bottom: 1px solid #dde0e4; vertical-align: top; }
+.note { font-size: 8.8pt; color: #333; }
+.box { background: #f4f5f7; border-left: 3pt solid #9aa1ab; padding: 6pt 9pt; margin: 8pt 0; }
+.avoid { page-break-inside: avoid; }
+</style></head><body>
+
+<h1>Coding Workflow for RoO Restricted-Input Pairs</h1>
+<p class="lead">General coding rules for every preferential trade agreement (PTA). The definition of an input–output
+link is expansive: every pair <b>starts at DV = 1</b>, and each step turns to 0 only the cases it clearly excludes.
+Pairs are written <b>input → output</b> (A → B). The rules include the scope decisions of 19 October 2026; they are
+summarised in the last section. Results for individual PTAs are reported separately.</p>
+
+<h2>Variables</h2>
+<table>
+<tr><th style="width:36%">Variable</th><th>Contents</th></tr>
+<tr><td>pair_id, pta, hs_vintage</td><td>Identifiers</td></tr>
+<tr><td>input_hs6, output_hs6, descriptions</td><td>The pair</td></tr>
+<tr><td>DV</td><td>Final code; initialised to 1 for every pair</td></tr>
+<tr><td>DV_strict</td><td>DV × (1 − uncertain): counts only certain 1s</td></tr>
+<tr><td>DV_excl_remelt</td><td>Robustness version of DV with direct remelting (route = recycle_direct) set to 0</td></tr>
+<tr><td>locked</td><td>1 if step 2 protects the pair at DV = 1</td></tr>
+<tr><td>step</td><td>Step that turned the pair to 0 (3–6), or 2 if locked; blank if the pair stayed 1</td></tr>
+<tr><td>route</td><td>Reason a pair stays 1: same_good, forward, ingredient, component, reconstitute, mixture,
+recycle_waste, recycle_direct, feed, sibling_intermediate; none if turned to 0</td></tr>
+<tr><td>uncertain, uncertain_reason</td><td>1 if the pair is kept at 1 but is doubtful: the two AI coders disagree, or
+the pair falls under a rule that is 1 with uncertainty (step 6); the reason is recorded</td></tr>
+<tr><td>source</td><td>How the code was reached: rule, rule_textile, ai coders, exact_copy, ml, conflict</td></tr>
+<tr><td>dv_ai1, dv_ai2, why_ai1, why_ai2</td><td>Each AI coder’s code and one-line reason</td></tr>
+<tr><td>ml_prob</td><td>Model probability (step 7 only)</td></tr>
+<tr><td>concord_flag</td><td>1 if a code is not one-to-one with the common HS vintage (step 1)</td></tr>
+</table>
+
+<h2>Step 1. Take in the RoO pairs and set DV = 1</h2>
+<ul>
+<li>Read each agreement’s product-specific rules and list every (restricted input, output) pair at HS6, in the
+agreement’s own HS vintage.</li>
+<li>Map every pair to a common HS vintage with the WCO/UN correlation tables. A code that splits produces one pair
+per new code; flag non-one-to-one mappings as <i>concord_flag</i> = 1 for later checking.</li>
+<li>Remove duplicate pairs within each agreement and keep a pair-level master list across agreements (used in
+step 7).</li>
+<li><b>Set DV = 1 for every pair.</b> Steps 3–6 can only turn a 1 into a 0; no step turns a 0 back into a 1.</li>
+</ul>
+
+<h2>Step 2. Lock identical or same-good pairs at 1</h2>
+<p><b>Rule:</b> set <i>locked</i> = 1 (<i>route</i> = same_good) when input and output are the same good or very
+similar: the same HS6 code, or the same species, material or variety differing only in processing stage,
+preservation state, packing or size of presentation, or a treatment the producer can add (roasting, decaffeinating,
+dyeing, printing, plying). Locked pairs skip steps 3–6.</p>
+<table>
+<tr><th style="width:52%">Input → Output</th><th style="width:13%">DV</th><th>Why</th></tr>
+<tr><td>090111 coffee, not roasted → 090111 coffee, not roasted</td><td>1, locked</td><td>Same HS6 code (self-pair)</td></tr>
+<tr><td>090111 coffee, not roasted → 090121 coffee, roasted</td><td>1, locked</td><td>Same coffee, roasted</td></tr>
+<tr><td>090111 coffee, not roasted → 090112 coffee, decaffeinated</td><td>1, locked</td><td>Same coffee, decaffeinated</td></tr>
+<tr><td>090210 green tea, packs ≤ 3 kg → 090220 green tea, packs &gt; 3 kg</td><td>1, locked</td><td>Same tea, different packing</td></tr>
+<tr><td>520811 unbleached cotton plain weave → 520831 dyed cotton plain weave</td><td>1, locked</td><td>Same fabric, dyed</td></tr>
+</table>
+<p class="note"><b>Boundary with siblings (step 4).</b> “Very similar” means one can be turned into the other. Goods
+that differ in a fixed attribute — fibre, species, gender cut, base material — are siblings, not the same good:
+women’s cotton jackets → women’s synthetic jackets is not locked and goes to 0 at step 4. The direction must also be
+possible: dyed fabric → unbleached fabric is not locked and goes to 0 at step 5.</p>
+
+<h2>Step 3. Turn to 0: clearly irrelevant pairs</h2>
+<p><b>Rule:</b> turn to 0 only when no route from step 6 could apply: the input would have to change into a
+different species, plant, fibre or substance, and it is not a constituent, feed, part or waste of the output. If in
+doubt, leave the pair at 1 for step 6.</p>
+<table>
+<tr><th style="width:52%">Input → Output</th><th style="width:13%">DV</th><th>Why</th></tr>
+<tr><td>200941 pineapple juice → 200410 frozen prepared potatoes</td><td>1→0</td><td>Different plant; juice is not an ingredient of potatoes</td></tr>
+<tr><td>210500 ice cream → 210320 tomato ketchup</td><td>1→0</td><td>Unrelated food preparations</td></tr>
+<tr><td>151110 crude palm oil → 151491 crude rapeseed oil</td><td>1→0</td><td>Refining cannot change the oil’s source</td></tr>
+<tr><td>710231 unworked diamonds → 711510 platinum catalysts</td><td>1→0</td><td>A stone does not become a metal</td></tr>
+<tr><td>730810 steel bridges → 730729 stainless tube fittings</td><td>1→0</td><td>Finished articles with unrelated uses</td></tr>
+<tr><td>030562 salted cod → 030344 frozen bigeye tuna</td><td>1→0</td><td>Different fish species, and salted cod is not feed</td></tr>
+<tr><td>030379 other frozen fish → 030332 frozen plaice</td><td>1→0</td><td>Different species; plaice is wild-caught, so no feed route</td></tr>
+</table>
+<p class="note"><b>Caution.</b> Do not turn a pair to 0 at this step when the output is a mixture, a farmed animal
+or a waste product; leave it at 1 for step 6. Example: chicken cuts → 160249 (prepared pork and mixtures) looks
+irrelevant but is a mixture pair.</p>
+<p class="note"><b>Fibres.</b> Different synthetic fibres — nylon, polyester, acrylic, polypropylene — count as
+<b>one</b> fibre: nylon yarn → acrylic yarn is not a step-3 pair; it is an intermediate sibling (step 4) and stays 1.
+Different natural or artificial fibres (cotton → polyester, flax → jute, viscose → polyester) remain different fibres.</p>
+<p class="note"><b>Fish and other seafood.</b> Different species are different goods: the pair is 0 at this step
+unless the input could feed the output (step 6, feed). The intermediate-sibling rule of step 4 does not apply to
+different species.</p>
+
+<h2>Step 4. Turn to 0: downstream sibling products</h2>
+<p><b>Rule:</b> both goods are <b>finished</b> products at the same stage, usually in the same heading or chapter,
+differing in a fixed attribute (fibre, species, cut, material), and neither physically goes into the other.</p>
+<table>
+<tr><th style="width:52%">Input → Output</th><th style="width:13%">DV</th><th>Why</th></tr>
+<tr><td>620432 women’s cotton jackets → 620433 women’s synthetic jackets</td><td>1→0</td><td>Parallel finished garments</td></tr>
+<tr><td>620630 women’s cotton blouses → 620640 women’s man-made-fibre blouses</td><td>1→0</td><td>Parallel finished garments</td></tr>
+<tr><td>640192 waterproof boots → 640110 waterproof boots with metal toe-cap</td><td>1→0</td><td>Parallel footwear</td></tr>
+<tr><td>630622 synthetic-fibre tents → 630621 cotton tents</td><td>1→0</td><td>Parallel made-up articles</td></tr>
+<tr><td>960820 felt-tip pens → 960810 ballpoint pens</td><td>1→0</td><td>Parallel pens</td></tr>
+</table>
+<p>Exceptions that stay 1 (<i>route</i> = component), because one sibling is a part of the other:</p>
+<table>
+<tr><th style="width:52%">Input → Output</th><th style="width:13%">DV</th><th>Why</th></tr>
+<tr><td>640699 footwear parts → 640399 leather footwear</td><td>stays 1</td><td>Parts (uppers, soles) go into footwear</td></tr>
+<tr><td>960891 nibs → 960839 fountain pens</td><td>stays 1</td><td>Nib is a pen component</td></tr>
+<tr><td>960860 ballpoint refills → 960810 ballpoint pens</td><td>stays 1</td><td>Refill is a pen component</td></tr>
+<tr><td>611780 knitted clothing accessories (trims, bows) → 610610 women’s knitted cotton blouses</td><td>stays 1</td><td>Trims are attached to garments</td></tr>
+</table>
+
+<p><b>Intermediate siblings stay 1.</b> Step 4 applies only when both goods are finished. Two different intermediate
+goods of the same material at the same stage stay 1 with <i>route</i> = sibling_intermediate. Intermediate goods are
+fibre, yarn (including sewing thread), fabric, steel and other metal semi-finished products, paper and paperboard in
+rolls or sheets, glass in the mass and semi-finished glass, feed residues, basic chemicals and parts. Fabrics of the
+same fibre but a different construction (woven, knitted, pile, nonwoven) are intermediate siblings.</p>
+<table>
+<tr><th style="width:52%">Input → Output</th><th style="width:13%">DV</th><th>Why</th></tr>
+<tr><td>720851 hot-rolled steel sheet → 721420 hot-rolled steel bars</td><td>stays 1</td><td>Intermediate steel products</td></tr>
+<tr><td>480100 newsprint → 480411 kraft paper</td><td>stays 1</td><td>Intermediate paper grades</td></tr>
+<tr><td>480591 other uncoated paper → 480512 straw fluting paper</td><td>stays 1</td><td>Intermediate paper grades</td></tr>
+<tr><td>230230 wheat bran → 230400 soya-bean oil-cake</td><td>stays 1</td><td>Parallel feed residues</td></tr>
+<tr><td>731815 screws and bolts → 731816 nuts</td><td>stays 1</td><td>Steel fastener parts</td></tr>
+<tr><td>520811 cotton woven fabric → 600622 cotton knitted fabric</td><td>stays 1</td><td>Same fibre, different construction</td></tr>
+<tr><td>540241 nylon filament yarn → 540243 polyester filament yarn</td><td>stays 1</td><td>Synthetic fibres count as one fibre</td></tr>
+<tr><td>540110 synthetic sewing thread → 550959 synthetic staple yarn</td><td>stays 1</td><td>Thread and yarn of one fibre</td></tr>
+</table>
+
+<h2>Step 5. Turn to 0: inverse (backward) pairs</h2>
+<p><b>Rule:</b> the input is downstream of the output in the same production chain, so the real relationship runs
+the other way.</p>
+<table>
+<tr><th style="width:52%">Input → Output</th><th style="width:13%">DV</th><th>Why</th></tr>
+<tr><td>721123 cold-rolled steel → 720229 ferro-silicon</td><td>1→0</td><td>Ferro-silicon goes into steel, not the reverse</td></tr>
+<tr><td>520811 cotton woven fabric → 520511 cotton yarn</td><td>1→0</td><td>Yarn is woven into fabric</td></tr>
+<tr><td>410791 finished leather → 410120 raw bovine hides</td><td>1→0</td><td>Hides are tanned into leather</td></tr>
+</table>
+<ul>
+<li>Exception that stays 1: a reverse link through a waste or scrap code (step 6, recycling).</li>
+<li>Exception that stays 1: direct remelting with no scrap code in between (step 6, <i>route</i> = recycle_direct).</li>
+<li>Steps 2, 4 and 5 can largely be applied by rule (self-pairs and same-heading stage rules for step 2; sibling and
+backward rules for steps 4 and 5); AI coders only need to check the exceptions.</li>
+</ul>
+
+<h2>Step 6. Turn to 0 only where the expansive definition finds no route</h2>
+<p><b>Rule:</b> every pair still at 1 is checked against the expansive routes below. It stays 1 if any route
+plausibly applies (record the route). It is turned to 0 only if you are sure no route exists — the cases listed in
+each table.</p>
+<p><b>General principle.</b> Use the broadest scope: keep 1 wherever <b>any</b> production route is technically
+possible, even if it is uncommon. If in doubt, keep 1.</p>
+
+<h3>Mixtures (route = mixture)</h3>
+<table>
+<tr><th style="width:52%">Input → Output</th><th style="width:13%">DV</th><th>Why</th></tr>
+<tr><td>020714 frozen chicken cuts → 160249 prepared pork and mixtures</td><td>stays 1</td><td>Another meat in a meat mixture</td></tr>
+<tr><td>070310 onions → 200570 prepared olives</td><td>stays 1</td><td>Flavouring or stuffing</td></tr>
+<tr><td>070960 capsicum → 200570 prepared olives</td><td>stays 1</td><td>Pimento-stuffed olives</td></tr>
+<tr><td>551219 polyester woven fabric → 551693 rayon woven fabric</td><td>1→0</td><td>“Mixed” refers to fibre content; fabric → fabric of another fibre has no route</td></tr>
+</table>
+
+<h3>Minor constituents of textile goods (route = ingredient or mixture)</h3>
+<p>A garment, made-up article, yarn or fabric is classified by its main fibre, but it can contain other fibres:
+lining, pocketing, trim or blend. A fibre, yarn, fabric or waste of another fibre going into it stays 1:</p>
+<ul>
+<li><b>certain 1</b> when the input is <b>cotton or a man-made fibre</b> (synthetic or artificial). These are the
+usual blend partners and lining materials, and the HS classifies a mixed good by the fibre that predominates by
+weight, so a “cotton” garment can contain almost half man-made fibre;</li>
+<li><b>1 with <i>uncertain</i> = 1</b> when the input is another fibre (wool, silk, flax, ramie, coarse animal hair,
+other textile materials), and when fabric of the <b>same fibre but another construction</b> goes into a garment
+(woven fabric → knitted garment and the reverse). These pairs count in DV but not in DV_strict.</li>
+</ul>
+<table>
+<tr><th style="width:52%">Input → Output</th><th style="width:13%">DV</th><th>Why</th></tr>
+<tr><td>540231 nylon filament yarn → 620342 men’s cotton trousers</td><td>stays 1</td><td>Man-made yarn as minor constituent</td></tr>
+<tr><td>540752 dyed polyester woven fabric → 620311 men’s wool suits</td><td>stays 1</td><td>Lining or blend</td></tr>
+<tr><td>520821 cotton fabric → 630253 table linen of man-made fibres</td><td>stays 1</td><td>Cotton as blend or trim</td></tr>
+<tr><td>540231 nylon filament yarn → 520851 printed cotton fabric</td><td>stays 1</td><td>Minor yarn in a fabric</td></tr>
+<tr><td>510710 wool yarn → 610463 women’s knitted synthetic trousers</td><td>1, uncertain</td><td>Wool blend: possible, less common</td></tr>
+<tr><td>500720 silk woven fabric → 570110 wool carpets</td><td>1, uncertain</td><td>Silk as minor constituent</td></tr>
+<tr><td>520811 cotton woven fabric → 610610 women’s knitted cotton blouses</td><td>1, uncertain</td><td>Same fibre, other construction (woven trim)</td></tr>
+</table>
+
+<h3>Recycling (route = recycle_waste; recycle_direct)</h3>
+<table>
+<tr><th style="width:52%">Input → Output</th><th style="width:13%">DV</th><th>Why</th></tr>
+<tr><td>551431 synthetic woven fabric → 550510 synthetic fibre waste</td><td>stays 1</td><td>Cutting waste</td></tr>
+<tr><td>411200 finished sheep leather → 411520 leather parings and dust</td><td>stays 1</td><td>Shaving and buffing waste</td></tr>
+<tr><td>510310 wool noils → 510521 combed wool in fragments</td><td>stays 1</td><td>Waste reprocessed into fibre</td></tr>
+<tr><td>721320 hot-rolled rod → 720610 non-alloy ingots</td><td>stays 1*</td><td>Direct remelting with no scrap code in between</td></tr>
+<tr><td>761010 aluminium doors and windows → 760110 unwrought aluminium</td><td>stays 1*</td><td>Direct remelting</td></tr>
+<tr><td>780500 lead pipes → 780110 refined lead</td><td>stays 1*</td><td>Direct remelting</td></tr>
+<tr><td>540752 dyed polyester woven fabric → 540233 textured polyester yarn</td><td>stays 1*</td><td>Polyester can be melted and spun again</td></tr>
+</table>
+<p class="note">* Direct remelting is 1 in the main DV and coded <i>route</i> = recycle_direct. The robustness variable
+DV_excl_remelt sets these pairs to 0.</p>
+
+<h3>Broad scope: wastes, raw materials and uncommon uses</h3>
+<table>
+<tr><th style="width:52%">Input → Output</th><th style="width:13%">DV</th><th>Rule</th></tr>
+<tr><td>292212 diethanolamine → 382520 sewage sludge</td><td>stays 1</td><td>Any chemical (ch. 28–38) → wastes of heading 3825 (recycle_waste)</td></tr>
+<tr><td>290322 trichloroethylene → 382541 halogenated waste solvents</td><td>stays 1</td><td>As above</td></tr>
+<tr><td>252400 asbestos → 252330 aluminous cement</td><td>stays 1</td><td>Any mineral of ch. 25 → cement (ingredient)</td></tr>
+<tr><td>251200 diatomite → 252329 Portland cement</td><td>stays 1</td><td>As above</td></tr>
+<tr><td>480451 kraft paper → 482320 filter paper</td><td>stays 1</td><td>Technically possible further use (forward)</td></tr>
+<tr><td>910811 watch movements → 910599 other clocks</td><td>stays 1</td><td>Technically possible further use (component)</td></tr>
+</table>
+
+<h3>Feed (route = feed)</h3>
+<p>The input must be a feed-grade good — whole low-value fish (herring, sardines, mackerel, other fish), fish meat
+and meal, crustaceans and their meal (krill), molluscs — and the output a farmed carnivorous fish or crustacean
+(trout, salmon, eels, sea bass, flatfish, bluefin tuna, shrimps and prawns, crabs) or a product made from it.
+Wild-caught outputs (other tunas, skipjack, cod, herring, plaice) and grazers or filter feeders are 0. Where a feed
+use is possible but not established, the pair is 1 with <i>uncertain</i> = 1.</p>
+<table>
+<tr><th style="width:52%">Input → Output</th><th style="width:13%">DV</th><th>Why</th></tr>
+<tr><td>030264 fresh mackerel → 160411 prepared salmon</td><td>stays 1</td><td>Feed fish → farmed salmon</td></tr>
+<tr><td>030371 frozen sardines → 030191 live trout</td><td>stays 1</td><td>Feed fish → farmed carnivore</td></tr>
+<tr><td>030629 other crustaceans and crustacean meal → 030621 rock lobster</td><td>1, uncertain</td><td>Rock lobster is farmed on such feed in parts of Asia</td></tr>
+<tr><td>030410 fresh fish fillets → 030613 frozen shrimp</td><td>1→0</td><td>Fillets are a human-food form, not feed</td></tr>
+<tr><td>030350 frozen herring → 160414 canned tuna</td><td>1→0</td><td>Canned tuna is wild-caught</td></tr>
+<tr><td>030710 oysters → 030332 frozen plaice</td><td>1→0</td><td>Oysters are high-value food, not feed</td></tr>
+<tr><td>any fish → abalone, oysters or mussels</td><td>1→0</td><td>Grazers and filter feeders do not eat fish feed</td></tr>
+</table>
+
+<h3>Other routes</h3>
+<table>
+<tr><th style="width:52%">Input → Output</th><th style="width:13%">DV</th><th>Route</th></tr>
+<tr><td>010639 live birds → 020890 other meat</td><td>stays 1</td><td>forward</td></tr>
+<tr><td>120400 linseed → 200811 peanut butter</td><td>stays 1</td><td>ingredient</td></tr>
+<tr><td>350211 dried egg albumin → 350219 liquid egg albumin</td><td>stays 1</td><td>reconstitute</td></tr>
+<tr><td>290220 benzene → 290611 menthol (process solvent)</td><td>stays 1</td><td>ingredient (process)</td></tr>
+</table>
+
+<h2>Two AI coders and conflicts</h2>
+<ul>
+<li><b>Setup.</b> Two independent coders, ideally from different model families, receive the same codebook (steps
+2–6 with these examples) and the same pair. Neither sees the other’s answer.</li>
+<li><b>Units.</b> To code tens of thousands of pairs, pairs are grouped by heading pair (input HS4 × output HS4).
+Each coder gives one default code per unit plus exceptions for single input codes, output codes or pairs, with the
+5 most similar coded pairs as worked examples.</li>
+<li><b>Question asked.</b> Each coder decides whether the pair should be turned from 1 to 0, and at which step, and
+returns {DV, route, step, one-sentence reason}.</li>
+<li><b>Combining rule.</b> Both say 0: DV = 0. Both say 1: DV = 1. If they disagree, the pair stays 1 with
+<i>uncertain</i> = 1, and both codes and reasons are kept.</li>
+<li><b>Decided by rule.</b> Where a scope convention (last section) settles a disagreement — for example intermediate
+siblings, chemicals → wastes, minerals → cement — the pair is coded by that convention with <i>uncertain</i> = 0.</li>
+<li><b>Strict robustness DV.</b> Count only certain 1s: DV_strict = DV × (1 − uncertain), optionally restricted to
+forward, ingredient and component routes.</li>
+<li><b>Reliability.</b> Report Cohen’s kappa between the two coders. Then code a stratified sample of about 300
+pairs across sources, steps and routes to estimate the accuracy of the final codes, weighting each stratum by its
+size. Without a domain expert, the sample is coded by two new AI sessions that see only the codebook and the
+pairs (no earlier answer), and a person reviews every pair where they disagree with the final code. Errors that form
+a group are corrected by rule in every PTA, not pair by pair. Report it as an independent AI audit, not as expert
+hand-coding.</li>
+</ul>
+
+<h2>Step 7. Scale up</h2>
+<h3>(a) Exact matches</h3>
+<p>Any pair already in the coded master list (same HS6 pair after concordance) takes the existing DV, route and
+uncertain values, with source = exact_copy. Exact copies are re-copied whenever the master labels change, so a pair
+has the same code in every PTA.</p>
+
+<h3>(b) Train a model on the coded pairs</h3>
+<ul>
+<li>Features: input and output chapters and headings; same-chapter and same-heading flags; flags from the step 2, 4
+and 5 rules; text embeddings of both descriptions and their interaction.</li>
+<li>Target: whether the pair stays 1 or is turned to 0 (optionally also route and step).</li>
+<li>Validation: hold out whole chapter pairs (grouped cross-validation) so the model cannot memorise near-duplicate
+pairs; random cross-validation overstates accuracy.</li>
+</ul>
+
+<h3>(c) Apply with confidence bands</h3>
+<table>
+<tr><th style="width:30%">Predicted probability</th><th>Action</th></tr>
+<tr><td>≥ 0.9</td><td>Keep at 1 (source = ml)</td></tr>
+<tr><td>≤ 0.1</td><td>Turn to 0 (source = ml)</td></tr>
+<tr><td>Between 0.1 and 0.9</td><td>Send through steps 2–6 with the two AI coders, giving them the 5 most similar coded pairs as worked examples</td></tr>
+</table>
+<p><b>Support condition.</b> Use the bands only where the chapter pair has more than 30 coded pairs in the master
+list, and only for pair types where the audit (d) shows the bands are reliable. Other pairs go to the AI coders or
+to explicit rules.</p>
+
+<h3>(d) Audit</h3>
+<p>Check a random sample of model-coded pairs from each band against the two AI coders (or a person). If accuracy
+in a band falls below the threshold, narrow that band and send more pairs to the AI coders. When the model and an
+explicit rule disagree, the rule is applied where it finds a route; otherwise the pair goes to the AI coders.</p>
+
+<h3>(e) Explicit rules for structured chapters</h3>
+<p>Textile chapters 50–63 are coded by explicit rules. Each code has a stage (fibre, yarn, fabric, trim, made-up or
+garment, waste), a fibre and, for fabrics and garments, a construction (knitted or not). The rules apply steps 2–6
+and the conventions above: forward stage with the same fibre = 1; minor constituents as in step 6; finished siblings
+= 0; backward = 0; intermediate siblings of one fibre = 1; sewing thread and trims → articles = component; waste
+reprocessed = 1.</p>
+<p><b>Reading “of other textile materials”.</b> In the HS this means every fibre that is <b>not named</b> in the same
+group of subheadings. 610990 T-shirts “of other textile materials” include synthetic T-shirts, because only cotton
+has its own subheading (610910), so 540231 nylon yarn → 610990 is a main-fibre (forward) pair. 620449 dresses of
+other textile materials exclude wool, cotton, synthetic and artificial fibres, which have their own subheadings.</p>
+
+<div class="box avoid"><b>Example.</b> Another agreement restricts 030342 frozen yellowfin tuna → 160414 prepared
+tuna; the exact pair is already coded, so it is copied and stays 1 (forward). A new pair, 030389 other frozen fish →
+160420 other prepared fish, has close neighbours coded 1 (forward, feed); the model gives p = 0.94 and it stays 1. A
+third pair, 230120 fishmeal → 020714 chicken cuts, falls in the middle band; the AI coders disagree (fishmeal as
+poultry feed), so it stays DV = 1 with uncertain = 1.</div>
+
+<div class="avoid">
+<h2>Summary of scope conventions (19 October 2026)</h2>
+<table>
+<tr><th style="width:46%">Question</th><th>Convention</th></tr>
+<tr><td>Different intermediate goods of the same material at the same stage</td><td>1, route sibling_intermediate; finished siblings stay 0 (step 4)</td></tr>
+<tr><td>Different synthetic fibres (nylon, polyester, acrylic, polypropylene)</td><td>One fibre</td></tr>
+<tr><td>Fabrics of the same fibre, different construction</td><td>1 (sibling_intermediate)</td></tr>
+<tr><td>Sewing thread ↔ yarn of the same fibre</td><td>1 (sibling_intermediate; thread → twine forward)</td></tr>
+<tr><td>Clothing accessories (trims, bows) → garments</td><td>1 (component)</td></tr>
+<tr><td>Any chemical (ch. 28–38) → wastes of heading 3825</td><td>1 (recycle_waste)</td></tr>
+<tr><td>Any mineral of ch. 25 → cement (2523)</td><td>1 (ingredient)</td></tr>
+<tr><td>Technically possible but uncommon further use</td><td>1</td></tr>
+<tr><td>Minor constituent of another fibre in a garment, made-up, yarn or fabric</td><td>Cotton or man-made input: 1. Other fibres, or the same fibre in another construction (fabric → garment): 1 with uncertain = 1</td></tr>
+<tr><td>Direct remelting with no scrap code in between</td><td>1, route recycle_direct; 0 in DV_excl_remelt</td></tr>
+<tr><td>Fish and other seafood of different species</td><td>0 (step 3), unless the input could feed the output: feed (1); possible but unestablished feed: 1 with uncertain = 1</td></tr>
+<tr><td>“Of other textile materials”</td><td>Every fibre not named in the same group of subheadings</td></tr>
+<tr><td>The two AI coders disagree and no convention settles it</td><td>1 with uncertain = 1</td></tr>
+</table>
+</div>
+
+</body></html>
