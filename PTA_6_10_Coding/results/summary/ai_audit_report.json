@@ -1,0 +1,633 @@
+{
+ "run": "2026-10-31T18:50:08",
+ "auditors": [
+  "claude",
+  "codex"
+ ],
+ "items": 305,
+ "final_fingerprint": "7d215ae5893a",
+ "frame_share_of_hs6_records": {
+  "TUR_SGP": 0.8569,
+  "NIC_TWN": 0.9788,
+  "CHL_KOR": 0.9826,
+  "OMN_USA": 0.9959,
+  "CAN_CHL": 0.9854
+ },
+ "sampled_pairs_in_agreement": {
+  "TUR_SGP": 58,
+  "NIC_TWN": 109,
+  "CHL_KOR": 167,
+  "OMN_USA": 48,
+  "CAN_CHL": 207
+ },
+ "claude": {
+  "agree_with_final": {
+   "DV": {
+    "items": 305,
+    "pair_weighted": {
+     "est": 0.9552,
+     "ci95": [
+      0.9155,
+      0.9767
+     ]
+    },
+    "record_weighted": {
+     "est": 0.972,
+     "ci95": [
+      0.9231,
+      0.9901
+     ]
+    }
+   },
+   "DV_strict": {
+    "items": 305,
+    "pair_weighted": {
+     "est": 0.8786,
+     "ci95": [
+      0.7915,
+      0.9325
+     ]
+    },
+    "record_weighted": {
+     "est": 0.8834,
+     "ci95": [
+      0.7826,
+      0.941
+     ]
+    }
+   }
+  },
+  "agree_with_final_unweighted": 0.8557,
+  "auditor1_final0": 5,
+  "auditor0_final1": 39,
+  "by_family": {
+   "ai_concord": {
+    "n": 30,
+    "agree": 0.8667
+   },
+   "ai_units": {
+    "n": 174,
+    "agree": 0.7446
+   },
+   "exact_copy": {
+    "n": 61,
+    "agree": 0.988
+   },
+   "rule_textile": {
+    "n": 40,
+    "agree": 1.0
+   }
+  }
+ },
+ "codex": {
+  "agree_with_final": {
+   "DV": {
+    "items": 305,
+    "pair_weighted": {
+     "est": 0.9249,
+     "ci95": [
+      0.8585,
+      0.9615
+     ]
+    },
+    "record_weighted": {
+     "est": 0.9449,
+     "ci95": [
+      0.8757,
+      0.9766
+     ]
+    }
+   },
+   "DV_strict": {
+    "items": 305,
+    "pair_weighted": {
+     "est": 0.8079,
+     "ci95": [
+      0.7141,
+      0.8762
+     ]
+    },
+    "record_weighted": {
+     "est": 0.8361,
+     "ci95": [
+      0.731,
+      0.9055
+     ]
+    }
+   }
+  },
+  "agree_with_final_unweighted": 0.8984,
+  "auditor1_final0": 14,
+  "auditor0_final1": 17,
+  "by_family": {
+   "ai_concord": {
+    "n": 30,
+    "agree": 0.8667
+   },
+   "ai_units": {
+    "n": 174,
+    "agree": 0.8719
+   },
+   "exact_copy": {
+    "n": 61,
+    "agree": 0.9328
+   },
+   "rule_textile": {
+    "n": 40,
+    "agree": 1.0
+   }
+  }
+ },
+ "between_auditors": {
+  "agree_unweighted": 0.8721,
+  "kappa_unweighted": 0.7381,
+  "agree_weighted": {
+   "items": 305,
+   "pair_weighted": {
+    "est": 0.9243,
+    "ci95": [
+     0.8614,
+     0.96
+    ]
+   },
+   "record_weighted": {
+    "est": 0.95,
+    "ci95": [
+     0.8846,
+     0.9792
+    ]
+   }
+  }
+ },
+ "final_vs_auditor_consensus": {
+  "items_where_auditors_agree": 266,
+  "DV": {
+   "items": 266,
+   "pair_weighted": {
+    "est": 0.9737,
+    "ci95": [
+     0.9279,
+     0.9907
+    ]
+   },
+   "record_weighted": {
+    "est": 0.9809,
+    "ci95": [
+     0.9243,
+     0.9954
+    ]
+   },
+   "records_TUR_SGP": {
+    "est": 0.9588,
+    "ci95": [
+     0.9091,
+     0.9819
+    ]
+   },
+   "records_TUR_SGP_own_pairs": {
+    "est": 0.9613,
+    "ci95": [
+     0.4434,
+     0.9987
+    ],
+    "weight_covered": 0.8824
+   },
+   "records_NIC_TWN": {
+    "est": 0.976,
+    "ci95": [
+     0.9112,
+     0.9938
+    ]
+   },
+   "records_NIC_TWN_own_pairs": {
+    "est": 0.992,
+    "ci95": [
+     0.912,
+     0.9993
+    ],
+    "weight_covered": 0.9949
+   },
+   "records_CHL_KOR": {
+    "est": 0.9806,
+    "ci95": [
+     0.9246,
+     0.9952
+    ]
+   },
+   "records_CHL_KOR_own_pairs": {
+    "est": 0.9775,
+    "ci95": [
+     0.9183,
+     0.9941
+    ],
+    "weight_covered": 1.0
+   },
+   "records_OMN_USA": {
+    "est": 0.9903,
+    "ci95": [
+     0.924,
+     0.9988
+    ]
+   },
+   "records_OMN_USA_own_pairs": {
+    "est": 0.9865,
+    "ci95": [
+     0.912,
+     0.9981
+    ]
+   },
+   "records_CAN_CHL": {
+    "est": 0.9788,
+    "ci95": [
+     0.925,
+     0.9942
+    ]
+   },
+   "records_CAN_CHL_own_pairs": {
+    "est": 0.977,
+    "ci95": [
+     0.9254,
+     0.9932
+    ]
+   }
+  },
+  "DV_strict": {
+   "items": 266,
+   "pair_weighted": {
+    "est": 0.8674,
+    "ci95": [
+     0.778,
+     0.9243
+    ]
+   },
+   "record_weighted": {
+    "est": 0.8777,
+    "ci95": [
+     0.7753,
+     0.9372
+    ]
+   },
+   "records_TUR_SGP": {
+    "est": 0.7212,
+    "ci95": [
+     0.6419,
+     0.7887
+    ]
+   },
+   "records_TUR_SGP_own_pairs": {
+    "est": 0.7079,
+    "ci95": [
+     0.3175,
+     0.9266
+    ],
+    "weight_covered": 0.8824
+   },
+   "records_NIC_TWN": {
+    "est": 0.8944,
+    "ci95": [
+     0.7951,
+     0.9487
+    ]
+   },
+   "records_NIC_TWN_own_pairs": {
+    "est": 0.9008,
+    "ci95": [
+     0.7661,
+     0.9618
+    ],
+    "weight_covered": 0.9949
+   },
+   "records_CHL_KOR": {
+    "est": 0.8792,
+    "ci95": [
+     0.777,
+     0.9383
+    ]
+   },
+   "records_CHL_KOR_own_pairs": {
+    "est": 0.8816,
+    "ci95": [
+     0.7784,
+     0.9404
+    ],
+    "weight_covered": 1.0
+   },
+   "records_OMN_USA": {
+    "est": 0.885,
+    "ci95": [
+     0.7628,
+     0.9484
+    ]
+   },
+   "records_OMN_USA_own_pairs": {
+    "est": 0.8836,
+    "ci95": [
+     0.7533,
+     0.9497
+    ]
+   },
+   "records_CAN_CHL": {
+    "est": 0.8702,
+    "ci95": [
+     0.7729,
+     0.9296
+    ]
+   },
+   "records_CAN_CHL_own_pairs": {
+    "est": 0.8683,
+    "ci95": [
+     0.7717,
+     0.9279
+    ]
+   }
+  },
+  "by_family_DV": {
+   "ai_concord": {
+    "n": 26,
+    "agree": 0.9231
+   },
+   "ai_units": {
+    "n": 143,
+    "agree": 0.8898
+   },
+   "exact_copy": {
+    "n": 57,
+    "agree": 0.9873
+   },
+   "rule_textile": {
+    "n": 40,
+    "agree": 1.0
+   }
+  }
+ },
+ "recycle_direct_items": {
+  "n": 13,
+  "claude_dv1": 7,
+  "codex_dv1": 11,
+  "claude_route_recycle_direct": 5,
+  "codex_route_recycle_direct": 9
+ },
+ "review_counts": {
+  "1 auditors agree, final differs": 18,
+  "2 auditors disagree": 39,
+  "3 all agree": 248
+ },
+ "after_August_review": {
+  "complete": true,
+  "stale": false,
+  "review_items": 57,
+  "marked_1": 44,
+  "marked_0": 13,
+  "unsure": 0,
+  "unmarked": 0,
+  "marked_same_as_final_DV": 43,
+  "marks_overriding_all_agree": 0,
+  "DV": {
+   "items": 305,
+   "pair_weighted": {
+    "est": 0.9651,
+    "ci95": [
+     0.9046,
+     0.9878
+    ]
+   },
+   "record_weighted": {
+    "est": 0.9875,
+    "ci95": [
+     0.9289,
+     0.9979
+    ]
+   },
+   "records_TUR_SGP": {
+    "est": 0.9777,
+    "ci95": [
+     0.9336,
+     0.9928
+    ]
+   },
+   "records_TUR_SGP_own_pairs": {
+    "est": 0.9787,
+    "ci95": [
+     0.4436,
+     0.9996
+    ],
+    "weight_covered": 0.8824
+   },
+   "records_NIC_TWN": {
+    "est": 0.9858,
+    "ci95": [
+     0.9273,
+     0.9974
+    ]
+   },
+   "records_NIC_TWN_own_pairs": {
+    "est": 0.9755,
+    "ci95": [
+     0.8835,
+     0.9952
+    ],
+    "weight_covered": 0.9949
+   },
+   "records_CHL_KOR": {
+    "est": 0.9871,
+    "ci95": [
+     0.9292,
+     0.9978
+    ]
+   },
+   "records_CHL_KOR_own_pairs": {
+    "est": 0.9963,
+    "ci95": [
+     0.9471,
+     0.9997
+    ],
+    "weight_covered": 1.0
+   },
+   "records_OMN_USA": {
+    "est": 0.9906,
+    "ci95": [
+     0.9158,
+     0.999
+    ]
+   },
+   "records_OMN_USA_own_pairs": {
+    "est": 1.0,
+    "ci95": [
+     0.924,
+     1.0
+    ]
+   },
+   "records_CAN_CHL": {
+    "est": 0.9871,
+    "ci95": [
+     0.932,
+     0.9977
+    ]
+   },
+   "records_CAN_CHL_own_pairs": {
+    "est": 0.9771,
+    "ci95": [
+     0.9143,
+     0.9942
+    ]
+   },
+   "lower": {
+    "pair_weighted": 0.9651,
+    "record_weighted": 0.9875,
+    "records_TUR_SGP": 0.9777,
+    "records_TUR_SGP_own_pairs": 0.9787,
+    "records_NIC_TWN": 0.9858,
+    "records_NIC_TWN_own_pairs": 0.9755,
+    "records_CHL_KOR": 0.9871,
+    "records_CHL_KOR_own_pairs": 0.9963,
+    "records_OMN_USA": 0.9906,
+    "records_OMN_USA_own_pairs": 1.0,
+    "records_CAN_CHL": 0.9871,
+    "records_CAN_CHL_own_pairs": 0.9771
+   },
+   "upper": {
+    "pair_weighted": 0.9651,
+    "record_weighted": 0.9875,
+    "records_TUR_SGP": 0.9777,
+    "records_TUR_SGP_own_pairs": 0.9787,
+    "records_NIC_TWN": 0.9858,
+    "records_NIC_TWN_own_pairs": 0.9755,
+    "records_CHL_KOR": 0.9871,
+    "records_CHL_KOR_own_pairs": 0.9963,
+    "records_OMN_USA": 0.9906,
+    "records_OMN_USA_own_pairs": 1.0,
+    "records_CAN_CHL": 0.9871,
+    "records_CAN_CHL_own_pairs": 0.9771
+   }
+  },
+  "DV_wrong_by_family": {
+   "ai_units": 10,
+   "ai_concord": 2,
+   "exact_copy": 2
+  },
+  "DV_strict": {
+   "items": 305,
+   "pair_weighted": {
+    "est": 0.8359,
+    "ci95": [
+     0.7469,
+     0.8978
+    ]
+   },
+   "record_weighted": {
+    "est": 0.8739,
+    "ci95": [
+     0.7746,
+     0.9332
+    ]
+   },
+   "records_TUR_SGP": {
+    "est": 0.6931,
+    "ci95": [
+     0.6195,
+     0.7581
+    ]
+   },
+   "records_TUR_SGP_own_pairs": {
+    "est": 0.7177,
+    "ci95": [
+     0.3261,
+     0.9304
+    ],
+    "weight_covered": 0.8824
+   },
+   "records_NIC_TWN": {
+    "est": 0.8912,
+    "ci95": [
+     0.7984,
+     0.9442
+    ]
+   },
+   "records_NIC_TWN_own_pairs": {
+    "est": 0.8658,
+    "ci95": [
+     0.7306,
+     0.9388
+    ],
+    "weight_covered": 0.9949
+   },
+   "records_CHL_KOR": {
+    "est": 0.8738,
+    "ci95": [
+     0.7749,
+     0.9329
+    ]
+   },
+   "records_CHL_KOR_own_pairs": {
+    "est": 0.8882,
+    "ci95": [
+     0.7904,
+     0.9436
+    ],
+    "weight_covered": 1.0
+   },
+   "records_OMN_USA": {
+    "est": 0.8861,
+    "ci95": [
+     0.7643,
+     0.9492
+    ]
+   },
+   "records_OMN_USA_own_pairs": {
+    "est": 0.8972,
+    "ci95": [
+     0.7677,
+     0.9584
+    ]
+   },
+   "records_CAN_CHL": {
+    "est": 0.8652,
+    "ci95": [
+     0.7714,
+     0.9243
+    ]
+   },
+   "records_CAN_CHL_own_pairs": {
+    "est": 0.8568,
+    "ci95": [
+     0.7624,
+     0.9177
+    ]
+   },
+   "lower": {
+    "pair_weighted": 0.8359,
+    "record_weighted": 0.8739,
+    "records_TUR_SGP": 0.6931,
+    "records_TUR_SGP_own_pairs": 0.7177,
+    "records_NIC_TWN": 0.8912,
+    "records_NIC_TWN_own_pairs": 0.8658,
+    "records_CHL_KOR": 0.8738,
+    "records_CHL_KOR_own_pairs": 0.8882,
+    "records_OMN_USA": 0.8861,
+    "records_OMN_USA_own_pairs": 0.8972,
+    "records_CAN_CHL": 0.8652,
+    "records_CAN_CHL_own_pairs": 0.8568
+   },
+   "upper": {
+    "pair_weighted": 0.8359,
+    "record_weighted": 0.8739,
+    "records_TUR_SGP": 0.6931,
+    "records_TUR_SGP_own_pairs": 0.7177,
+    "records_NIC_TWN": 0.8912,
+    "records_NIC_TWN_own_pairs": 0.8658,
+    "records_CHL_KOR": 0.8738,
+    "records_CHL_KOR_own_pairs": 0.8882,
+    "records_OMN_USA": 0.8861,
+    "records_OMN_USA_own_pairs": 0.8972,
+    "records_CAN_CHL": 0.8652,
+    "records_CAN_CHL_own_pairs": 0.8568
+   }
+  },
+  "DV_strict_wrong_by_family": {
+   "ai_units": 55,
+   "ai_concord": 8,
+   "exact_copy": 7,
+   "rule_textile": 3
+  }
+ }
+}

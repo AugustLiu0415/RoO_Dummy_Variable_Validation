@@ -1,0 +1,383 @@
+{
+ "decisions": "Prof. Zhang 2026-10-19 (PTA_2_5_coding_questions_2026_10_18_Hao.docx and replies); conventions of 2026-10-30 (PTA_6_10_coding_questions_2026_10_28_answered.docx, Coding_Rules_2026_10_30.md I.9); A1 screen (_work/coded/screen_final.csv) and rescue screen (screen_rescue.csv)",
+ "policies_on_new_pairs": {
+  "P_Q4": {
+   "rows_matched": 5188,
+   "DV_changed": 0
+  },
+  "P_Q1_2": {
+   "rows_matched": 0,
+   "DV_changed": 0
+  },
+  "P_Q1_1": {
+   "rows_matched": 2501,
+   "DV_changed": 0
+  },
+  "P_AUD_C": {
+   "rows_matched": 0,
+   "DV_changed": 0
+  },
+  "P_AUD_D": {
+   "rows_matched": 0,
+   "DV_changed": 0
+  },
+  "P_AUD_A": {
+   "rows_matched": 0,
+   "DV_changed": 0
+  },
+  "P_OPT2": {
+   "rows_matched": 0,
+   "DV_changed": 0
+  },
+  "uncertain_rule_category": {
+   "rows_matched": 0,
+   "DV_changed": 0
+  },
+  "P_AUD_B": {
+   "rows_matched": 0,
+   "DV_changed": 0
+  },
+  "P_Q2_1": {
+   "rows_matched": 0,
+   "DV_changed": 0
+  },
+  "P_Q2_2": {
+   "rows_matched": 0,
+   "DV_changed": 0
+  },
+  "P_FISH_feed": {
+   "rows_matched": 0,
+   "DV_changed": 0
+  },
+  "P_FISH_maybe": {
+   "rows_matched": 0,
+   "DV_changed": 0
+  },
+  "P_FISH_0": {
+   "rows_matched": 0,
+   "DV_changed": 0
+  },
+  "P_Q2C_same": {
+   "rows_matched": 1,
+   "DV_changed": 0
+  },
+  "P_Q2C_art": {
+   "rows_matched": 279,
+   "DV_changed": 0
+  },
+  "P_Q3E_own": {
+   "rows_matched": 566,
+   "DV_changed": 0
+  },
+  "P_Q3E_other": {
+   "rows_matched": 1313,
+   "DV_changed": 0
+  },
+  "P_Q3E_0": {
+   "rows_matched": 2342,
+   "DV_changed": 2342
+  },
+  "P_Q2C": {
+   "rows_matched": 2453,
+   "DV_changed": 0
+  },
+  "P_Q2C_chem": {
+   "rows_matched": 1972,
+   "DV_changed": 0
+  },
+  "P_Q2C_q11": {
+   "rows_matched": 337,
+   "DV_changed": 0
+  },
+  "P_Q2C_same0": {
+   "rows_matched": 9,
+   "DV_changed": 9
+  },
+  "P_Q2C_art0": {
+   "rows_matched": 198,
+   "DV_changed": 198
+  },
+  "P_Q3E_own0": {
+   "rows_matched": 0,
+   "DV_changed": 0
+  },
+  "P_Q3E_other0": {
+   "rows_matched": 586,
+   "DV_changed": 586
+  },
+  "P_Q5B": {
+   "rows_matched": 12,
+   "DV_changed": 12
+  },
+  "P_PROF0": {
+   "rows_matched": 5,
+   "DV_changed": 5
+  },
+  "P_RESCUE": {
+   "rows_matched": 52,
+   "DV_changed": 52
+  },
+  "P_A1": {
+   "rows_matched": 200,
+   "DV_changed": 200
+  }
+ },
+ "new_pairs": {
+  "pairs": 55861,
+  "DV1_before_policies": 41781,
+  "DV1": 40067,
+  "uncertain": 23463,
+  "by_source": {
+   "ai_sample": {
+    "pairs": 153,
+    "DV1": 136
+   },
+   "ai_units": {
+    "pairs": 53696,
+    "DV1": 38102
+   },
+   "rule": {
+    "pairs": 6,
+    "DV1": 6
+   },
+   "rule_textile": {
+    "pairs": 2006,
+    "DV1": 1823
+   }
+  },
+  "uncertain_by_reason": {
+   "AI coders, or the model and the textile rules, disagree": 16205,
+   "same-material intermediate of another heading, or another compound (convention of 2026-10-30)": 5239,
+   "remelting into another primary or semi-finished form (convention of 2026-10-30)": 1899,
+   "remelting excluded (convention of 2026-10-30), another route possible": 52,
+   "minor constituent of a garment or made-up: other fibre or construction": 44,
+   "AI coders disagree: sibling or backward": 24
+  }
+ },
+ "consistency_with_PTA_1_5": {
+  "exact_copies": 349143,
+  "DV_differs": 0,
+  "uncertain_differs": 0,
+  "route_differs": 0
+ },
+ "concord_pairs": {
+  "pairs": 589,
+  "records": 591,
+  "DV1": 408,
+  "uncertain": 119,
+  "policies": {
+   "P_Q4": {
+    "rows_matched": 4,
+    "DV_changed": 0
+   },
+   "P_Q1_1": {
+    "rows_matched": 14,
+    "DV_changed": 0
+   },
+   "P_Q3E_0": {
+    "rows_matched": 4,
+    "DV_changed": 4
+   },
+   "P_Q2C": {
+    "rows_matched": 4,
+    "DV_changed": 0
+   },
+   "P_Q2C_chem": {
+    "rows_matched": 36,
+    "DV_changed": 0
+   },
+   "P_Q2C_q11": {
+    "rows_matched": 10,
+    "DV_changed": 0
+   },
+   "P_Q2C_same0": {
+    "rows_matched": 4,
+    "DV_changed": 4
+   },
+   "P_PROF0": {
+    "rows_matched": 1,
+    "DV_changed": 1
+   },
+   "P_RESCUE": {
+    "rows_matched": 2,
+    "DV_changed": 2
+   }
+  }
+ },
+ "screen_pool": {
+  "pairs": 16499,
+  "set_to_0_by_screen": 200,
+  "screen_file": "/Users/augustliu/Desktop/RoO_Project/Dummy_Variable/PTA6_10/_work/coded/screen_final.csv"
+ },
+ "pta": {
+  "TUR_SGP": {
+   "records_in_original_file": 24146,
+   "records": 21873,
+   "hs_vintage": "HS2012",
+   "records_deleted_not_hs6_input": 2273,
+   "DV1": 14559,
+   "DV1_share": 0.6656,
+   "DV_strict1": 9018,
+   "uncertain": 5541,
+   "uncertain_share_of_DV1": 0.3806,
+   "records_mapped_to_several_pairs": 2390,
+   "records_concordance_mixed": 198,
+   "records_coded_on_HS2012_codes": 591,
+   "source": {
+    "exact_copy": 13024,
+    "ai_units": 8254,
+    "ai_concord": 591,
+    "rule": 4
+   },
+   "copy_from": {
+    "PTA_2_5": 10457,
+    "ASEAN_JPN": 2567
+   },
+   "uncertain_by_reason": {
+    "AI coders, or the model and the textile rules, disagree": 3265,
+    "same-material intermediate of another heading, or another compound (convention of 2026-10-30)": 1807,
+    "HS concordance: the HS2002 pairs of this record differ": 198,
+    "open case in the ASEAN-Japan labels": 191,
+    "AI coders disagree: sibling or backward": 75,
+    "remelting excluded (convention of 2026-10-30), another route possible": 3,
+    "remelting into another primary or semi-finished form (convention of 2026-10-30)": 2
+   }
+  },
+  "NIC_TWN": {
+   "records_in_original_file": 211027,
+   "records": 211027,
+   "hs_vintage": "HS2002",
+   "records_deleted_not_hs6_input": 0,
+   "DV1": 139179,
+   "DV1_share": 0.6595,
+   "DV_strict1": 120721,
+   "uncertain": 18458,
+   "uncertain_share_of_DV1": 0.1326,
+   "records_mapped_to_several_pairs": 0,
+   "records_concordance_mixed": 0,
+   "records_coded_on_HS2012_codes": 0,
+   "source": {
+    "exact_copy": 195805,
+    "ai_units": 14459,
+    "rule_textile": 705,
+    "ai_sample": 52,
+    "rule": 6
+   },
+   "copy_from": {
+    "PTA_2_5": 127059,
+    "ASEAN_JPN": 68746
+   },
+   "uncertain_by_reason": {
+    "minor constituent of a garment or made-up: other fibre or construction": 10196,
+    "AI coders, or the model and the textile rules, disagree": 4090,
+    "same-material intermediate of another heading, or another compound (convention of 2026-10-30)": 2007,
+    "open case in the ASEAN-Japan labels": 1162,
+    "remelting into another primary or semi-finished form (convention of 2026-10-30)": 861,
+    "AI coders disagree: sibling or backward": 83,
+    "minor constituent of a yarn or fabric: other fibre": 54,
+    "possible feed (rock lobster)": 4,
+    "remelting excluded (convention of 2026-10-30), another route possible": 1
+   }
+  },
+  "CHL_KOR": {
+   "records_in_original_file": 313785,
+   "records": 313785,
+   "hs_vintage": "HS2002",
+   "records_deleted_not_hs6_input": 0,
+   "DV1": 209686,
+   "DV1_share": 0.6682,
+   "DV_strict1": 175853,
+   "uncertain": 33833,
+   "uncertain_share_of_DV1": 0.1614,
+   "records_mapped_to_several_pairs": 614,
+   "records_concordance_mixed": 12,
+   "records_coded_on_HS2012_codes": 0,
+   "source": {
+    "exact_copy": 289451,
+    "ai_units": 22729,
+    "rule_textile": 1492,
+    "ai_sample": 107,
+    "rule": 6
+   },
+   "copy_from": {
+    "PTA_2_5": 210702,
+    "ASEAN_JPN": 78749
+   },
+   "uncertain_by_reason": {
+    "minor constituent of a garment or made-up: other fibre or construction": 16839,
+    "AI coders, or the model and the textile rules, disagree": 9081,
+    "same-material intermediate of another heading, or another compound (convention of 2026-10-30)": 2957,
+    "minor constituent of a yarn or fabric: other fibre": 1811,
+    "open case in the ASEAN-Japan labels": 1555,
+    "remelting into another primary or semi-finished form (convention of 2026-10-30)": 994,
+    "AI coders disagree: sibling or backward": 561,
+    "remelting excluded (convention of 2026-10-30), another route possible": 19,
+    "HS concordance: the HS2002 pairs of this record differ": 12,
+    "possible feed (rock lobster)": 4
+   }
+  },
+  "OMN_USA": {
+   "records_in_original_file": 249838,
+   "records": 249838,
+   "hs_vintage": "HS2002",
+   "records_deleted_not_hs6_input": 0,
+   "DV1": 189946,
+   "DV1_share": 0.7603,
+   "DV_strict1": 169290,
+   "uncertain": 20656,
+   "uncertain_share_of_DV1": 0.1087,
+   "records_mapped_to_several_pairs": 0,
+   "records_concordance_mixed": 0,
+   "records_coded_on_HS2012_codes": 0,
+   "source": {
+    "exact_copy": 249838
+   },
+   "copy_from": {
+    "PTA_2_5": 198528,
+    "ASEAN_JPN": 51310
+   },
+   "uncertain_by_reason": {
+    "minor constituent of a garment or made-up: other fibre or construction": 16863,
+    "minor constituent of a yarn or fabric: other fibre": 2243,
+    "open case in the ASEAN-Japan labels": 1422,
+    "AI coders, or the model and the textile rules, disagree": 128
+   }
+  },
+  "CAN_CHL": {
+   "records_in_original_file": 374528,
+   "records": 374528,
+   "hs_vintage": "HS2002",
+   "records_deleted_not_hs6_input": 0,
+   "DV1": 252172,
+   "DV1_share": 0.6733,
+   "DV_strict1": 208606,
+   "uncertain": 43566,
+   "uncertain_share_of_DV1": 0.1728,
+   "records_mapped_to_several_pairs": 0,
+   "records_concordance_mixed": 0,
+   "records_coded_on_HS2012_codes": 0,
+   "source": {
+    "exact_copy": 336180,
+    "ai_units": 36859,
+    "rule_textile": 1383,
+    "ai_sample": 102,
+    "rule": 4
+   },
+   "copy_from": {
+    "PTA_2_5": 242440,
+    "ASEAN_JPN": 93740
+   },
+   "uncertain_by_reason": {
+    "AI coders, or the model and the textile rules, disagree": 16740,
+    "minor constituent of a garment or made-up: other fibre or construction": 16471,
+    "open case in the ASEAN-Japan labels": 2693,
+    "same-material intermediate of another heading, or another compound (convention of 2026-10-30)": 2367,
+    "minor constituent of a yarn or fabric: other fibre": 2243,
+    "remelting into another primary or semi-finished form (convention of 2026-10-30)": 1893,
+    "AI coders disagree: sibling or backward": 1109,
+    "remelting excluded (convention of 2026-10-30), another route possible": 46,
+    "possible feed (rock lobster)": 4
+   }
+  }
+ }
+}

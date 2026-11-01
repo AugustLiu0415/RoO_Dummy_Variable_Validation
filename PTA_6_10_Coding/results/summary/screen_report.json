@@ -1,0 +1,14 @@
+{
+ "pool": 16508,
+ "claude_invalid": 7683,
+ "codex_invalid_of_those": 210,
+ "codex_valid_of_those": 7473,
+ "set_to_0": 210,
+ "records_set_to_0": 218,
+ "calibration_claude": {
+  "truth 0, claude invalid": 5,
+  "truth 0, claude valid": 7,
+  "truth 1, claude invalid": 2,
+  "truth 1, claude valid": 14
+ }
+}

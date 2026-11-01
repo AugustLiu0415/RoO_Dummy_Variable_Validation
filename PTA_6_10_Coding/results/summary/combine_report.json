@@ -1,0 +1,255 @@
+{
+ "run": "2026-10-31T17:23:45",
+ "coder1": "/Users/augustliu/Desktop/RoO_Project/Dummy_Variable/PTA6_10/ai_coders/coder1_claude",
+ "coder2": "/Users/augustliu/Desktop/RoO_Project/Dummy_Variable/PTA6_10/ai_coders/coder2_codex_v2",
+ "draft": false,
+ "unit_pairs": 53696,
+ "unit_pairs_coded": {
+  "coder1": 53696,
+  "coder2": 53696
+ },
+ "units": {
+  "pairs_both_coders": 53696,
+  "kappa_pairs": 0.2752,
+  "agreement_pairs": 0.577,
+  "kappa_unit_defaults": 0.3506,
+  "units_both_coders": 4751,
+  "DV1_coder1": 17367,
+  "DV1_coder2": 39553,
+  "coder1_1_coder2_0": 263,
+  "coder1_0_coder2_1": 22449,
+  "DV1": 39816,
+  "DV0": 13880,
+  "uncertain": 22712,
+  "exceptions_ai1": 3661,
+  "exceptions_ai2": 2429,
+  "kappa_by_input_group": {
+   "01-05 animal": {
+    "pairs": 581,
+    "kappa": 0.8364,
+    "agree": 0.9604,
+    "coder1_DV1": 0.1205,
+    "coder2_DV1": 0.1601
+   },
+   "06-15 plant/fats": {
+    "pairs": 457,
+    "kappa": 0.6465,
+    "agree": 0.8709,
+    "coder1_DV1": 0.1707,
+    "coder2_DV1": 0.2954
+   },
+   "16-24 food": {
+    "pairs": 374,
+    "kappa": 0.0347,
+    "agree": 0.4465,
+    "coder1_DV1": 0.4198,
+    "coder2_DV1": 0.9572
+   },
+   "25-27 mineral": {
+    "pairs": 4118,
+    "kappa": 0.3552,
+    "agree": 0.7186,
+    "coder1_DV1": 0.1474,
+    "coder2_DV1": 0.4099
+   },
+   "28-38 chemical": {
+    "pairs": 14980,
+    "kappa": 0.0266,
+    "agree": 0.3972,
+    "coder1_DV1": 0.375,
+    "coder2_DV1": 0.9771
+   },
+   "39-40 plastic/rubber": {
+    "pairs": 5104,
+    "kappa": 0.2913,
+    "agree": 0.6281,
+    "coder1_DV1": 0.1953,
+    "coder2_DV1": 0.5406
+   },
+   "44-49 wood/paper": {
+    "pairs": 583,
+    "kappa": 0.296,
+    "agree": 0.6123,
+    "coder1_DV1": 0.4168,
+    "coder2_DV1": 0.8045
+   },
+   "50-67 textile/footwear": {
+    "pairs": 1054,
+    "kappa": 0.6075,
+    "agree": 0.945,
+    "coder1_DV1": 0.8975,
+    "coder2_DV1": 0.9526
+   },
+   "68-71 stone/glass/jewel": {
+    "pairs": 3008,
+    "kappa": 0.0699,
+    "agree": 0.3983,
+    "coder1_DV1": 0.3275,
+    "coder2_DV1": 0.9259
+   },
+   "72-83 metals": {
+    "pairs": 8161,
+    "kappa": 0.2067,
+    "agree": 0.5993,
+    "coder1_DV1": 0.4936,
+    "coder2_DV1": 0.894
+   },
+   "84-85 machinery": {
+    "pairs": 11212,
+    "kappa": 0.4527,
+    "agree": 0.7278,
+    "coder1_DV1": 0.2397,
+    "coder2_DV1": 0.495
+   },
+   "86-89 transport": {
+    "pairs": 616,
+    "kappa": 0.3311,
+    "agree": 0.664,
+    "coder1_DV1": 0.4951,
+    "coder2_DV1": 0.7435
+   },
+   "90-97 other": {
+    "pairs": 3448,
+    "kappa": 0.1832,
+    "agree": 0.5032,
+    "coder1_DV1": 0.1874,
+    "coder2_DV1": 0.6731
+   }
+  }
+ },
+ "sample": {
+  "items": 153,
+  "both_coders": 153,
+  "kappa": 0.8029,
+  "agreement": 0.9542
+ },
+ "textile_rule_audit": {
+  "T_BACKWARD": {
+   "n": 8,
+   "coders_agree": 7,
+   "rule_acc_vs_agreed": 0.1429,
+   "rule_acc_vs_combined": 0.125,
+   "rule_DV1": 0,
+   "coders_DV1_agreed": 6
+  },
+  "T_CONSTITUENT": {
+   "n": 8,
+   "coders_agree": 6,
+   "rule_acc_vs_agreed": 1.0,
+   "rule_acc_vs_combined": 1.0,
+   "rule_DV1": 8,
+   "coders_DV1_agreed": 6
+  },
+  "T_CONSTITUENT_COMMON": {
+   "n": 24,
+   "coders_agree": 24,
+   "rule_acc_vs_agreed": 1.0,
+   "rule_acc_vs_combined": 1.0,
+   "rule_DV1": 24,
+   "coders_DV1_agreed": 24
+  },
+  "T_FINISHED_SIBLING": {
+   "n": 14,
+   "coders_agree": 12,
+   "rule_acc_vs_agreed": 1.0,
+   "rule_acc_vs_combined": 0.8571,
+   "rule_DV1": 0,
+   "coders_DV1_agreed": 0
+  },
+  "T_FORWARD": {
+   "n": 28,
+   "coders_agree": 28,
+   "rule_acc_vs_agreed": 1.0,
+   "rule_acc_vs_combined": 1.0,
+   "rule_DV1": 28,
+   "coders_DV1_agreed": 28
+  },
+  "T_FORWARD_COMMON_FIBRE": {
+   "n": 8,
+   "coders_agree": 8,
+   "rule_acc_vs_agreed": 1.0,
+   "rule_acc_vs_combined": 1.0,
+   "rule_DV1": 8,
+   "coders_DV1_agreed": 8
+  },
+  "T_INTERMEDIATE_SIBLING": {
+   "n": 8,
+   "coders_agree": 7,
+   "rule_acc_vs_agreed": 1.0,
+   "rule_acc_vs_combined": 1.0,
+   "rule_DV1": 8,
+   "coders_DV1_agreed": 7
+  },
+  "T_RAGS": {
+   "n": 4,
+   "coders_agree": 4,
+   "rule_acc_vs_agreed": 1.0,
+   "rule_acc_vs_combined": 1.0,
+   "rule_DV1": 4,
+   "coders_DV1_agreed": 4
+  },
+  "T_RAGS_NOT_FROM_FIBRE": {
+   "n": 6,
+   "coders_agree": 6,
+   "rule_acc_vs_agreed": 0.0,
+   "rule_acc_vs_combined": 0.0,
+   "rule_DV1": 0,
+   "coders_DV1_agreed": 6
+  },
+  "T_WASTE_COMMON_FIBRE": {
+   "n": 8,
+   "coders_agree": 8,
+   "rule_acc_vs_agreed": 1.0,
+   "rule_acc_vs_combined": 1.0,
+   "rule_DV1": 8,
+   "coders_DV1_agreed": 8
+  },
+  "T_WASTE_REPROCESSED": {
+   "n": 8,
+   "coders_agree": 8,
+   "rule_acc_vs_agreed": 1.0,
+   "rule_acc_vs_combined": 1.0,
+   "rule_DV1": 8,
+   "coders_DV1_agreed": 8
+  },
+  "T_WORN_CLOTHING": {
+   "n": 8,
+   "coders_agree": 7,
+   "rule_acc_vs_agreed": 0.4286,
+   "rule_acc_vs_combined": 0.5,
+   "rule_DV1": 8,
+   "coders_DV1_agreed": 3
+  },
+  "T_WORN_NOT_FROM": {
+   "n": 21,
+   "coders_agree": 21,
+   "rule_acc_vs_agreed": 0.0,
+   "rule_acc_vs_combined": 0.0,
+   "rule_DV1": 0,
+   "coders_DV1_agreed": 21
+  }
+ },
+ "textile_rule_audit_weighted": 0.762,
+ "dv0_without_step": 0,
+ "concord": {
+  "pairs": 589,
+  "both_coders": 589,
+  "kappa": 0.6911,
+  "agreement": 0.854,
+  "DV1": 407,
+  "uncertain": 86
+ },
+ "master": {
+  "pairs": 405004,
+  "source": {
+   "exact_copy": 349143,
+   "ai_units": 53696,
+   "rule_textile": 2006,
+   "ai_sample": 153,
+   "rule": 6
+  },
+  "new_pairs": 55861,
+  "new_DV1": 41781,
+  "new_uncertain": 22761
+ }
+}
