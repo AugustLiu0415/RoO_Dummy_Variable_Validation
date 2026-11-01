@@ -49,7 +49,7 @@ import conventions as CV  # noqa: E402
 P25 = importlib.import_module('09_apply_policy')         # PTA_2_5/_work/09_apply_policy.py (policy functions)
 apply, fish_policy, family, synthetic, textile_rule = (P25.apply, P25.fish_policy, P25.family, P25.synthetic,
                                                        P25.textile_rule)
-DATE = '2026_10_31'
+DATE = '2026_11_01'                                       # DV_strict dropped (Prof. Zhang, 2026-11-01)
 CONCORD_REASON = 'HS concordance: the HS2002 pairs of this record differ'
 SCREEN = CODED / 'screen_final.csv'                      # A1 screen: pairs both families judged clearly invalid
 RESCUE = CODED / 'screen_rescue.csv'                     # P_Q3E_0 pairs with another specific route (rescue screen)
@@ -151,9 +151,8 @@ def concord_codes(A, L, T):
     C['locked'] = ((C.route == 'same_good') & (C.uncertain == 0)).astype(int)
     C['policy'], C['uncertain_reason'] = '', ''
     pol = policies(C, A, L, T, 'HS2012')
-    C = P25.finish(C)
+    C = P25.finish(C).drop(columns='DV_strict')            # DV only (Prof. Zhang, 2026-11-01)
     C.loc[C.DV == 1, 'step'] = np.where(C.loc[C.DV == 1, 'route'] == 'same_good', C.loc[C.DV == 1, 'step'], '')
-    C['DV_strict'] = C.DV * (1 - C.uncertain)
     C.loc[C.uncertain == 0, 'uncertain_reason'] = ''
     C['why_ai1'], C['why_ai2'] = C.reason_ai1, C.reason_ai2
     C['copy_from'], C['ml_prob'], C['ml_supported'] = '', '', ''
@@ -177,11 +176,10 @@ def main():
         F[c] = F[c].astype(int)
     before = F[['DV', 'uncertain']].copy()
     pol = policies(F, A, L, T)
-    F = P25.finish(F)
+    F = P25.finish(F).drop(columns='DV_strict')            # DV only (Prof. Zhang, 2026-11-01)
     F.loc[F.DV == 1, 'step'] = np.where(F.loc[F.DV == 1, 'route'] == 'same_good', F.loc[F.DV == 1, 'step'], '')
     new = F.source != 'exact_copy'
     F.loc[new & (F.DV == 0), 'uncertain'] = 0
-    F['DV_strict'] = F.DV * (1 - F.uncertain)
     F.loc[new & (F.uncertain == 0), 'uncertain_reason'] = ''
     F['why_ai1'], F['why_ai2'] = F.reason_ai1, F.reason_ai2
 
@@ -200,7 +198,8 @@ def main():
 
     rep = {'decisions': 'Prof. Zhang 2026-10-19 (PTA_2_5_coding_questions_2026_10_18_Hao.docx and replies); conventions '
                         'of 2026-10-30 (PTA_6_10_coding_questions_2026_10_28_answered.docx, Coding_Rules_2026_10_30.md I.9); '
-                        'A1 screen (_work/coded/screen_final.csv) and rescue screen (screen_rescue.csv)',
+                        'A1 screen (_work/coded/screen_final.csv) and rescue screen (screen_rescue.csv); '
+                        'meeting of 2026-11-01: DV is the main variable, DV_strict is no longer computed',
            'policies_on_new_pairs': {k: {'rows_matched': v[1], 'DV_changed': v[0]} for k, v in pol.items()},
            'new_pairs': {'pairs': int(new.sum()), 'DV1_before_policies': int(before.DV[new].sum()),
                          'DV1': int(F.DV[new].sum()), 'uncertain': int(F.uncertain[new].sum()),
@@ -214,7 +213,7 @@ def main():
     clean = lambda t: t.split(' - ', 1)[-1].lstrip('- ').strip() if ' - ' in t else t  # noqa: E731
     desc2 = lambda c: f'{T.get(c[:4], "")} | {T.get(c, T.get(c[:5], ""))}'.strip(' |')  # noqa: E731
     desc4 = lambda c: f'{clean(H4.get(c[:4], ""))} | {clean(H4.get(c, ""))}'.strip(' |')  # noqa: E731
-    pv = ['DV', 'DV_strict', 'DV_excl_remelt', 'DV_max', 'uncertain', 'uncertain_reason', 'locked', 'step', 'route',
+    pv = ['DV', 'DV_excl_remelt', 'DV_max', 'uncertain', 'uncertain_reason', 'locked', 'step', 'route',
           'source', 'copy_from', 'policy', 'ml_prob', 'ml_supported', 'dv_ai1', 'dv_ai2', 'why_ai1', 'why_ai2',
           'master_id']
     Fi = F.set_index(['input_hs6', 'output_hs6'])[pv]
@@ -253,7 +252,6 @@ def main():
               'concord_flag': '1 = code not one-to-one with HS2002 or not a valid code',
               'concord_note': 'type of the HS concordance link',
               'DV': '1 = input can be used to make output (main)',
-              'DV_strict': 'DV x (1 - uncertain): certain links only',
               'DV_excl_remelt': 'like DV, but direct remelting (recycle_direct) = 0',
               'DV_max': 'same as DV (kept for older code)',
               'uncertain': '1 = kept at 1 but uncertain (see uncertain_reason)',
@@ -269,7 +267,7 @@ def main():
               'dv_ai1': 'DV of AI coder 1 (Claude), where coded', 'dv_ai2': 'DV of AI coder 2 (Codex), where coded',
               'why_ai1': 'reason of AI coder 1 (Claude)', 'why_ai2': 'reason of AI coder 2 (Codex)',
               'master_id': 'id of the HS2002 input-output pair (same in every PTA)'}
-    BYTE = ['VA_Alternative', 'VA_Complement', 'special_rule', 'DV', 'DV_strict', 'DV_excl_remelt', 'DV_max',
+    BYTE = ['VA_Alternative', 'VA_Complement', 'special_rule', 'DV', 'DV_excl_remelt', 'DV_max',
             'uncertain', 'locked', 'concord_flag']
     DOUBLE = ['step', 'ml_prob', 'ml_supported', 'dv_ai1', 'dv_ai2', 'mapped_DV1_share']
     order = ['output_hs6', 'output_description', 'input_hs6', 'input_description', 'VA_Alternative', 'VA_Complement',
@@ -294,10 +292,9 @@ def main():
             P.loc[conc, 'mixed'] = False
         selfp = (P.input_type == 'hs6') & (P.input_hs6 == P.output_hs6)
         P.loc[selfp, 'mixed'] = False
-        P.loc[selfp, ['DV', 'DV_strict', 'DV_excl_remelt', 'DV_max', 'uncertain', 'uncertain_reason', 'locked',
-                      'step', 'route']] = [1, 1, 1, 1, 0, '', 1, '2', 'same_good']
+        P.loc[selfp, ['DV', 'DV_excl_remelt', 'DV_max', 'uncertain', 'uncertain_reason', 'locked',
+                      'step', 'route']] = [1, 1, 1, 0, '', 1, '2', 'same_good']
         multi = P.n_mapped_pairs.astype(int) > 1
-        P['DV_strict'] = P.DV * (1 - P.uncertain)
         vint = P.hs_vintage.iloc[0]
         dfun = desc4 if vint == 'HS2012' else desc2
         P['output_description'] = P.output_hs6.map(dfun)
@@ -328,7 +325,7 @@ def main():
             'records_in_original_file': len(R0), 'records': len(P), 'hs_vintage': vint,
             'records_deleted_not_hs6_input': int(nh.sum()),
             'DV1': int(P.DV.sum()), 'DV1_share': round(float(P.DV.mean()), 4),
-            'DV_strict1': int(P.DV_strict.sum()), 'uncertain': int(P.uncertain.sum()),
+            'uncertain': int(P.uncertain.sum()),
             'uncertain_share_of_DV1': round(float(P.uncertain.sum() / max(P.DV.sum(), 1)), 4),
             'records_mapped_to_several_pairs': int(multi.sum()),
             'records_concordance_mixed': int(mixed.sum()),

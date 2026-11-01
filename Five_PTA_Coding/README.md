@@ -6,7 +6,7 @@ the same rules, so a pair has the same code in every agreement. The scope conven
 19 October 2026. The result is version `2026_10_19_v2`.
 
 This folder holds the workflow, the methodology and the aggregate results. The workflow of 19 October is superseded
-by the version of 31 October in [`../PTA_6_10_Coding/`](../PTA_6_10_Coding/README.md); the codes delivered here are
+by the version of 1 November in [`../PTA_6_10_Coding/`](../PTA_6_10_Coding/README.md); the codes delivered here are
 not re-judged. The row-level coded files (one Stata file
 per agreement) are kept locally and are not published here.
 

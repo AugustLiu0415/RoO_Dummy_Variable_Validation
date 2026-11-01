@@ -266,9 +266,8 @@ def main():
     h12 = X.vintage == 'HS2012'
     for s in ('input', 'output'):
         X[f'{s}_description'] = np.where(h12, X[f'{s}_hs6'].map(d4), X[f'{s}_hs6'].map(d2))
-    X['DV_strict'] = X.DV.astype(int) * (1 - X.uncertain.astype(int))
     cols = ['primary', 'tags', 'origin', 'vintage', 'input_hs6', 'input_description', 'output_hs6',
-            'output_description', 'DV', 'uncertain', 'DV_strict', 'route', 'policy', 'source', 'rule_id',
+            'output_description', 'DV', 'uncertain', 'route', 'policy', 'source', 'rule_id',
             'uncertain_reason', 'split'] + AI_COLS + ['mat_in', 'lev_in', 'mat_out', 'lev_out', 'q3_A', 'q3_B',
                                                       'q3_C', 'not_thermoplastic', 'rule_dv_now', 'rule_id_now',
                                                       'in_ASEAN', 'ptas_2_5', 'n_rec_2_5', 'ptas_6_10', 'n_rec_6_10']

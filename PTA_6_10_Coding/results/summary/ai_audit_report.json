@@ -1,11 +1,11 @@
 {
- "run": "2026-10-31T18:50:08",
+ "run": "2026-11-01T07:41:20",
  "auditors": [
   "claude",
   "codex"
  ],
  "items": 305,
- "final_fingerprint": "7d215ae5893a",
+ "final_fingerprint": "f9f5f402450e",
  "frame_share_of_hs6_records": {
   "TUR_SGP": 0.8569,
   "NIC_TWN": 0.9788,
@@ -36,23 +36,6 @@
      "ci95": [
       0.9231,
       0.9901
-     ]
-    }
-   },
-   "DV_strict": {
-    "items": 305,
-    "pair_weighted": {
-     "est": 0.8786,
-     "ci95": [
-      0.7915,
-      0.9325
-     ]
-    },
-    "record_weighted": {
-     "est": 0.8834,
-     "ci95": [
-      0.7826,
-      0.941
      ]
     }
    }
@@ -95,23 +78,6 @@
      "ci95": [
       0.8757,
       0.9766
-     ]
-    }
-   },
-   "DV_strict": {
-    "items": 305,
-    "pair_weighted": {
-     "est": 0.8079,
-     "ci95": [
-      0.7141,
-      0.8762
-     ]
-    },
-    "record_weighted": {
-     "est": 0.8361,
-     "ci95": [
-      0.731,
-      0.9055
      ]
     }
    }
@@ -248,96 +214,6 @@
     "ci95": [
      0.9254,
      0.9932
-    ]
-   }
-  },
-  "DV_strict": {
-   "items": 266,
-   "pair_weighted": {
-    "est": 0.8674,
-    "ci95": [
-     0.778,
-     0.9243
-    ]
-   },
-   "record_weighted": {
-    "est": 0.8777,
-    "ci95": [
-     0.7753,
-     0.9372
-    ]
-   },
-   "records_TUR_SGP": {
-    "est": 0.7212,
-    "ci95": [
-     0.6419,
-     0.7887
-    ]
-   },
-   "records_TUR_SGP_own_pairs": {
-    "est": 0.7079,
-    "ci95": [
-     0.3175,
-     0.9266
-    ],
-    "weight_covered": 0.8824
-   },
-   "records_NIC_TWN": {
-    "est": 0.8944,
-    "ci95": [
-     0.7951,
-     0.9487
-    ]
-   },
-   "records_NIC_TWN_own_pairs": {
-    "est": 0.9008,
-    "ci95": [
-     0.7661,
-     0.9618
-    ],
-    "weight_covered": 0.9949
-   },
-   "records_CHL_KOR": {
-    "est": 0.8792,
-    "ci95": [
-     0.777,
-     0.9383
-    ]
-   },
-   "records_CHL_KOR_own_pairs": {
-    "est": 0.8816,
-    "ci95": [
-     0.7784,
-     0.9404
-    ],
-    "weight_covered": 1.0
-   },
-   "records_OMN_USA": {
-    "est": 0.885,
-    "ci95": [
-     0.7628,
-     0.9484
-    ]
-   },
-   "records_OMN_USA_own_pairs": {
-    "est": 0.8836,
-    "ci95": [
-     0.7533,
-     0.9497
-    ]
-   },
-   "records_CAN_CHL": {
-    "est": 0.8702,
-    "ci95": [
-     0.7729,
-     0.9296
-    ]
-   },
-   "records_CAN_CHL_own_pairs": {
-    "est": 0.8683,
-    "ci95": [
-     0.7717,
-     0.9279
     ]
    }
   },
@@ -504,130 +380,6 @@
    "ai_units": 10,
    "ai_concord": 2,
    "exact_copy": 2
-  },
-  "DV_strict": {
-   "items": 305,
-   "pair_weighted": {
-    "est": 0.8359,
-    "ci95": [
-     0.7469,
-     0.8978
-    ]
-   },
-   "record_weighted": {
-    "est": 0.8739,
-    "ci95": [
-     0.7746,
-     0.9332
-    ]
-   },
-   "records_TUR_SGP": {
-    "est": 0.6931,
-    "ci95": [
-     0.6195,
-     0.7581
-    ]
-   },
-   "records_TUR_SGP_own_pairs": {
-    "est": 0.7177,
-    "ci95": [
-     0.3261,
-     0.9304
-    ],
-    "weight_covered": 0.8824
-   },
-   "records_NIC_TWN": {
-    "est": 0.8912,
-    "ci95": [
-     0.7984,
-     0.9442
-    ]
-   },
-   "records_NIC_TWN_own_pairs": {
-    "est": 0.8658,
-    "ci95": [
-     0.7306,
-     0.9388
-    ],
-    "weight_covered": 0.9949
-   },
-   "records_CHL_KOR": {
-    "est": 0.8738,
-    "ci95": [
-     0.7749,
-     0.9329
-    ]
-   },
-   "records_CHL_KOR_own_pairs": {
-    "est": 0.8882,
-    "ci95": [
-     0.7904,
-     0.9436
-    ],
-    "weight_covered": 1.0
-   },
-   "records_OMN_USA": {
-    "est": 0.8861,
-    "ci95": [
-     0.7643,
-     0.9492
-    ]
-   },
-   "records_OMN_USA_own_pairs": {
-    "est": 0.8972,
-    "ci95": [
-     0.7677,
-     0.9584
-    ]
-   },
-   "records_CAN_CHL": {
-    "est": 0.8652,
-    "ci95": [
-     0.7714,
-     0.9243
-    ]
-   },
-   "records_CAN_CHL_own_pairs": {
-    "est": 0.8568,
-    "ci95": [
-     0.7624,
-     0.9177
-    ]
-   },
-   "lower": {
-    "pair_weighted": 0.8359,
-    "record_weighted": 0.8739,
-    "records_TUR_SGP": 0.6931,
-    "records_TUR_SGP_own_pairs": 0.7177,
-    "records_NIC_TWN": 0.8912,
-    "records_NIC_TWN_own_pairs": 0.8658,
-    "records_CHL_KOR": 0.8738,
-    "records_CHL_KOR_own_pairs": 0.8882,
-    "records_OMN_USA": 0.8861,
-    "records_OMN_USA_own_pairs": 0.8972,
-    "records_CAN_CHL": 0.8652,
-    "records_CAN_CHL_own_pairs": 0.8568
-   },
-   "upper": {
-    "pair_weighted": 0.8359,
-    "record_weighted": 0.8739,
-    "records_TUR_SGP": 0.6931,
-    "records_TUR_SGP_own_pairs": 0.7177,
-    "records_NIC_TWN": 0.8912,
-    "records_NIC_TWN_own_pairs": 0.8658,
-    "records_CHL_KOR": 0.8738,
-    "records_CHL_KOR_own_pairs": 0.8882,
-    "records_OMN_USA": 0.8861,
-    "records_OMN_USA_own_pairs": 0.8972,
-    "records_CAN_CHL": 0.8652,
-    "records_CAN_CHL_own_pairs": 0.8568
-   }
-  },
-  "DV_strict_wrong_by_family": {
-   "ai_units": 55,
-   "ai_concord": 8,
-   "exact_copy": 7,
-   "rule_textile": 3
   }
  }
 }

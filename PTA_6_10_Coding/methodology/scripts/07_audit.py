@@ -10,17 +10,17 @@ build:   draws about 300 pairs after 09_apply_policy.py, stratified by how the f
 enrich:  gives every bare "Other" subheading in audit/audit_pairs.csv its context, as 05c does for the coder inputs v2
          (descriptions only; ids, rows and order unchanged). Run after build.
 check:   format check of an auditor file (see AI_Audit_Prompt.md).
-compare: auditors vs the final DV and DV_strict and vs each other, weighted by pairs, by records and by the records
+compare: auditors vs the final DV and vs each other, weighted by pairs, by records and by the records
          of each agreement, with 95% intervals; writes audit/audit_review.xlsx with the disagreements first for
          August's review and final/ai_audit_report.json. An existing audit_review.xlsx is backed up first and August's
          marks are carried over by audit_id when the row still holds the same pair.
-score:   reads August's marks (August_dv: the true value 1 / 0, or unsure) and adds the reviewed accuracy of DV and
-         DV_strict to final/ai_audit_report.json, with bounds for unsure or unmarked items. Re-run compare first
+score:   reads August's marks (August_dv: the true value 1 / 0, or unsure) and adds the reviewed accuracy of DV to
+         final/ai_audit_report.json, with bounds for unsure or unmarked items. Re-run compare first
          whenever 09 has been re-run (score warns when the final codes of the sample changed).
 
 What is measured. An item is correct when the final value equals the true value of the pair (the auditors' common
-answer where they agree with the final DV, August's mark otherwise). DV_strict is scored against the same true DV,
-so it shows how often the certain-links-only variant is right, not whether the uncertainty flag is right.
+answer where they agree with the final DV, August's mark otherwise). DV_strict is no longer computed or scored
+(Prof. Zhang, 2026-11-01: DV is the main variable).
 DV_excl_remelt differs from DV only on recycle_direct pairs, by definition; compare reports those items instead.
 
 Weights. Pairs: each stratum counts its pairs in the frame. Records: each record with an HS6 input counts once,
@@ -72,7 +72,7 @@ MARKS = ['August_dv', 'August_note']
 BUILD_STRATUM = {'T_CH59_SIBLING': 'T_BACKWARD', 'T_COATED_TO_BELTING': 'T_BACKWARD',
                  'T_CH59_NOT_INPUT': 'T_INTERMEDIATE_SIBLING',
                  'T_WORN_FROM_INPUT': 'T_WORN_NOT_FROM', 'T_RAGS_FROM_FIBRE': 'T_RAGS_NOT_FROM_FIBRE'}   # 5(a), 10-30
-VARIANTS = ['DV', 'DV_strict']
+VARIANTS = ['DV']                                        # DV only (Prof. Zhang, 2026-11-01)
 Z95 = 1.959964
 REVIEW = OUT / 'audit_review.xlsx'
 REPORT = FINAL / 'ai_audit_report.json'
@@ -100,7 +100,7 @@ def final_codes():
     C = pd.read_csv(FINAL / 'concord_coded_final.csv', dtype=str, keep_default_na=False)
     C['n_records'] = C.n_records.astype(int)
     C['hs_vintage'] = 'HS2012'
-    cols = ['master_id', 'input_hs6', 'output_hs6', 'hs_vintage', 'DV', 'DV_strict', 'uncertain', 'uncertain_reason',
+    cols = ['master_id', 'input_hs6', 'output_hs6', 'hs_vintage', 'DV', 'uncertain', 'uncertain_reason',
             'route', 'source', 'copy_from', 'rule_id', 'n_records']
     C['copy_from'], C['rule_id'] = '', ''
     return pd.concat([F[cols], C[cols]], ignore_index=True).set_index('master_id')
@@ -200,8 +200,8 @@ def estimate(ok, items, W, by_pta=True):
 
 
 def fingerprint(master_ids, F):
-    """short hash of the final DV and DV_strict of the sampled pairs"""
-    s = ';'.join(f'{m}:{F.DV[m]}:{F.DV_strict[m]}' for m in sorted(master_ids))
+    """short hash of the final DV and uncertain of the sampled pairs"""
+    s = ';'.join(f'{m}:{F.DV[m]}:{F.uncertain[m]}' for m in sorted(master_ids))
     return hashlib.sha1(s.encode()).hexdigest()[:12]
 
 

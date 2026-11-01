@@ -114,15 +114,14 @@ def main():
         ['审核方法', '从第二轮草稿的最终编码中分层抽取 305 对；Claude 与 Codex 两个全新的 AI 会话按 2026-10-19 规则独立盲审；'
                  '两位审核者与最终编码不一致（红色 40 对）、或两位审核者意见不同（黄色 39 对）的对子由 August 判断真实值；'
                  '其余 226 对两位审核者都与最终编码一致，视为正确。'],
-        ['不确定配对', '两位 AI coder 意见不同时，按 10-19 规则编为 DV = 1、uncertain = 1（DV_strict = 0）。'],
+        ['不确定配对', '两位 AI coder 意见不同时，按 10-19 规则编为 DV = 1、uncertain = 1。'],
         ['样本中的不确定配对', f'样本中由 AI 编码（含 HS2012 对照）的不确定配对共 {len(ua)} 对：August 逐对复核，判为 0 的 '
                       f'{int((judged & (t == 0)).sum())} 对' + (f'、判为 1 的 {n1} 对' if (n1 := int((judged & (t == 1)).sum())) else '') + '；两位审核者都同意'
                       f'最终编码 1、未经复核的 {int((~judged & ~tb & (t == 1)).sum())} 对；另有 {int(tb.sum())} 对两位审核者'
                       '意见不同，按 August 的指示统一判为 1，没有逐对判断，教授答复问卷后按新口径重判。'
-                      'DV 把真实值为 0 的算错，DV_strict 把真实值为 1 的算错，两者夹住真实值。'],
+                      ''],
         ['最终准确率', f"复核{'已完成' if res['complete'] else '未完成'}。DV：按 pair {pct(res['DV']['pair_weighted'])}，"
-                  f"按记录 {pct(res['DV']['record_weighted'])}；DV_strict：按 pair {pct(res['DV_strict']['pair_weighted'])}，"
-                  f"按记录 {pct(res['DV_strict']['record_weighted'])}。括号内为 95% 区间。详见“最终准确率”。"],
+                  f"按记录 {pct(res['DV']['record_weighted'])}。括号内为 95% 区间。详见“最终准确率”。"],
         ['翻译', '商品名称与两位审核者的理由由 AI 翻译，并由另一个 AI 对照英文原文核对；如有出入以英文原文'
                '（audit/audit_review.xlsx）为准。'],
         ['工作表', '最终准确率；不确定配对_判1（黄一 20 对）；不确定配对_判0（红一 21 对）；黄色其余19对（黄二、黄三）；'
@@ -143,7 +142,7 @@ def main():
 
     acc = wb.create_sheet('最终准确率')
     acc.append(['指标', '按 pair', '按记录'] + PTAS)
-    for v in ('DV', 'DV_strict'):
+    for v in ['DV']:                                          # DV_strict no longer scored (2026-11-01)
         e = res[v]
         acc.append([v, pct(e['pair_weighted']), pct(e['record_weighted'])] + [pct(e.get(f'records_{p}')) for p in PTAS])
     acc.append([])

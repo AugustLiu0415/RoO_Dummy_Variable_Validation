@@ -1,8 +1,8 @@
 """Build the PTA 6-10 result report and variable file (HTML, printed to PDF with Chrome) from the final files.
 
-Reads final/<PTA>_coded_2026_10_31.csv, final/{master,concord}_coded_final.csv, final/policy_report.json,
+Reads final/<PTA>_coded_2026_11_01.csv, final/{master,concord}_coded_final.csv, final/policy_report.json,
 final/combine_report.json, final/ai_audit_report.json, _work/coded/screen_report.json and the draft of 28 October
-(final_v2_draft_2026_10_28/). Writes Results_PTA_6_10_2026_10_31.html, Variables_PTA_6_10_2026_10_31.html and
+(final_v2_draft_2026_10_28/). Writes Results_PTA_6_10_2026_11_01.html, Variables_PTA_6_10_2026_11_01.html and
 summary_by_pta.csv next to this script.
 """
 import json
@@ -14,7 +14,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 FINAL = ROOT / 'final'
 DRAFT = ROOT / 'final_v2_draft_2026_10_28'
-DATE = '2026_10_31'
+DATE = '2026_11_01'                    # the 10-31 codes without DV_strict (Prof. Zhang, 2026-11-01)
 PTAS = [('TUR_SGP', 'Turkey–Singapore'), ('NIC_TWN', 'Nicaragua–Taiwan'), ('CHL_KOR', 'Chile–Korea'),
         ('OMN_USA', 'Oman–US'), ('CAN_CHL', 'Canada–Chile')]
 REASONS = [('AI coders, or the model and the textile rules, disagree',
@@ -40,7 +40,7 @@ SOURCES = [('Copied from the ASEAN–Japan labels (step 7a)', lambda f: (f.sourc
            ('Two AI coders on HS2012 codes (step 1)', lambda f: f.source == 'ai_concord'),
            ('Textile rules (step 7e)', lambda f: f.source == 'rule_textile'),
            ('Self-pairs (step 2)', lambda f: f.source == 'rule')]
-COLS = ['pta', 'master_id', 'DV', 'DV_strict', 'DV_excl_remelt', 'uncertain', 'uncertain_reason', 'route', 'source',
+COLS = ['pta', 'master_id', 'DV', 'DV_excl_remelt', 'uncertain', 'uncertain_reason', 'route', 'source',
         'copy_from', 'n_mapped_pairs', 'concord_flag', 'input_hs2002', 'output_hs2002']
 # accuracy of the draft of 28 October and of variants, scored with 07_audit.py on the true values of 31 October
 # (audit/audit_review.xlsx); the final figures are read from ai_audit_report.json
@@ -81,19 +81,19 @@ def load():
     S, frames = {}, []
     for p, _ in PTAS:
         f = pd.read_csv(FINAL / f'{p}_coded_{DATE}.csv', usecols=COLS, dtype=str, keep_default_na=False)
-        for c in ('DV', 'DV_strict', 'DV_excl_remelt', 'uncertain', 'concord_flag', 'n_mapped_pairs'):
+        for c in ('DV', 'DV_excl_remelt', 'uncertain', 'concord_flag', 'n_mapped_pairs'):
             f[c] = pd.to_numeric(f[c])
         d = pd.read_csv(DRAFT / f'{p}_coded_2026_10_25.csv', usecols=['DV', 'uncertain', 'input_type'], dtype=str)
         d = d[d.input_type == 'hs6']
         textile = (f.input_hs2002.str[:2].astype(int).between(50, 63)
                    & f.output_hs2002.str[:2].astype(int).between(50, 63))
-        S[p] = dict(rows=len(f), DV1=int(f.DV.sum()), DVs=int(f.DV_strict.sum()), DVx=int(f.DV_excl_remelt.sum()),
+        S[p] = dict(rows=len(f), DV1=int(f.DV.sum()), DVx=int(f.DV_excl_remelt.sum()),
                     unc=int(f.uncertain.sum()), reasons=f[f.uncertain == 1].uncertain_reason.value_counts().to_dict(),
                     src=[int(m(f).sum()) for _, m in SOURCES], new=int((f.source != 'exact_copy').sum()),
                     textile=int(textile.sum()), concord_flag=int(f.concord_flag.sum()),
                     multi_rep=int(((f.n_mapped_pairs > 1) & (f.source != 'ai_concord')).sum()),
                     d_rows=len(d), d_DV1=int((d.DV == '1').sum()), d_unc=int((d.uncertain == '1').sum()),
-                    d_DVs=int(((d.DV == '1') & (d.uncertain == '0')).sum()))
+                    )
         assert sum(S[p]['src']) == len(f) and sum(S[p]['reasons'].values()) == S[p]['unc']
         assert set(S[p]['reasons']) <= {k for k, _ in REASONS}
         frames.append(f)
@@ -179,8 +179,7 @@ pre {{ font-family: Menlo, Consolas, monospace; font-size: 8.4pt; background: #f
 
 
 def results(S, X, C, pol, comb, aud, scr):
-    T = {k: sum(S[p][k] for p, _ in PTAS) for k in ('rows', 'DV1', 'DVs', 'DVx', 'unc', 'new', 'd_rows', 'd_DV1',
-                                                    'd_unc', 'd_DVs')}
+    T = {k: sum(S[p][k] for p, _ in PTAS) for k in ('rows', 'DV1', 'DVx', 'unc', 'new', 'd_rows', 'd_DV1', 'd_unc')}
     names = [nm for _, nm in PTAS]
     master = comb['master']
     new_pairs = master['new_pairs']
@@ -191,18 +190,19 @@ def results(S, X, C, pol, comb, aud, scr):
     bt = aud['between_auditors']
     rc = aud['review_counts']
     h = ['<!doctype html>\n<html lang="en"><head><meta charset="utf-8">\n<title>PTA 6–10 Coding Results</title>',
-         CSS.format(foot='RoO input–output codes for PTA 6–10 · results · 31 October 2026'), '</head><body>']
+         CSS.format(foot='RoO input–output codes for PTA 6–10 · results · 1 November 2026'), '</head><body>']
     a = h.append
     a('<h1>RoO Input–Output Codes for PTA 6–10: Results</h1>')
-    a('<p class="lead">31 October 2026 · August Liu. Companion to the coding workflow document (general coding rules, '
-      '31 October 2026) and the variable explanation file.</p>')
+    a('<p class="lead">1 November 2026 · August Liu. Companion to the coding workflow document (general coding rules, '
+      '1 November 2026) and the variable explanation file. The codes are those of 31 October; the files of 1 November '
+      'only drop the variable DV_strict.</p>')
 
     a('<h2>1. Data</h2><ul>')
     a(f'<li>Five agreements: Turkey–Singapore (HS2012), Nicaragua–Taiwan, Chile–Korea, Oman–US and Canada–Chile (all '
       f'HS2002). Each row is one (restricted input, output) pair at HS6 from the agreement’s product-specific rules: '
       f'{n(T["rows"])} rows in all. The {n(tur["records_deleted_not_hs6_input"])} Turkey–Singapore rows whose input is '
       f'“WO” (wholly obtained) or “any” rather than an HS code were deleted (decision of 28 October).</li>')
-    a('<li>One Stata file per agreement (<i>&lt;PTA&gt;_coded_2026_10_31.dta</i>) with 36 variables; Turkey–Singapore '
+    a('<li>One Stata file per agreement (<i>&lt;PTA&gt;_coded_2026_11_01.dta</i>) with 35 variables; Turkey–Singapore '
       'has one more (special_rule, from its original file).</li>')
     a(f'<li>All pairs are coded on HS2002. Turkey–Singapore was mapped from HS2012 with the UN correlation table, and '
       f'{n(tur["records_mapped_to_several_pairs"])} of its rows map to several HS2002 pairs. '
@@ -216,14 +216,14 @@ def results(S, X, C, pol, comb, aud, scr):
       f'the other {n(new_pairs)} were coded under the workflow. A pair has the same code in every agreement.</li></ul>')
 
     a('<h2>2. Main results</h2><p class="cap">Table 1. Input–output links by agreement</p>')
-    rows = [[nm, n(S[p]['rows']), n(S[p]['DV1']), pct(S[p]['DV1'], S[p]['rows']), n(S[p]['DVs']), n(S[p]['DVx']),
+    rows = [[nm, n(S[p]['rows']), n(S[p]['DV1']), pct(S[p]['DV1'], S[p]['rows']), n(S[p]['DVx']),
              n(S[p]['unc']), pct(S[p]['unc'], S[p]['DV1'])] for p, nm in PTAS]
-    rows.append(bold(['Total', n(T['rows']), n(T['DV1']), pct(T['DV1'], T['rows']), n(T['DVs']), n(T['DVx']),
+    rows.append(bold(['Total', n(T['rows']), n(T['DV1']), pct(T['DV1'], T['rows']), n(T['DVx']),
                       n(T['unc']), pct(T['unc'], T['DV1'])]))
-    a(table(['Agreement', 'Rows', 'DV = 1', 'Share', 'DV_strict = 1', 'DV_excl_remelt = 1', 'Uncertain',
+    a(table(['Agreement', 'Rows', 'DV = 1', 'Share', 'DV_excl_remelt = 1', 'Uncertain',
              'Uncertain / DV = 1'], rows))
     a('<p class="note">DV = 1: the input can be used to make the output (main variable; it includes links that are '
-      'possible but unconfirmed, marked uncertain). DV_strict counts only certain links (DV × (1 − uncertain)). '
+      'possible but unconfirmed, marked uncertain). '
       'DV_excl_remelt sets every direct-remelting HS2002 pair (route = recycle_direct, for example steel rod → steel '
       'ingots) to 0; a row coded on HS2002 that maps to several HS2002 pairs takes the highest value among them, so 3 '
       'Turkey–Singapore rows shown as recycle_direct keep 1 because another of their pairs has another route. The 591 '
@@ -321,25 +321,21 @@ def results(S, X, C, pol, comb, aud, scr):
       f'intervals)</p>')
     a(table(['', 'By pairs', 'By rows'],
             [['DV, final (31 October)', ci(after['DV']['pair_weighted']), ci(after['DV']['record_weighted'])],
-             ['DV, draft of 28 October, same true values', p1(DRAFT_ACC['pair']), p1(DRAFT_ACC['record'])],
-             ['DV_strict, final', ci(after['DV_strict']['pair_weighted']), ci(after['DV_strict']['record_weighted'])]],
+             ['DV, draft of 28 October, same true values', p1(DRAFT_ACC['pair']), p1(DRAFT_ACC['record'])]],
             widths=['46%', '27%', '27%']))
     a(table(['DV by rows'] + names,
             [['Final'] + [p1(after['DV'][f'records_{p}']['est']) for p, _ in PTAS]], widths=['26%'] + [''] * 5))
     wrong = after['DV_wrong_by_family']
     a(f'<p class="note">{sum(wrong.values())} sampled pairs remain wrong in DV: 5 complete machines built into another '
-      f'good that both AI coders coded 0 (convention 4 has not been applied to pairs coded 0), 6 one-sided 1s the screen '
+      f'good that both AI coders coded 0 (convention 4 is not applied to pairs both coders coded 0, as Professor Zhang decided on 1 November), 6 one-sided 1s the screen '
       f'kept, 1 other HS2012 pair, and 2 copies of PTA 1–5, which are not re-judged. Six sampled pairs were set to 0 '
       f'directly because both auditors coded them 0; counting them as errors gives {p1(NO_PROF0_ACC["pair"])} by pairs '
-      f'and {p1(NO_PROF0_ACC["record"])} by rows. DV_strict is lower because many pairs whose true value is 1 are coded '
-      f'1 with uncertainty. This is an AI audit reviewed by a research assistant, not an expert hand-coding.</p>')
+      f'and {p1(NO_PROF0_ACC["record"])} by rows. This is an AI audit reviewed by a research assistant, not an expert hand-coding.</p>')
 
     a('<h2>6. Revisions of 28–31 October 2026</h2><p class="cap">Table 5. DV = 1 and uncertain rows by version</p>')
-    rows = [[nm, n(S[p]['d_DV1']), n(S[p]['DV1']), n(S[p]['d_DVs']), n(S[p]['DVs']), n(S[p]['d_unc']),
-             n(S[p]['unc'])] for p, nm in PTAS]
-    rows.append(bold(['Total', n(T['d_DV1']), n(T['DV1']), n(T['d_DVs']), n(T['DVs']), n(T['d_unc']), n(T['unc'])]))
-    a(table(['Agreement', 'DV = 1, 28 Oct', 'DV = 1, final', 'DV_strict = 1, 28 Oct', 'DV_strict = 1, final',
-             'Uncertain, 28 Oct', 'Uncertain, final'], rows))
+    rows = [[nm, n(S[p]['d_DV1']), n(S[p]['DV1']), n(S[p]['d_unc']), n(S[p]['unc'])] for p, nm in PTAS]
+    rows.append(bold(['Total', n(T['d_DV1']), n(T['DV1']), n(T['d_unc']), n(T['unc'])]))
+    a(table(['Agreement', 'DV = 1, 28 Oct', 'DV = 1, final', 'Uncertain, 28 Oct', 'Uncertain, final'], rows))
     m, c = C['master'], C['concord']
     a(f'<ul><li><b>28 October (draft):</b> coded under the conventions of 19 October. The Turkey–Singapore draft also '
       f'had {n(tur["records_deleted_not_hs6_input"])} rows with input “WO” or “any” and no code; they are excluded from '
@@ -348,10 +344,11 @@ def results(S, X, C, pol, comb, aud, scr):
       f'chapter 59) and Professor Zhang’s questionnaire answers of 30 October, applied to the newly coded pairs. Against '
       f'the draft, {n(m["up"])} HS2002 pairs went from 0 to 1, {n(m["down"])} from 1 to 0, and {n(m["flag"])} changed only '
       f'their uncertain flag (HS2012 pairs: {c["up"]}, {c["down"]} and {c["flag"]}). The share of rows with DV = 1 moved '
-      f'from {pct(T["d_DV1"], T["d_rows"])} to {pct(T["DV1"], T["rows"])}; DV_strict from {pct(T["d_DVs"], T["d_rows"])} '
-      f'to {pct(T["DVs"], T["rows"])}, mainly because convention 2 turned {n(C["conv2_pairs"])} pairs '
+      f'from {pct(T["d_DV1"], T["d_rows"])} to {pct(T["DV1"], T["rows"])}; the share of uncertain rows rose from '
+      f'{pct(T["d_unc"], T["d_rows"])} to {pct(T["unc"], T["rows"])}, mainly because convention 2 turned {n(C["conv2_pairs"])} pairs '
       f'({n(C["conv2_rows"])} rows) of certain 1s into 1s with uncertainty. Oman–US is unchanged because all its pairs '
-      f'are copies of PTA 1–5.</li></ul>')
+      f'are copies of PTA 1–5.</li>')
+    a('<li><b>1 November:</b> the same codes; the variable DV_strict is dropped (section 7).</li></ul>')
 
     a('<h2>7. Notes</h2><ul>')
     a(f'<li><b>Scope.</b> Codes delivered for PTA 1–5 are not re-judged (Professor Zhang, 30 October), and pairs copied '
@@ -362,14 +359,16 @@ def results(S, X, C, pol, comb, aud, scr):
       'conventions that could raise a 0 to 1 (complete machines, cut or refitted goods, associated minerals recovered '
       'from an ore, crushed goods as filler, waste of a component) were not applied to pairs both coders had coded 0. '
       'Distinctions between a certain 1 and a 1 with '
-      'uncertainty were not re-judged pair by pair; they apply to future coding and affect only DV_strict.</li>')
-    a('<li><b>To be confirmed by Professor Zhang.</b> DV as the main variable, with DV_strict as a robustness check. '
-      'Whether the complete machines built into another good that both AI coders coded 0 (6,733 HS2002 pairs) are '
-      're-reviewed under convention 4. '
-      'Three extensions of his answers: thermosets and other non-meltable plastics are 0; rubbers in primary forms only '
-      'to the same polymer; no laminate route between different plastics (“other plastics” also count as a polymer of '
-      'their own). Also: which convention applies where metal articles (convention 2) and remelting into a finished '
-      'product (convention 3) overlap (convention 2 for now).</li>')
+      'uncertainty were not re-judged pair by pair; they apply to future coding and do not affect DV.</li>')
+    a('<li><b>Decisions of Professor Zhang, 1 November 2026.</b> (1) DV is the main variable; DV_strict is no longer '
+      'computed and has been dropped from these files (it stays in the PTA 1–5 files until their next reissue). '
+      '(2) Convention 4 (complete machines) is not applied to pairs both AI coders coded 0; they are not re-reviewed. '
+      '(3) In the screen of one-sided 1s, a chemical stays 1 with uncertainty whenever a specific role can be named. '
+      '(4) The rest as coded: thermosets and other non-meltable plastics are 0; rubbers in primary forms only to the '
+      'same polymer; “other plastics” count as a polymer of their own; no laminate route between different plastics; '
+      'vulcanised rubber crumb used as an ingredient stays 1 with uncertainty; where metal articles (convention 2) and '
+      'remelting into a finished product (convention 3) overlap, convention 2 applies; the uncertain flags of blended '
+      'fabrics that share a minor fibre are updated at the next reissue of PTA 1–5.</li>')
     a(f'<li>concord_flag = 1 marks {n(S["TUR_SGP"]["concord_flag"])} Turkey–Singapore rows whose HS2012 code is not '
       f'one-to-one with HS2002, and {n(S["CHL_KOR"]["concord_flag"])} Chile–Korea rows with an invalid code (610340, '
       f'610344, 610345), mapped to every HS2002 subheading of 6103.4. The HS concordance will follow the project’s '
@@ -381,7 +380,7 @@ def results(S, X, C, pol, comb, aud, scr):
 
 
 def variables(S, X):
-    rows = ''.join(f'<tr><td class="v">{p}_coded_2026_10_31.dta</td><td>{nm}</td><td class="n">{n(S[p]["rows"])}</td></tr>'
+    rows = ''.join(f'<tr><td class="v">{p}_coded_2026_11_01.dta</td><td>{nm}</td><td class="n">{n(S[p]["rows"])}</td></tr>'
                    for p, nm in PTAS)
     total = sum(S[p]['rows'] for p, _ in PTAS)
     reasons = ''.join(f'<tr><td>{k}</td><td>{v}</td></tr>' for k, v in [
@@ -411,11 +410,11 @@ def variables(S, X):
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <title>Variables of the PTA 6–10 Files</title>
-{CSS.format(foot='Variables of the coded PTA 6–10 files · 31 October 2026')}
+{CSS.format(foot='Variables of the coded PTA 6–10 files · 1 November 2026')}
 </head><body>
 
 <h1>Variables of the Coded PTA 6–10 Files</h1>
-<p class="lead">31 October 2026 · August Liu. The coding rules are in the workflow document; results are in the
+<p class="lead">1 November 2026 · August Liu. The coding rules are in the workflow document; results are in the
 result report.</p>
 
 <h2>Files</h2>
@@ -426,12 +425,12 @@ result report.</p>
 </table>
 <p>One row is one (restricted input, output) pair from the agreement’s product-specific rules of origin, in the order
 of the original files. Turkey–Singapore is in HS2012; the other four are in HS2002. Every pair is coded on HS2002
-(input_hs2002, output_hs2002). The files share 36 variables, each with a Stata label; Turkey–Singapore has one more,
+(input_hs2002, output_hs2002). The files share 35 variables, each with a Stata label; Turkey–Singapore has one more,
 special_rule, from its original file. They can be combined with <code>append</code>, which widens string variables
 as needed:</p>
-<pre>use TUR_SGP_coded_2026_10_31, clear
+<pre>use TUR_SGP_coded_2026_11_01, clear
 foreach p in NIC_TWN CHL_KOR OMN_USA CAN_CHL {{
-    append using `p'_coded_2026_10_31
+    append using `p'_coded_2026_11_01
 }}</pre>
 <p>A pair (master_id) has the same DV in every agreement where it appears, and the same DV as in the PTA 1–5 files.
 {n(X['multi_rows'])} rows map to several HS2002 pairs. The {n(X['multi_rows'] - X['concord_multi'])} coded on HS2002 take the highest DV among their
@@ -459,7 +458,6 @@ their own.</p>
 <tr><td class="v">concord_flag</td><td>byte</td><td>1 = a code is not one-to-one with HS2002, or not a valid code ({n(S['TUR_SGP']['concord_flag'])} TUR_SGP rows, {n(S['CHL_KOR']['concord_flag'])} CHL_KOR rows)</td></tr>
 <tr><td class="v">concord_note</td><td>strL</td><td>Type of the concordance link, e.g. “input HS2012 n to 1”, “output invalid code: all HS2002 subheadings of 61034”; empty when one-to-one</td></tr>
 <tr><td class="v"><b>DV</b></td><td>byte</td><td><b>Main variable.</b> 1 = the input can be used to make the output (including links that are possible but unconfirmed, marked uncertain); 0 = no link</td></tr>
-<tr><td class="v">DV_strict</td><td>byte</td><td>Robustness version: DV × (1 − uncertain), only certain links</td></tr>
 <tr><td class="v">DV_excl_remelt</td><td>byte</td><td>Robustness version: as DV, but direct remelting (route = recycle_direct, e.g. steel rod → steel ingots) = 0, per HS2002 pair; a row coded on HS2002 that maps to several HS2002 pairs takes the highest value among them (so 3 TUR_SGP rows shown as recycle_direct keep 1, because another of their pairs has another route); the 591 TUR_SGP rows coded on their HS2012 codes are coded directly</td></tr>
 <tr><td class="v">DV_max</td><td>byte</td><td>Same as DV (kept for older code)</td></tr>
 <tr><td class="v">uncertain</td><td>byte</td><td>1 = kept at DV = 1, but the link is possible rather than known; the reason is in uncertain_reason</td></tr>
@@ -550,8 +548,7 @@ def main():
     X, C = cross(A), changes()
     for p, _ in PTAS:
         q = pol['pta'][p]
-        assert (q['records'], q['DV1'], q['DV_strict1'], q['uncertain']) == (S[p]['rows'], S[p]['DV1'], S[p]['DVs'],
-                                                                             S[p]['unc'])
+        assert (q['records'], q['DV1'], q['uncertain']) == (S[p]['rows'], S[p]['DV1'], S[p]['unc'])
     html, T = results(S, X, C, pol, comb, aud, scr)
     (HERE / f'Results_PTA_6_10_{DATE}.html').write_text(html, encoding='utf-8')
     (HERE / f'Variables_PTA_6_10_{DATE}.html').write_text(variables(S, X), encoding='utf-8')
@@ -559,7 +556,7 @@ def main():
     for p, nm in PTAS:
         s = S[p]
         r = dict(pta=p, agreement=nm.replace('–', '-'), rows=s['rows'], DV1=s['DV1'], DV1_share=round(s['DV1'] / s['rows'], 4),
-                 DV_strict1=s['DVs'], DV_excl_remelt1=s['DVx'], uncertain=s['unc'],
+                 DV_excl_remelt1=s['DVx'], uncertain=s['unc'],
                  uncertain_share_of_DV1=round(s['unc'] / s['DV1'], 4), newly_coded_rows=s['new'],
                  DV1_draft_2026_10_28=s['d_DV1'], uncertain_draft_2026_10_28=s['d_unc'])
         r.update({f'uncertain: {k}': s['reasons'].get(k, 0) for k, _ in REASONS})

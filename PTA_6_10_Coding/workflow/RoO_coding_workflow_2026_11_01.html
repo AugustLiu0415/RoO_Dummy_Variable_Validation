@@ -3,7 +3,7 @@
 <title>Coding Workflow for RoO Restricted-Input Pairs</title>
 <style>
 @page { size: letter; margin: 0.9in 0.85in 0.85in 0.85in;
-  @bottom-left { content: "RoO input–output coding workflow · 31 October 2026"; font: 8pt "Helvetica Neue", Helvetica, Arial, sans-serif; color: #666; }
+  @bottom-left { content: "RoO input–output coding workflow · 1 November 2026"; font: 8pt "Helvetica Neue", Helvetica, Arial, sans-serif; color: #666; }
   @bottom-right { content: counter(page); font: 8pt "Helvetica Neue", Helvetica, Arial, sans-serif; color: #666; } }
 body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 10pt; line-height: 1.42; color: #111; }
 h1 { font-size: 19pt; margin: 0 0 4pt 0; }
@@ -26,12 +26,11 @@ td { padding: 3.5pt 5pt; border-bottom: 1px solid #dde0e4; vertical-align: top; 
 <p class="lead">General coding rules for every preferential trade agreement (PTA). The definition of an input–output
 link is expansive: every pair <b>starts at DV = 1</b>, and each step turns to 0 only the cases it clearly excludes.
 Pairs are written <b>input → output</b> (A → B). The rules include the scope decisions of 19 October 2026 and the
-conventions of 28–30 October 2026 (Professor Zhang’s questionnaire answers, plus a few project decisions and
-extensions that are marked “to be confirmed”); both are summarised in the last section. Results for individual PTAs
-are reported separately.</p>
+conventions of 28–30 October 2026 (Professor Zhang’s questionnaire answers), with the points he settled on 1 November
+2026; all are summarised in the last section. Results for individual PTAs are reported separately.</p>
 
 <h2>Decision rule</h2>
-<p><b>DV is the main variable</b> (project decision of 30 October, to be confirmed by Professor Zhang). A pair is
+<p><b>DV is the main variable</b> (Professor Zhang, 1 November 2026). A pair is
 turned to 0 only on clear evidence that the input cannot be used to make the output: a step or convention below says
 0, the direction is reversed, or the claimed route is physically or chemically impossible or too generic to name. A pair that cannot be settled stays 1 and is marked uncertain; it is
 never turned to 0 for being uncertain. Every pair that stays 1 falls into one of two levels:</p>
@@ -43,18 +42,20 @@ industrial practice does</td><td>DV = 1, uncertain = 0</td></tr>
 <tr><td>Invalid</td><td>Physically or chemically impossible, the reverse direction, or no specific route can be
 named</td><td>DV = 0</td></tr>
 </table>
-<p>The three levels are Professor Zhang’s overall principle of 30 October. DV_strict = DV × (1 − uncertain) counts
-only known links and is a robustness check. Accuracy is reported for DV first.</p>
+<p>The three levels are Professor Zhang’s overall principle of 30 October. The uncertain flag records which 1s are
+only possible; no variant of DV that counts only certain links is computed (1 November). Accuracy is reported for
+DV.</p>
 <p class="note"><b>Scope.</b> The conventions of 28–30 October apply to the pairs newly coded in PTA 6–10 and to all
 later agreements. Codes delivered for PTA 1–5 are not re-judged (Professor Zhang, 30 October). Pairs copied from them
 keep their codes (step 7a), including errors an audit finds in them, so a pair has the same code in every agreement.
-One update is pending: under the blended-fabric convention, the copied fabric pairs that share a minor fibre are to
-get uncertain = 1 when the PTA 1–5 files are reissued. In PTA 6–10 the conventions were applied by rule to whole
+Two updates are pending for the next reissue of the PTA 1–5 files (Professor Zhang, 1 November): DV_strict is dropped
+from them, and under the blended-fabric convention the copied fabric pairs that share a minor fibre get uncertain = 1. In PTA 6–10 the conventions were applied by rule to whole
 classes; the answers that would raise single pairs from 0 to 1 and the distinctions between a certain 1 and a 1 with
 uncertainty were not re-judged pair by pair (see the results report). They apply in full to pairs not yet in the
 master list. Pairs already in it are copied as they are (step 7a), including PTA 6–10 pairs to which these answers
-were not applied (for example 842420 spray guns → 842410 fire extinguishers = 0). Whether such pairs are re-reviewed —
-above all the complete machines that both coders coded 0 — is to be confirmed by Professor Zhang.</p>
+were not applied (for example 842420 spray guns → 842410 fire extinguishers = 0). They are not re-reviewed; in
+particular, the convention on complete machines is not applied to pairs both coders coded 0 (Professor Zhang,
+1 November).</p>
 
 <h2>Variables</h2>
 <table>
@@ -63,7 +64,6 @@ above all the complete machines that both coders coded 0 — is to be confirmed 
 <tr><td>input_hs6, output_hs6, descriptions</td><td>The pair, in the agreement’s own HS vintage; input_hs2002 and
 output_hs2002 give the common vintage (step 1)</td></tr>
 <tr><td>DV</td><td>Final code; initialised to 1 for every pair</td></tr>
-<tr><td>DV_strict</td><td>DV × (1 − uncertain): counts only certain (known) links</td></tr>
 <tr><td>DV_excl_remelt</td><td>Robustness version of DV with direct remelting (route = recycle_direct) set to 0, per HS2002 pair</td></tr>
 <tr><td>locked</td><td>1 if step 2 protects the pair at DV = 1</td></tr>
 <tr><td>step</td><td>Step that turned the pair to 0 (3–6), or 2 for a certain same-good pair; blank otherwise</td></tr>
@@ -225,9 +225,9 @@ one-sided 1 clearly invalid</td><td>0</td><td>280120 iodine → 280110 chlorine<
 </table>
 <p class="note">Metal articles of the same metal follow this table whatever route is claimed, including remelting
 (731441 steel wire netting → 730711 cast-iron tube fittings: 1, uncertain); a semi-finished form remelted into a metal
-article follows step 6 (730210 rails → 730711 cast-iron tube fittings: 0, made into a finished product). Whether the direct-remelting rule of
-step 6 (“made into a finished product = 0”) should take precedence over this table where the two overlap is still to
-be confirmed.</p>
+article follows step 6 (730210 rails → 730711 cast-iron tube fittings: 0, made into a finished product). Where this
+table and the direct-remelting rule of step 6 (“made into a finished product = 0”) overlap, this table applies
+(Professor Zhang, 1 November).</p>
 
 <h3>Complete goods inside other goods (30 October)</h3>
 <table>
@@ -287,7 +287,7 @@ usual blend partners and lining materials, and the HS classifies a mixed good by
 weight, so a “cotton” garment can contain almost half man-made fibre;</li>
 <li><b>1 with <i>uncertain</i> = 1</b> when the input is another fibre (wool, silk, flax, ramie, coarse animal hair,
 other textile materials), and when fabric of the <b>same fibre but another construction</b> goes into a garment
-(woven fabric → knitted garment and the reverse). These pairs count in DV but not in DV_strict.</li>
+(woven fabric → knitted garment and the reverse). These pairs count as 1 in DV.</li>
 </ul>
 <table>
 <tr><th style="width:52%">Input → Output</th><th style="width:13%">DV</th><th>Why</th></tr>
@@ -334,13 +334,15 @@ the semi-finished form the article is made from, and yarn or fibre of the same f
 <li><b>Glass</b> (cullet) and <b>paper</b> (repulping) qualify, and <b>thermoplastics</b> only for the same polymer
 (Professor Zhang, 30 October). Vulcanised rubber (4007–4017) is 0; reclaimed rubber (4003) and rubber waste (4004)
 remain possible outputs of rubber goods.</li>
-<li><b>Applied by rule, to be confirmed by Professor Zhang:</b> (i) plastics that cannot be remelted are 0
+<li><b>Extensions confirmed by Professor Zhang on 1 November:</b> (i) plastics that cannot be remelted are 0
 (thermosets such as epoxide, alkyd, unsaturated polyester, amino and phenolic resins; silicones; cellulose and its
 derivatives; regenerated cellulose; vulcanised fibre); (ii) rubbers in primary forms only to the same polymer (natural
 rubber → synthetic rubber is 0); (iii) a code “of other plastics” counts as a polymer different from every named one;
-(iv) a laminate or component route does not create a link between different plastics.</li>
-<li>Metal articles of the same metal are decided by the same-material table of step 4 (for now; which rule applies
-first is to be confirmed, see step 4).</li>
+(iv) a laminate or component route does not create a link between different plastics; (v) vulcanised rubber ground
+into crumb and used as an ingredient of compounded or unvulcanised rubber (4005, 4006) is not remelting and stays 1
+with uncertainty.</li>
+<li>Metal articles of the same metal are decided by the same-material table of step 4, which takes precedence over
+these levels.</li>
 </ul>
 <p class="note">* Direct remelting is 1 in the main DV and coded <i>route</i> = recycle_direct. The robustness variable
 DV_excl_remelt sets every recycle_direct HS2002 pair to 0.</p>
@@ -409,13 +411,12 @@ coders said 0.</li>
 fails step 3, is physically or chemically impossible, runs in the reverse direction, names only a generic process
 role, or is a parallel by-product. One model family screens every such pair; the other screens, blind, the pairs the
 first found invalid. Only pairs that both find clearly invalid become 0 (example: tobacco → garments). All others
-stay 1 with uncertainty.</li>
+stay 1 with uncertainty; for chemicals, a 1 stays whenever a specific role can be named (Professor Zhang,
+1 November).</li>
 <li><b>Applying a new convention to pairs already coded.</b> A convention applied by rule can turn a 1 to 0. Those
 pairs are screened once for another specific route (a component, ingredient or forward use); if one exists, the pair
 is 1 with uncertainty. A pair the convention’s own example decides is not reopened, and neither is any plastics →
-plastics pair (extension (iv) of step 6, to be confirmed).</li>
-<li><b>Strict robustness DV.</b> Count only certain 1s: DV_strict = DV × (1 − uncertain), optionally restricted to
-forward, ingredient and component routes.</li>
+plastics pair (extension (iv) of step 6).</li>
 <li><b>Reliability.</b> Report Cohen’s kappa between the two coders. Then code a stratified sample of about 300
 pairs across sources, steps and routes to estimate the accuracy of the final codes, weighting each stratum by its
 size, by pairs and by records, with 95% intervals. Without a domain expert, the sample is coded by two new AI
@@ -484,10 +485,10 @@ the other codes 0; the screen does not find the claim clearly invalid, so it sta
 <h2>Summary of scope conventions</h2>
 <table>
 <tr><th style="width:36%">Question</th><th>Convention</th><th style="width:13%">Set</th></tr>
-<tr><td>Main variable</td><td>DV; DV_strict is a robustness check (project decision, to be confirmed)</td><td>30 Oct</td></tr>
+<tr><td>Main variable</td><td>DV. No variant counting only certain links (DV_strict) is computed</td><td>1 Nov</td></tr>
 <tr><td>Overall principle</td><td>Known route or standard practice: 1. Possible but unconfirmed: 1 with uncertain = 1. Impossible or reverse: 0</td><td>30 Oct</td></tr>
 <tr><td>Different intermediate goods of the same material at the same stage</td><td>1, route sibling_intermediate; finished siblings stay 0 (step 4)</td><td>19 Oct</td></tr>
-<tr><td>Parts and metal articles; chemicals of one heading</td><td>Same heading and material (metal articles even when finished), or same compound: 1. Another heading but the same base material, the same heading but another material, or another compound of the same heading: 1 with uncertain = 1. Chemicals of one heading: 0 when both AI coders code 0 or both screens find the 1 clearly invalid</td><td>30 Oct</td></tr>
+<tr><td>Parts and metal articles; chemicals of one heading</td><td>Same heading and material (metal articles even when finished), or same compound: 1. Another heading but the same base material, the same heading but another material, or another compound of the same heading: 1 with uncertain = 1. Chemicals of one heading: 0 when both AI coders code 0 or both screens find the 1 clearly invalid. Metal articles: this rule takes precedence over the remelting levels</td><td>30 Oct / 1 Nov</td></tr>
 <tr><td>Different synthetic fibres (nylon, polyester, acrylic, polypropylene)</td><td>One fibre</td><td>19 Oct</td></tr>
 <tr><td>Fabrics of the same fibre, different construction</td><td>1 (sibling_intermediate)</td><td>19 Oct</td></tr>
 <tr><td>Fabrics of different main fibres sharing a minor fibre</td><td>1 with uncertain = 1</td><td>30 Oct</td></tr>
@@ -495,11 +496,11 @@ the other codes 0; the screen does not find the claim clearly invalid, so it sta
 <tr><td>Clothing accessories → garments</td><td>Trims and bows: 1 (component). Finished accessories (scarves, ties, gloves): 0</td><td>19 / 28 Oct</td></tr>
 <tr><td>Any chemical (ch. 28–38) → wastes of heading 3825</td><td>1 (recycle_waste)</td><td>19 Oct</td></tr>
 <tr><td>Any mineral of ch. 25 → cement (2523)</td><td>1 (ingredient)</td><td>19 Oct</td></tr>
-<tr><td>Process inputs (reagent, solvent, catalyst, binder, fuel)</td><td>Known route: 1. Specific role: 1 with uncertain = 1. Generic claim only: 0</td><td>30 Oct</td></tr>
+<tr><td>Process inputs (reagent, solvent, catalyst, binder, fuel)</td><td>Known route: 1. Specific role: 1 with uncertain = 1 (also in the screen of one-sided 1s). Generic claim only: 0</td><td>30 Oct / 1 Nov</td></tr>
 <tr><td>Further use</td><td>Known route, even if uncommon: 1. Technically possible but unconfirmed: 1 with uncertain = 1</td><td>19 / 30 Oct</td></tr>
 <tr><td>Minor constituent of another fibre in a garment, made-up, yarn or fabric</td><td>Cotton or man-made input: 1. Other fibres, or the same fibre in another construction (fabric → garment): 1 with uncertain = 1</td><td>19 Oct</td></tr>
-<tr><td>Direct remelting with no scrap code in between</td><td>Own upstream form: 1. Other primary or semi-finished form of the same material: 1 with uncertain = 1. Finished product: 0. Vulcanised rubber: 0. Glass and paper qualify; thermoplastics only the same polymer. Non-meltable plastics 0, rubbers only the same polymer, “other plastics” a polymer of its own, no laminate route between plastics: applied, to be confirmed. Route recycle_direct; 0 in DV_excl_remelt</td><td>19 / 30 Oct</td></tr>
-<tr><td>A complete machine or appliance inside another good</td><td>Real combination: 1. Conceivable only: 1 with uncertain = 1</td><td>30 Oct</td></tr>
+<tr><td>Direct remelting with no scrap code in between</td><td>Own upstream form: 1. Other primary or semi-finished form of the same material: 1 with uncertain = 1. Finished product: 0. Vulcanised rubber: 0. Glass and paper qualify; thermoplastics only the same polymer. Non-meltable plastics 0, rubbers only the same polymer, “other plastics” a polymer of its own, no laminate route between plastics; vulcanised rubber crumb as an ingredient: 1 with uncertain = 1. Route recycle_direct; 0 in DV_excl_remelt</td><td>19 / 30 Oct / 1 Nov</td></tr>
+<tr><td>A complete machine or appliance inside another good</td><td>Real combination: 1. Conceivable only: 1 with uncertain = 1. Not applied to pairs both coders already coded 0</td><td>30 Oct / 1 Nov</td></tr>
 <tr><td>A finished good cut or refitted into another good</td><td>1 with uncertain = 1. Taken apart for its parts: 0</td><td>30 / 28 Oct</td></tr>
 <tr><td>Waste</td><td>Waste of goods made from the input (6309, 6310): 1. Waste of a component of the input: 1 with uncertain = 1. Parallel by-product of the same source: 0</td><td>30 Oct</td></tr>
 <tr><td>Minerals and stone</td><td>Associated mineral recovered from an ore: 1 with uncertain = 1. Crushed into filler or aggregate: 1</td><td>30 Oct</td></tr>
@@ -510,7 +511,7 @@ the other codes 0; the screen does not find the claim clearly invalid, so it sta
 <tr><td>Chapter 59</td><td>Wicks, hosepiping → belting: 0. Coated fabric → belting, 5901 → tyre cord fabric: 1</td><td>28 Oct</td></tr>
 <tr><td>Inputs “WO” or “any”</td><td>Rows deleted</td><td>28 Oct</td></tr>
 <tr><td>The two AI coders disagree and no convention settles it</td><td>1 with uncertain = 1, unless both model families find the 1 clearly invalid (0)</td><td>19 / 28 Oct</td></tr>
-<tr><td>Codes already delivered</td><td>Not re-judged when a later convention is adopted; copies keep them (uncertain flags of blended fabrics: update pending)</td><td>30 Oct</td></tr>
+<tr><td>Codes already delivered</td><td>Not re-judged when a later convention is adopted; copies keep them. Uncertain flags of blended fabrics are updated at the next reissue of PTA 1–5</td><td>30 Oct / 1 Nov</td></tr>
 </table>
 </div>
 

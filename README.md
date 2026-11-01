@@ -126,10 +126,10 @@ The ASEAN–Japan conventions were turned into one general coding workflow. Unde
 document, codebook, prompts, scripts, result report, variable description and aggregate figures are in
 [`Five_PTA_Coding/`](Five_PTA_Coding/README.md). The row-level coded files are kept locally.
 
-## PTA 6–10 coding (2026-10-25 to 10-31)
+## PTA 6–10 coding (2026-10-25 to 11-01)
 
 Five more agreements (Turkey–Singapore, Nicaragua–Taiwan, Chile–Korea, Oman–US, Canada–Chile) were coded under the
-same workflow, with the conventions Professor Zhang set on 28–30 October 2026. Pairs already coded in PTA 1–5 were
-copied unchanged. The updated workflow document (which replaces the one of 19 October), the coders' rules, prompts,
+same workflow, with the conventions Professor Zhang set on 28–30 October 2026 and the decisions of 1 November 2026
+(DV is the main variable; DV_strict is no longer computed). Pairs already coded in PTA 1–5 were copied unchanged. The updated workflow document (which replaces the one of 19 October), the coders' rules, prompts,
 scripts, result report, variable description and aggregate figures are in
 [`PTA_6_10_Coding/`](PTA_6_10_Coding/README.md). The row-level coded files are kept locally.
